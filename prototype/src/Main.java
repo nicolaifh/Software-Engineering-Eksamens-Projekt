@@ -25,6 +25,9 @@ public class Main {
             case 1:
                 ProjectMenu();
                 break;
+            case 2:
+
+
         }
     }
     public static void loginMenu(){
@@ -82,7 +85,5 @@ public class Main {
         System.out.println("[3] View Users");
         System.out.println("[4] Add assignment");
         System.out.println("[5] Edit assignment");
-        System.out.println("[6] Add User");
-
     }
 }
