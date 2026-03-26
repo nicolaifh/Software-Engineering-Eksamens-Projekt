@@ -1,5 +1,5 @@
 # Created by Nicolai at 23/03/2026
-Feature: # Enter feature name here
+Feature: tests
   # Enter feature description here
 
   Scenario: View available users
@@ -14,14 +14,14 @@ Feature: # Enter feature name here
 
 
   Scenario: Create project with proper project ID
-    Given that the year is 2026
-    And that no other project existes
+    Given that no other project exists
+    And that the year is 2026
     When a user creates a project
     Then a project is created with the project ID "26001"
 
   Scenario: Alternative to create project with proper project ID
-    Given that the year is 2026
-    And that 100 other project existes
+    Given that 100 other project exists
+    And  that the year is 2026
     When a user creates a project
     Then a project is created with the project ID "26101"
 
@@ -29,25 +29,25 @@ Feature: # Enter feature name here
   Scenario: Assign User
     Given User2 as an input
     When User2 is not assigned to project
-    And User1 is projectleader
+    And User1 is project leader
     Then assign User2 to project
 
   Scenario: Failed to assign User
     Given User2 as an input
-    When User2 is already assignd to project
-    And  User1 is projectleader
-    Then faild to assign User2 to project ErrorMessage: "User alleredy assigned."
+    When User2 is already assigned to project
+    And  User1 is project leader
+    Then failed to assign User2 to project ErrorMessage: "User already assigned."
 
 
   Scenario: Create assignment
     When a user creates an assignment
     And user is assigned to project
-    Then create assignement
+    Then create assignment
 
   Scenario: fail to create assignment
     When a user creates an assignment
     And user is not assigned project
-    Then fail to create assignement
+    Then fail to create assignment
 
 
   Scenario: Assign time used

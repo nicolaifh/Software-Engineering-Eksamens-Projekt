@@ -13,4 +13,12 @@ public class Project {
 
     public Project() {
     }
+
+    public void assignUser(User user) {
+        this.assignedUsers.add(user);
+    }
+
+    public int getProjectID() {
+        return projectID;
+    }
 }
