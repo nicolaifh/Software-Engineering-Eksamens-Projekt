@@ -1,12 +1,14 @@
 package org.example;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 
 public class ProjectController {
     HashMap<Integer, ArrayList<Project>> projectsPerYear = new HashMap<>();
 
-    public Project createProject(int year){
+    public Project createProject(User caller){
+        int year = Calendar.getInstance().get(Calendar.YEAR);
         Project newProject = new Project();
         if (!projectsPerYear.containsKey(year)) {
             projectsPerYear.put(year, new ArrayList<>());
@@ -20,6 +22,7 @@ public class ProjectController {
             }
         }
         projectsPerYear.get(year).add(newProject);
+        newProject.setProjectLead(caller);
         return newProject;
     }
 

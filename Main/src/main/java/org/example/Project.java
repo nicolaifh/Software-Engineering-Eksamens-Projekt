@@ -1,5 +1,6 @@
 package org.example;
 
+import java.nio.channels.AsynchronousServerSocketChannel;
 import java.util.ArrayList;
 
 public class Project {
@@ -18,7 +19,38 @@ public class Project {
         this.assignedUsers.add(user);
     }
 
+    public Assignment createAssignment() {
+        this.assignments.add(new Assignment("Assignment #" + this.assignments.size()));
+        return this.assignments.getLast();
+    }
+
+    public ArrayList<User> getAvailableUsers() {
+        ArrayList<User> AvailableUsers = new ArrayList<>();
+        for (Assignment a : this.assignments) {
+            if(!a.hasStarted()){
+                for(User u : a.getAssignedUsers()){
+                    AvailableUsers.add(u);
+                }
+            }
+        }
+        return AvailableUsers;
+    }
+
+
+    public ArrayList<User> getAssignedUsers() {
+        return assignedUsers;
+    }
+
     public int getProjectID() {
         return projectID;
     }
+
+    public User getProjectLead() {
+        return projectLead;
+    }
+
+    public void setProjectLead(User projectLead) {
+        this.projectLead = projectLead;
+    }
+
 }

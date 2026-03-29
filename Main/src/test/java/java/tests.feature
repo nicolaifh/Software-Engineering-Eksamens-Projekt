@@ -3,14 +3,14 @@ Feature: tests
   # Enter feature description here
 
   Scenario: View available users
-    Given project manager checks available users
-    When User1 is not assigned to any started assignments
-    Then User1 should be present on a list over available users.
+    Given User1 checks available users
+    When User2 is not assigned to any started assignments
+    Then User2 should be present on a list over available users.
 
   Scenario: No available users
-    Given project manager checks available users
-    When User1 is assigned to a started assignments
-    Then User1 should not be present on a list over available users.
+    Given User1 checks available users
+    When User2 is assigned to a started assignments
+    Then User2 should not be present on a list over available users.
 
 
   Scenario: Create project with proper project ID
@@ -28,14 +28,14 @@ Feature: tests
 
   Scenario: Assign User
     Given User2 as an input
-    When User2 is not assigned to project
     And User1 is project leader
+    When User2 is not assigned to project
     Then assign User2 to project
 
   Scenario: Failed to assign User
     Given User2 as an input
-    When User2 is already assigned to project
     And  User1 is project leader
+    When User2 is assigned to project
     Then failed to assign User2 to project ErrorMessage: "User already assigned."
 
 
@@ -51,9 +51,9 @@ Feature: tests
 
 
   Scenario: Assign time used
-    Given An int int1
+    Given An int 1
     When user assigns time used on assignment
-    Then the time int1 is assigned to user
+    Then the time 1 is assigned to user
 
   Scenario: Failed to assign time used
     Given a String "String"

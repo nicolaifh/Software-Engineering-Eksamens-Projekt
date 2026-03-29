@@ -1,26 +1,58 @@
 package org.example;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 
 public class Assignment {
-    String startDate;
-    String endDate;
+    Date startDate;
+    Date endDate;
     String name;
-    ArrayList<User> assignedUsers;
+    ArrayList<User> assignedUsers = new ArrayList<>();
     int timeBudget;
     HashMap<User, Integer> timeUsed;
     Boolean finished;
     Boolean started;
 
-    public Assignment() {
+    public Assignment(String name) {
+        this.name = name;
     }
 
-    public void assignUser(User user){
 
+    public void assignUser(User user){
+        assignedUsers.add(user);
+    }
+
+    public Boolean hasStarted(){
+        Calendar cal = Calendar.getInstance();
+        if (startDate != null) {
+            return !cal.before(startDate);
+        }
+        return false;
+    }
+
+    public ArrayList<User> getAssignedUsers(){
+        return assignedUsers;
     }
 
     public void assignTimeUsed(User user, int time){
 
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 }

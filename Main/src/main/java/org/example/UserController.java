@@ -8,6 +8,8 @@ import java.util.List;
 public class UserController {
     ArrayList<User> users = new ArrayList<User>();
 
+    public UserController() {}
+
     public UserController(ArrayList<User> users) {
         this.users = users;
     }

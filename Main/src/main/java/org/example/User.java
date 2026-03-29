@@ -1,9 +1,14 @@
 package org.example;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class User {
     String initials;
     int accessLevel = 0;
     int timeManagement;
+    ArrayList<Project> assignedProjects = new ArrayList<>();
+    HashMap<Project, ArrayList<Assignment>> assignedAssignments;
 
     public User(String initials) {
         this.initials = initials;
@@ -23,8 +28,17 @@ public class User {
         this.initials = "TEST";
     }
 
-    public void assignProjectManager(){
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User user)) return false;
+        return initials.equals(user.initials);
+    }
+
+    @Override
+    public int hashCode() {
+        return initials.hashCode();
     }
 
     public String getInitials() {
@@ -49,5 +63,15 @@ public class User {
 
     public void setTimeMangement(int timeMangement) {
         this.timeManagement = timeMangement;
+    }
+
+    public ArrayList<Project> getAssignedProjects() {
+        return assignedProjects;
+    }
+
+    public Project createProject(ProjectController projectController) {
+        Project newProject = projectController.createProject(this);
+        this.assignedProjects.add(newProject);
+        return newProject;
     }
 }
