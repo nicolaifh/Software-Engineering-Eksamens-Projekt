@@ -2,7 +2,7 @@ package org.example;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;**
+import java.util.HashMap;
 
 public class ProjectController {
     HashMap<Integer, ArrayList<Project>> projectsPerYear = new HashMap<>();
