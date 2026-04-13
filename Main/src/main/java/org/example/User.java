@@ -74,4 +74,14 @@ public class User {
         this.assignedProjects.add(newProject);
         return newProject;
     }
+
+    public boolean login(String inputInitials) {
+        return this.initials.equals(inputInitials);
+    }
+
+    public void assignProjectManager(Project project) {
+        if (this.accessLevel >= 1) {
+            project.setProjectLead(this);
+        }
+    }
 }
