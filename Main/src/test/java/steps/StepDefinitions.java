@@ -33,6 +33,8 @@ public class StepDefinitions {
         return new User(name);
     }
 
+
+
     @Given("{User} checks available users")
     public void project_manager_checks_available_users(User arg0) {
         dummyProject = arg0.createProject(dummyProjectController);
@@ -49,6 +51,9 @@ public class StepDefinitions {
     public void user1_should_be_present_on_a_list_over_available_users(User arg0) {
         assertTrue(dummyProject.getAvailableUsers().contains(arg0));
     }
+
+
+
     @When("{User} is assigned to a started assignments")
     public void userIsAssignedToAStartedAssignments(User arg0) {
         dummyAssignment.setStartDate(dummyDate); // sets time to current time
@@ -59,9 +64,22 @@ public class StepDefinitions {
         assertFalse(dummyProject.getAvailableUsers().contains(arg0));
     }
 
+
+
     @Given("that no other project exists")
     public void thatNoOtherProjectExists() {
         dummyArraySize = 0;
+    }
+
+    @Given("that {int} other project exists")
+    public void thatOtherProjectExists(int arg0) {
+        dummyArraySize = arg0;
+    }
+
+    @And("that the year is {int}")
+    public void thatTheYearIs(int arg0) {
+        ProjectController projectController = new ProjectController();
+        newProject = projectController.createProject(arg0,dummyArraySize);
     }
 
     @When("a {User} creates a project")
@@ -75,16 +93,7 @@ public class StepDefinitions {
         assertEquals(Integer.parseInt(arg0), newProject.getProjectID());
     }
 
-    @Given("that {int} other project exists")
-    public void thatOtherProjectExists(int arg0) {
-        dummyArraySize = arg0;
-    }
 
-    @And("that the year is {int}")
-    public void thatTheYearIs(int arg0) {
-        ProjectController projectController = new ProjectController();
-        newProject = projectController.createProject(arg0,dummyArraySize);
-    }
 
     @Given("{User} as an input")
     public void userAsAnInput(User arg0) {
@@ -108,20 +117,22 @@ public class StepDefinitions {
     }
 
 
+
+    @When("{User} is assigned to project")
+    public void userIsAssignedToProject(User arg0) {
+        assertFalse(((Project) dummyData2).getAssignedUsers().contains(arg0));
+    }
+
     @Then("failed to assign {User} to project ErrorMessage: {string}")
     public void failedToAssignUserToProjectErrorMessage(User arg0, String arg1) {
         // Write code here that turns the phrase above into concrete actions
         throw new PendingException();
     }
 
+
+
     @When("a {User} creates an assignment")
     public void aUserCreatesAnAssignment(User arg0) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
-    }
-
-    @And("{User} is assigned to project")
-    public void userIsAssignedToProject(User arg0) {
         // Write code here that turns the phrase above into concrete actions
         throw new PendingException();
     }
@@ -131,6 +142,8 @@ public class StepDefinitions {
         // Write code here that turns the phrase above into concrete actions
         throw new PendingException();
     }
+
+
 
     @And("{User} is not assigned project")
     public void userIsNotAssignedProject(User arg0) {
@@ -143,6 +156,8 @@ public class StepDefinitions {
         // Write code here that turns the phrase above into concrete actions
         throw new PendingException();
     }
+
+
 
     @Given("An int {int}")
     public void anIntInt(int arg0) {
@@ -162,6 +177,8 @@ public class StepDefinitions {
         throw new PendingException();
     }
 
+
+
     @Given("a String {string}")
     public void aString(String arg0) {
         // Write code here that turns the phrase above into concrete actions
@@ -179,6 +196,4 @@ public class StepDefinitions {
         // Write code here that turns the phrase above into concrete actions
         throw new PendingException();
     }
-
-
 }
