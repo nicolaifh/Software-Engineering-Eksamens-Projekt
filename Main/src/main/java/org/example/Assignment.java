@@ -19,12 +19,11 @@ public class Assignment {
         this.name = name;
     }
 
-
-    public void assignUser(User user){
+    public void assignUser(User user) {
         assignedUsers.add(user);
     }
 
-    public Boolean hasStarted(){
+    public Boolean hasStarted() {
         Calendar cal = Calendar.getInstance();
         if (startDate != null) {
             return !cal.before(startDate);
@@ -32,12 +31,29 @@ public class Assignment {
         return false;
     }
 
-    public ArrayList<User> getAssignedUsers(){
+    public ArrayList<User> getAssignedUsers() {
         return assignedUsers;
     }
 
-    public void assignTimeUsed(User user, int time){
+    public void assignTimeUsed(User user, int time) {
+        if (timeUsed == null) {
+            timeUsed = new HashMap<>();
+        }
+        timeUsed.put(user, timeUsed.getOrDefault(user, 0) + time);
+    }
 
+    public int getTotalTimeUsed() {
+        if (timeUsed == null)
+            return 0;
+        int total = 0;
+        for (int time : timeUsed.values()) {
+            total += time;
+        }
+        return total;
+    }
+
+    public HashMap<User, Integer> getTimeUsed() {
+        return timeUsed;
     }
 
     public Date getStartDate() {

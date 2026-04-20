@@ -17,6 +17,11 @@ public class UserController {
     public List<User> getUsersFromHR(File file){
         return List.of();
     }
+    public User createUser(String initals){
+        User newUser = new User(initals);
+        users.add(newUser);
+        return newUser;
+    }
 
     public void editUser(User user){
 

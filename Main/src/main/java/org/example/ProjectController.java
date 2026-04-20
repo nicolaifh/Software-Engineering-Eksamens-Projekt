@@ -14,9 +14,10 @@ public class ProjectController {
             projectsPerYear.put(year, new ArrayList<>());
         }
 
-        newProject.projectID = projectsPerYear.get(year).size() + 1;
+        newProject.projectID = ((year % 100) * 1000) + projectsPerYear.get(year).size() + 1;
         projectsPerYear.get(year).add(newProject);
         newProject.setProjectLead(caller);
+        newProject.setProjectName(String.valueOf(newProject.projectID));
         return newProject;
     }
 

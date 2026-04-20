@@ -52,5 +52,8 @@ public class Project {
     public void setProjectLead(User projectLead) {
         this.projectLead = projectLead;
     }
+    public void setProjectName(String projectName){
+        this.projectName = projectName;
+    }
 
 }
