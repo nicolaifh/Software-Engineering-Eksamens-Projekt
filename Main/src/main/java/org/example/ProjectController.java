@@ -14,13 +14,7 @@ public class ProjectController {
             projectsPerYear.put(year, new ArrayList<>());
         }
 
-        for(Project p : projectsPerYear.get(year)){
-            if (p.projectID <= (year+1)*1000) {
-                newProject.projectID = projectsPerYear.get(year).size() + 1;
-            } else  {
-                newProject.projectID = (year+1)*1000;
-            }
-        }
+        newProject.projectID = projectsPerYear.get(year).size() + 1;
         projectsPerYear.get(year).add(newProject);
         newProject.setProjectLead(caller);
         return newProject;
@@ -36,6 +30,12 @@ public class ProjectController {
         projectsPerYear.get(year).add(newProject);
         return newProject;
     }
-
+    public ArrayList<Project> getProjects(){
+        ArrayList<Project> allProjects = new ArrayList<>();
+        for (ArrayList<Project> projects : projectsPerYear.values()){
+            allProjects.addAll(projects);
+        }
+        return allProjects;
+    }
 
 }
