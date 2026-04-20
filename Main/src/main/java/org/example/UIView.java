@@ -21,6 +21,8 @@ public class UIView {
         System.out.println("2. Add Assignment");
         System.out.println("3. Time registration");
         System.out.println("4. Create User");
+        System.out.println("5. Assign User To Project");
+        System.out.println("6. Show Project Users");
         System.out.println("0. Exit");
         System.out.println("Choose: ");
     }
@@ -30,7 +32,7 @@ public class UIView {
     }
 
     public void showProjects(ArrayList<Project> projects) {
-        System.out.println("\nVælg et projekt:");
+        System.out.println("\nChoose a project:");
         for (Project p : projects) {
             System.out.println(p.getProjectID());
         }
@@ -39,11 +41,24 @@ public class UIView {
     public void showAssignments(Project project) {
     System.out.println("\nAssignments for project " + project.getProjectID() + ":");
     for (int i = 0; i < project.assignments.size(); i++) {
-        System.out.println(i + ": " + project.assignments.get(i).name + " (" + project.assignments.get(i).getTotalTimeUsed() + " timer)");
+        System.out.println(i + ": " + project.assignments.get(i).name + " (" + project.assignments.get(i).getTotalTimeUsed() + " Hours)");
     }
 }
 
     public void showCreateUser() {
         System.out.println("Enter initials:");
     }
+
+    public void showUsers(ArrayList<User> users) {
+    System.out.println("\nChoose a User (Enter Number):");
+    for (int i = 0; i < users.size(); i++) {
+        System.out.println(i + ": " + users.get(i).getInitials());
+    }
+}
+public void showProjectUsers(Project project) {
+    System.out.println("\nUsers in project " + project.getProjectID() + ":");
+    for (User u : project.getAssignedUsers()) {
+        System.out.println(u.getInitials());
+    }
+}
 }

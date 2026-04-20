@@ -50,6 +50,8 @@ public class UIController {
                 case 2 -> addAssignment(loggedInUser);
                 case 3 -> timeRegistration(loggedInUser);
                 case 4 -> addUser();
+                case 5 -> assignUserToProject();
+                case 6 -> showProjectUsers();
                 case 0 -> System.exit(0);
             }
         }
@@ -85,33 +87,75 @@ public class UIController {
     }
 
     private void timeRegistration(User loggedInUser) {
-    ArrayList<Project> projects = projectController.getProjects();
-    view.showProjects(projects);
+        ArrayList<Project> projects = projectController.getProjects();
+        view.showProjects(projects);
 
-    int choice = scanner.nextInt();
-    Project selectedProject = null;
-    for (Project p : projects) {
-        if (p.getProjectID() == choice) {
-            selectedProject = p;
+        int choice = scanner.nextInt();
+        Project selectedProject = null;
+        for (Project p : projects) {
+            if (p.getProjectID() == choice) {
+                selectedProject = p;
+            }
+        }
+        if (selectedProject == null) {
+            view.showError("Project not found!");
+            return;
+        }
+
+        view.showAssignments(selectedProject);
+        int assignmentChoice = scanner.nextInt();
+        Assignment selectedAssignment = selectedProject.assignments.get(assignmentChoice);
+
+        System.out.println("Enter hours:");
+        int hours = scanner.nextInt();
+
+        boolean success = selectedAssignment.assignTimeUsed(loggedInUser, hours);
+        if (success) {
+            System.out.println("Time registered!");
+        } else {
+            view.showError("Could not register time!");
         }
     }
-    if (selectedProject == null) {
-        view.showError("Project not found!");
-        return;
-    }
-    
-    // Vis assignments
-    view.showAssignments(selectedProject);
-    int assignmentChoice = scanner.nextInt();
-    Assignment selectedAssignment = selectedProject.assignments.get(assignmentChoice);
-    
-    // Indtast timer
-    System.out.println("Enter hours:");
-    int hours = scanner.nextInt();
-    
-    selectedAssignment.assignTimeUsed(loggedInUser, hours);
-    System.out.println("Time registered!");
-}
-    
 
+    private void assignUserToProject() {
+        ArrayList<Project> projects = projectController.getProjects();
+        view.showProjects(projects);
+
+        int choice = scanner.nextInt();
+        Project selectedProject = null;
+        for (Project p : projects) {
+            if (p.getProjectID() == choice) {
+                selectedProject = p;
+            }
+        }
+        if (selectedProject == null) {
+            view.showError("Project not found!");
+            return;
+        }
+
+        ArrayList<User> users = userController.getUsers();
+        view.showUsers(users);
+        int userChoice = scanner.nextInt();
+        User selectedUser = users.get(userChoice);
+        selectedProject.assignUser(selectedUser);
+        System.out.println("User assigned to project!");
+    }
+
+    private void showProjectUsers() {
+        ArrayList<Project> projects = projectController.getProjects();
+        view.showProjects(projects);
+
+        int choice = scanner.nextInt();
+        Project selectedProject = null;
+        for (Project p : projects) {
+            if (p.getProjectID() == choice) {
+                selectedProject = p;
+            }
+        }
+        if (selectedProject == null) {
+            view.showError("Project not found!");
+            return;
+        }
+        view.showProjectUsers(selectedProject);
+    }
 }
