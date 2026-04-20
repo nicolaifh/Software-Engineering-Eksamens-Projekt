@@ -9,6 +9,7 @@ public class User {
     int timeManagement;
     ArrayList<Project> assignedProjects = new ArrayList<>();
     HashMap<Project, ArrayList<Assignment>> assignedAssignments;
+    ArrayList<Assignment> personalActivitys = new ArrayList<>();
 
     public User(String initials) {
         this.initials = initials;

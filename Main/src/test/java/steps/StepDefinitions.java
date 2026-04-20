@@ -7,6 +7,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.example.*;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -177,8 +178,6 @@ public class StepDefinitions {
         throw new PendingException();
     }
 
-
-
     @Given("a String {string}")
     public void aString(String arg0) {
         // Write code here that turns the phrase above into concrete actions
@@ -196,4 +195,30 @@ public class StepDefinitions {
         // Write code here that turns the phrase above into concrete actions
         throw new PendingException();
     }
+
+    @Given("a {User} wants to fetch their projects")
+    public void aUserWantsToFetchTheirProjects(User arg0) {
+        dummyUser = arg0;
+    }
+
+    @And("User was added to {int} projects")
+    public void aUserWasAddedToProjects(int arg0) {
+        for (int i = 0; i < arg0; i++){
+            Project p = dummyProjectController.createProject(2026, 0);
+            dummyProjectController.assignUserToProject(p,dummyUser);
+        }
+        assertEquals(arg0,dummyUser.getAssignedProjects().size());
+    }
+
+    @Then("return {int} projects")
+    public void returnProjects(int arg0) {
+        int successes = 0;
+        for (Project project : dummyUser.getAssignedProjects()) {
+            if (project.getAssignedUsers().contains(dummyUser)) {
+                successes++;
+            }
+        }
+        assertEquals(arg0,successes);
+    }
+
 }
