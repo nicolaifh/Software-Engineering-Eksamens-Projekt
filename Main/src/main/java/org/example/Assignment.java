@@ -55,4 +55,23 @@ public class Assignment {
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
+
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public int getTimeBudget() {
+        return timeBudget;
+    }
+    public void setTimeBudget(int timeBudget) {
+        this.timeBudget = timeBudget;
+    }
+    public HashMap<User, Integer> getTimeUsed() {
+        return timeUsed;
+    }
+    public void setTimeUsed(HashMap<User, Integer> timeUsed) {
+        this.timeUsed = timeUsed;
+    }
 }

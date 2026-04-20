@@ -28,9 +28,7 @@ public class Project {
         ArrayList<User> AvailableUsers = new ArrayList<>();
         for (Assignment a : this.assignments) {
             if(!a.hasStarted()){
-                for(User u : a.getAssignedUsers()){
-                    AvailableUsers.add(u);
-                }
+                AvailableUsers.addAll(a.getAssignedUsers());
             }
         }
         return AvailableUsers;
@@ -51,6 +49,16 @@ public class Project {
 
     public void setProjectLead(User projectLead) {
         this.projectLead = projectLead;
+    }
+
+    public String getProjectName() {
+        return projectName;
+    }
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
+    public ArrayList<Assignment> getAssignments() {
+        return assignments;
     }
 
 }

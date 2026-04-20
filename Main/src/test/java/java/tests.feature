@@ -59,3 +59,8 @@ Feature: tests
     Given a String "String"
     When user assigns a String as input on an assignment
     Then no time is assigned to user
+
+  Scenario: Check Users Projects
+    Given a user wants to fetch their projects
+    And User was added to 5 projects
+    Then return 5 projects
