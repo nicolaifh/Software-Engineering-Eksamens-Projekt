@@ -29,4 +29,10 @@ public class UserController {
     public void setUsers(ArrayList<User> users) {
         this.users = users;
     }
+    public User login(String initials) {
+    return users.stream()
+        .filter(u -> u.getInitials().equals(initials))
+        .findFirst()
+        .orElse(null);
+}
 }
