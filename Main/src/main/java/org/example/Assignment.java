@@ -11,7 +11,7 @@ public class Assignment {
     String name;
     ArrayList<User> assignedUsers = new ArrayList<>();
     int timeBudget;
-    HashMap<User, HashMap<String, Integer>> timeUsed;
+    HashMap<User, HashMap<String, Integer>> timeUsed = new HashMap<>();
     Boolean finished;
     Boolean started;
 
@@ -35,27 +35,26 @@ public class Assignment {
         return assignedUsers;
     }
 
-    public boolean assignTimeUsed(User user, int time) {
+    public boolean assignTimeUsed(User user, int hours) {
 
-        if (timeUsed == null) {
-            timeUsed = new HashMap<>();
-        }
+        if (hours <= 0) return false;
+
         String today = new java.text.SimpleDateFormat("dd/MM/yyyy").format(new Date());
 
         timeUsed.putIfAbsent(user, new HashMap<>());
 
         int existingTime = timeUsed.get(user).getOrDefault(today, 0);
-        if (existingTime + time > 24) {
+        if (existingTime + hours > 24) {
             return false;
            
             
         }
-        timeUsed.get(user).put(today, existingTime + time);
+        timeUsed.get(user).put(today, existingTime + hours);
         return true;
     }
 
     public int getTotalTimeUsed() {
-    if (timeUsed == null) return 0;
+    
     int total = 0;
     for (HashMap<String, Integer> dayMap : timeUsed.values()) {
         for (int time : dayMap.values()) {
