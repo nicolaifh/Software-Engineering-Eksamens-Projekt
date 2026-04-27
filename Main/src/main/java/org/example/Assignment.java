@@ -11,7 +11,7 @@ public class Assignment {
     String name;
     ArrayList<User> assignedUsers = new ArrayList<>();
     int timeBudget;
-    HashMap<User, Integer> timeUsed;
+    HashMap<User, HashMap<String, Integer>> timeUsed = new HashMap<>();
     Boolean finished;
     Boolean started;
     Project project;
@@ -27,11 +27,11 @@ public class Assignment {
         this.name=name;
     }
 
-    public void assignUser(User user){
+    public void assignUser(User user) {
         assignedUsers.add(user);
     }
 
-    public Boolean hasStarted(){
+    public Boolean hasStarted() {
         Calendar cal = Calendar.getInstance();
         if (startDate != null) {
             return !cal.before(startDate);
@@ -39,12 +39,41 @@ public class Assignment {
         return false;
     }
 
-    public ArrayList<User> getAssignedUsers(){
+    public ArrayList<User> getAssignedUsers() {
         return assignedUsers;
     }
 
-    public void assignTimeUsed(User user, int time){
+    public boolean assignTimeUsed(User user, int hours) {
 
+        if (hours <= 0) return false;
+
+        String today = new java.text.SimpleDateFormat("dd/MM/yyyy").format(new Date());
+
+        timeUsed.putIfAbsent(user, new HashMap<>());
+
+        int existingTime = timeUsed.get(user).getOrDefault(today, 0);
+        if (existingTime + hours > 24) {
+            return false;
+           
+            
+        }
+        timeUsed.get(user).put(today, existingTime + hours);
+        return true;
+    }
+
+    public int getTotalTimeUsed() {
+    
+    int total = 0;
+    for (HashMap<String, Integer> dayMap : timeUsed.values()) {
+        for (int time : dayMap.values()) {
+            total += time;
+        }
+    }
+    return total;
+}
+
+    public HashMap<User, HashMap<String, Integer>> getTimeUsed() {
+        return timeUsed;
     }
 
     public Date getStartDate() {

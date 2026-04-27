@@ -1,0 +1,88 @@
+package org.example;
+
+import java.util.ArrayList;
+
+public class UIView {
+
+    public void showLogin() {
+        System.out.println("Please enter your initials:");
+    }
+
+    public void showLoginSuccess(User user) {
+        System.out.println("Welcome: " + user.getInitials());
+    }
+
+    public void showError(String message) {
+        System.out.println("Error: " + message);
+    }
+
+    public void showMainMenu() {
+        System.out.println("\ncreate-project            Creates a projekt");
+        System.out.println("add-assignment            Adds a assignment to projekt");
+        System.out.println("register-time             Register Time");
+        System.out.println("add-user                  Add a user");
+        System.out.println("assign-user               Assign user to a projekt");
+        System.out.println("show-users                Show user in a projekt");
+        System.out.println("exit                      Exits");
+        System.out.println("Choose: ");
+    }
+
+    public void showProject(Project project) {
+        System.out.println("Projekt oprettet med ID: " + project.getProjectID());
+    }
+
+    public void showProjects(ArrayList<Project> projects) {
+        System.out.println("\nChoose a project:");
+        for (Project p : projects) {
+            System.out.println(p.getProjectID());
+        }
+    }
+
+    public void showAssignments(Project project) {
+        System.out.println("\nAssignments for project " + project.getProjectID() + ":");
+        for (int i = 0; i < project.assignments.size(); i++) {
+            System.out.println(i + ": " + project.assignments.get(i).name + " ("
+                    + project.assignments.get(i).getTotalTimeUsed() + " Hours)");
+        }
+    }
+
+    public void showCreateUser() {
+        System.out.println("Enter initials:");
+    }
+
+    public void showUsers(ArrayList<User> users) {
+        System.out.println("\nChoose a User (Enter Number):");
+        for (int i = 0; i < users.size(); i++) {
+            System.out.println(i + ": " + users.get(i).getInitials());
+        }
+    }
+
+    public void showProjectUsers(Project project) {
+        System.out.println("\nUsers in project " + project.getProjectID() + ":");
+        for (User u : project.getAssignedUsers()) {
+            System.out.println(u.getInitials());
+        }
+    }
+
+    public void showAssignmentAdded() {
+        System.out.println("Assignment added!");
+    }
+
+    public void showUserCreated(User user) {
+        System.out.println("User created: " + user.getInitials());
+    }
+
+    public void showUserAssigned() {
+        System.out.println("User assigned to project!");
+    }
+
+    public void showEnterHours() {
+        System.out.println("Enter hours:");
+    }
+
+    public void showTimeRegistered() {
+        System.out.println("Time registered!");
+    }
+
+    
+}

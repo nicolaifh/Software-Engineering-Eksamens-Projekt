@@ -41,7 +41,6 @@ public class Project {
         return AvailableUsers;
     }
 
-
     public ArrayList<User> getAssignedUsers() {
         return assignedUsers;
     }

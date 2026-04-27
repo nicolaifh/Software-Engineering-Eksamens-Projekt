@@ -36,6 +36,13 @@ public class ProjectController {
         project.assignUser(user);
         user.getAssignedProjects().add(project);
     }
+    public ArrayList<Project> getProjects(){
+        ArrayList<Project> allProjects = new ArrayList<>();
+        for (ArrayList<Project> projects : projectsPerYear.values()){
+            allProjects.addAll(projects);
+        }
+        return allProjects;
+    }
 
     public User[] getAvailableUsers(Project project) {
         ArrayList<User> available = project.getAvailableUsers();
