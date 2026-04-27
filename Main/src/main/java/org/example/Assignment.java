@@ -14,11 +14,18 @@ public class Assignment {
     HashMap<User, Integer> timeUsed;
     Boolean finished;
     Boolean started;
+    Project project;
 
-    public Assignment(String name) {
+    public Assignment(String name, Date startDate, Date endDate, int timeBudget) {
         this.name = name;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.timeBudget = timeBudget;
     }
 
+    public Assignment(String name){
+        this.name=name;
+    }
 
     public void assignUser(User user){
         assignedUsers.add(user);
@@ -74,4 +81,10 @@ public class Assignment {
     public void setTimeUsed(HashMap<User, Integer> timeUsed) {
         this.timeUsed = timeUsed;
     }
+
+    public Project getProject() { return project; }
+
+    public void setProject(Project project) { this.project = project; }
+
+    public boolean isPersonal() { return project == null; }
 }

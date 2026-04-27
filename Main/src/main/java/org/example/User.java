@@ -9,7 +9,7 @@ public class User {
     int timeManagement;
     ArrayList<Project> assignedProjects = new ArrayList<>();
     HashMap<Project, ArrayList<Assignment>> assignedAssignments;
-    ArrayList<Assignment> personalActivitys = new ArrayList<>();
+    ArrayList<Assignment> personalActivities = new ArrayList<>();
 
     public User(String initials) {
         this.initials = initials;
@@ -74,6 +74,13 @@ public class User {
         Project newProject = projectController.createProject(this);
         this.assignedProjects.add(newProject);
         return newProject;
+    }
+
+    public Assignment createPersonalActivity(String name) {
+        Assignment activity = new Assignment(name);
+        activity.assignUser(this);
+        this.personalActivities.add(activity);
+        return activity;
     }
 
     public boolean login(String inputInitials) {

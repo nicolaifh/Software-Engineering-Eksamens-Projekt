@@ -39,7 +39,7 @@ public class StepDefinitions {
     @Given("{User} checks available users")
     public void project_manager_checks_available_users(User arg0) {
         dummyProject = arg0.createProject(dummyProjectController);
-        dummyAssignment = dummyProject.createAssignment();
+        dummyAssignment = dummyProject.createAssignment("assignment1");
     }
     @When("{User} is not assigned to any started assignments")
     public void user1_is_not_assigned_to_any_started_assignments(User arg0) {
