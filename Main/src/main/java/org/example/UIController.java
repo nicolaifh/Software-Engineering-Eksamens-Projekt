@@ -11,7 +11,6 @@ public class UIController {
     Scanner scanner = new Scanner(System.in);
     User loggedInUser = null;
     HashMap<String, Runnable> commands = new HashMap<>();
-    //ArrayList<Project> projects;
 
     public UIController(UserController userController, ProjectController projectController) {
         this.userController = userController;
@@ -22,11 +21,17 @@ public class UIController {
         commands.put("help",           () -> view.showMainMenu());
         commands.put("create-project", () -> createProject(loggedInUser));
         commands.put("add-activity",   () -> addActivity());
+        commands.put("show-projects",   () -> view.showProjects(projectController.getProjects()));
         commands.put("register-time",  () -> timeRegistration(loggedInUser));
         commands.put("add-user",       () -> addUser());
         commands.put("assign-user",    () -> assignUserToProject());
         commands.put("show-users",     () -> showProjectUsers());
         commands.put("exit",           () -> System.exit(0));
+        commands.put("show-activities", () -> {Project selectedProject = selectProject();
+            if (selectedProject == null) return;
+            view.showAssignments(selectedProject);
+        });
+
     }
 
     public void startScreen() {
@@ -123,8 +128,6 @@ public class UIController {
             project.createActivity(inp);
             view.showActivityAdded();
         }
-
-
     }
 
     private void addActivity() {

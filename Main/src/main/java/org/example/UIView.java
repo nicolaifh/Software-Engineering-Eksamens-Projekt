@@ -32,7 +32,7 @@ public class UIView {
     }
 
     public void showProjects(ArrayList<Project> projects) {
-        System.out.println("\nChoose a project:");
+
         for (Project p : projects) {
             System.out.println(p.getProjectID());
         }
