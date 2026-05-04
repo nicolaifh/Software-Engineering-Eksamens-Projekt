@@ -4,18 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="96f29bc4-d34c-4ce2-90f6-4f9901fa2bbc" name="Changes" comment="Implementerer fileReader">
+    <list default="true" id="96f29bc4-d34c-4ce2-90f6-4f9901fa2bbc" name="Changes" comment="flere commands til UI">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main/src/main/java/org/example/UIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Main/src/main/java/org/example/UIController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main/src/main/java/org/example/UIView.java" beforeDir="false" afterPath="$PROJECT_DIR$/Main/src/main/java/org/example/UIView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main/target/classes/org/example/Assignment.class" beforeDir="false" afterPath="$PROJECT_DIR$/Main/target/classes/org/example/Assignment.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main/target/classes/org/example/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/Main/target/classes/org/example/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main/target/classes/org/example/Project.class" beforeDir="false" afterPath="$PROJECT_DIR$/Main/target/classes/org/example/Project.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main/target/classes/org/example/ProjectController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Main/target/classes/org/example/ProjectController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main/target/classes/org/example/UIController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Main/target/classes/org/example/UIController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main/target/classes/org/example/UIView.class" beforeDir="false" afterPath="$PROJECT_DIR$/Main/target/classes/org/example/UIView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main/target/classes/org/example/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/Main/target/classes/org/example/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main/target/classes/org/example/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Main/target/classes/org/example/UserController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,7 +100,15 @@
       <option name="project" value="LOCAL" />
       <updated>1777890204275</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="flere commands til UI">
+      <option name="closed" value="true" />
+      <created>1777897226914</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1777897226915</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -119,7 +117,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="lort" />
     <MESSAGE value="Implementerer fileReader" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implementerer fileReader" />
+    <MESSAGE value="flere commands til UI" />
+    <option name="LAST_COMMIT_MESSAGE" value="flere commands til UI" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
