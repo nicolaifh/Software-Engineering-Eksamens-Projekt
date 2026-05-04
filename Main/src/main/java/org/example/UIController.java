@@ -11,6 +11,7 @@ public class UIController {
     Scanner scanner = new Scanner(System.in);
     User loggedInUser = null;
     HashMap<String, Runnable> commands = new HashMap<>();
+    //ArrayList<Project> projects;
 
     public UIController(UserController userController, ProjectController projectController) {
         this.userController = userController;
@@ -20,7 +21,7 @@ public class UIController {
     private void setupCommands() {
         commands.put("help",           () -> view.showMainMenu());
         commands.put("create-project", () -> createProject(loggedInUser));
-        commands.put("add-assignment", () -> addAssignment());
+        commands.put("add-activity",   () -> addActivity());
         commands.put("register-time",  () -> timeRegistration(loggedInUser));
         commands.put("add-user",       () -> addUser());
         commands.put("assign-user",    () -> assignUserToProject());
@@ -40,7 +41,7 @@ public class UIController {
         String initials = scanner.nextLine();
         User user = userController.login(initials);
         if (user == null) {
-            view.showError("Initialer ikke fundet, prøv igen:");
+            view.showError("Initials cannot be found, try again: ");
             return login();
         }
         view.showLoginSuccess(user);
@@ -90,15 +91,15 @@ public class UIController {
         return null;
     }
 
-    private Assignment selectAssignment(Project project) {
-        ArrayList<Assignment> assignments = project.getAssignments();
-        view.showAssignments(project);
-        int choice = promptInt("Choose assignment");
-        if (choice < 1 || choice > assignments.size()) {
-            view.showError("Assignment not found!");
+    private Activity selectActivity(Project project) {
+        ArrayList<Activity> activity = project.getActivity();
+        view.showActivity(project);
+        int choice = promptInt("Choose activity");
+        if (choice < 1 || choice > activity.size()) {
+            view.showError("Activity not found!");
             return null;
         }
-        return assignments.get(choice-1);
+        return activity.get(choice-1);
     }
 
     private User selectUser() {
@@ -115,17 +116,35 @@ public class UIController {
     private void createProject(User loggedInUser) {
         Project project = loggedInUser.createProject(projectController);
         view.showProject(project);
+
+        while(true) {
+            String inp = prompt("Add activity (or press enter to stop)");
+            if (inp.isEmpty()) break;
+            project.createActivity(inp);
+            view.showActivityAdded();
+        }
+
+
     }
 
-    private void addAssignment() {
+    private void addActivity() {
+        if (projectController.getProjects().isEmpty()) {
+            view.showError("No projects exist!");
+            return;
+        }
         Project selectedProject = selectProject();
-        if (selectedProject == null) return;
-        view.showEnterAssignmentName();
-        
-        String inp = scanner.nextLine();
+        if (selectedProject == null)
+            return;
 
-        selectedProject.createAssignment(inp);
-        view.showAssignmentAdded();
+        if (!canManageProject(selectedProject)) {
+            view.showError("Only the project leader can add activities!");
+            return;
+        }
+
+        view.showEnterActivityName();
+        String inp = scanner.nextLine();
+        selectedProject.createActivity(inp);
+        view.showActivityAdded();
     }
 
     private void addUser() {
@@ -138,11 +157,11 @@ public class UIController {
         Project selectedProject = selectProject();
         if (selectedProject == null) return;
 
-        Assignment selectedAssignment = selectAssignment(selectedProject);
-        if (selectedAssignment == null) return;
+        Activity selectedActivity = selectActivity(selectedProject);
+        if (selectedActivity == null) return;
 
         int hours = promptInt("Enter hours");
-        boolean success = selectedAssignment.assignTimeUsed(loggedInUser, hours);
+        boolean success = selectedActivity.assignTimeUsed(loggedInUser, hours);
         if (success) {
             view.showTimeRegistered();
         } else {
@@ -166,5 +185,9 @@ public class UIController {
         if (selectedProject == null) return;
 
         view.showProjectUsers(selectedProject);
+    }
+
+    public boolean canManageProject(Project project) {
+        return project.projectLead == null || project.projectLead == loggedInUser;
     }
 }

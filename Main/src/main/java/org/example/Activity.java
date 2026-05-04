@@ -5,7 +5,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 
-public class Assignment {
+public class Activity {
     Date startDate;
     Date endDate;
     String name;
@@ -16,14 +16,14 @@ public class Assignment {
     Boolean started;
     Project project;
 
-    public Assignment(String name, Date startDate, Date endDate, int timeBudget) {
+    public Activity(String name, Date startDate, Date endDate, int timeBudget) {
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
         this.timeBudget = timeBudget;
     }
 
-    public Assignment(String name){
+    public Activity(String name){
         this.name=name;
     }
 

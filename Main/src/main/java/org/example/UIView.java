@@ -17,12 +17,12 @@ public class UIView {
     }
 
     public void showMainMenu() {
-        System.out.println("\ncreate-project            Creates a projekt");
-        System.out.println("add-assignment            Adds a assignment to projekt");
+        System.out.println("\ncreate-project            Creates a project");
+        System.out.println("add-activity              Adds a activity to project");
         System.out.println("register-time             Register Time");
         System.out.println("add-user                  Add a user");
-        System.out.println("assign-user               Assign user to a projekt");
-        System.out.println("show-users                Show user in a projekt");
+        System.out.println("assign-user               Assign user to a project");
+        System.out.println("show-users                Show user in a project");
         System.out.println("exit                      Exits");
         System.out.println("Choose: ");
     }
@@ -38,11 +38,11 @@ public class UIView {
         }
     }
 
-    public void showAssignments(Project project) {
-        System.out.println("\nAssignments for project " + project.getProjectID() + ":");
-        for (int i = 0; i < project.assignments.size(); i++) {
-            System.out.println(i + 1 + ": " + project.assignments.get(i).name + " ("
-                    + project.assignments.get(i).getTotalTimeUsed() + " Hours)");
+    public void showActivity(Project project) {
+        System.out.println("\nActivities for project " + project.getProjectID() + ":");
+        for (int i = 0; i < project.activities.size(); i++) {
+            System.out.println(i + 1 + ": " + project.activities.get(i).name + " ("
+                    + project.activities.get(i).getTotalTimeUsed() + " Hours)");
         }
     }
 
@@ -64,8 +64,8 @@ public class UIView {
         }
     }
 
-    public void showAssignmentAdded() {
-        System.out.println("Assignment added!");
+    public void showActivityAdded() {
+        System.out.println("Activity added!");
     }
 
     public void showUserCreated(User user) {
@@ -99,8 +99,8 @@ public class UIView {
     public void showNumberError() {
         System.out.println("Error: Please enter a number!");
     }
-    public void showEnterAssignmentName() {
-    System.out.print("Enter name on assignment: ");
+    public void showEnterActivityName() {
+    System.out.print("Enter name on activity: ");
 }
 
 }

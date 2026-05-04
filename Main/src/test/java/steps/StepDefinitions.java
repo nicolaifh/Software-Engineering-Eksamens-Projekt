@@ -7,7 +7,6 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.example.*;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -21,7 +20,7 @@ public class StepDefinitions {
     int dummyArraySize;
     Project  dummyProject;
     User dummyUser;
-    Assignment dummyAssignment;
+    Activity dummyActivity;
     Project newProject;
     Calendar calendar;
     Date dummyDate = new Date();
@@ -39,13 +38,13 @@ public class StepDefinitions {
     @Given("{User} checks available users")
     public void project_manager_checks_available_users(User arg0) {
         dummyProject = arg0.createProject(dummyProjectController);
-        dummyAssignment = dummyProject.createAssignment("assignment1");
+        dummyActivity = dummyProject.createActivity("assignment1");
     }
     @When("{User} is not assigned to any started assignments")
     public void user1_is_not_assigned_to_any_started_assignments(User arg0) {
 
         dummyProject.assignUser(arg0);
-        dummyAssignment.assignUser(arg0);
+        dummyActivity.assignUser(arg0);
 
     }
     @Then("{User} should be present on a list over available users.")
@@ -57,7 +56,7 @@ public class StepDefinitions {
 
     @When("{User} is assigned to a started assignments")
     public void userIsAssignedToAStartedAssignments(User arg0) {
-        dummyAssignment.setStartDate(dummyDate); // sets time to current time
+        dummyActivity.setStartDate(dummyDate); // sets time to current time
     }
 
     @Then("{User} should not be present on a list over available users.")

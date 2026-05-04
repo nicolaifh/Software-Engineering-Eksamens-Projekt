@@ -1,6 +1,5 @@
 package org.example;
 
-import java.nio.channels.AsynchronousServerSocketChannel;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -8,7 +7,7 @@ public class Project {
     User projectLead;
     int projectID;
     String projectName;
-    ArrayList<Assignment> assignments = new ArrayList<>();
+    ArrayList<Activity> activities = new ArrayList<>();
     String startDate;
     String endDate;
     ArrayList<User> assignedUsers = new ArrayList<>();
@@ -20,20 +19,20 @@ public class Project {
         this.assignedUsers.add(user);
     }
 
-    public Assignment createAssignment(String name, Date startDate, Date endDate, int timeBudget) {
-        Assignment assignment = new Assignment(name, startDate, endDate, timeBudget);
-        assignment.setProject(this);
-        this.assignments.add(assignment);
-        return assignment;
+    public Activity createActivity(String name, Date startDate, Date endDate, int timeBudget) {
+        Activity activity = new Activity(name, startDate, endDate, timeBudget);
+        activity.setProject(this);
+        this.activities.add(activity);
+        return activity;
     }
 
-    public Assignment createAssignment(String name) {
-        return createAssignment(name, null, null, 0);
+    public Activity createActivity(String name) {
+        return createActivity(name, null, null, 0);
     }
 
     public ArrayList<User> getAvailableUsers() {
         ArrayList<User> AvailableUsers = new ArrayList<>();
-        for (Assignment a : this.assignments) {
+        for (Activity a : this.activities) {
             if(!a.hasStarted()){
                 AvailableUsers.addAll(a.getAssignedUsers());
             }
@@ -63,8 +62,8 @@ public class Project {
     public void setProjectName(String projectName) {
         this.projectName = projectName;
     }
-    public ArrayList<Assignment> getAssignments() {
-        return assignments;
+    public ArrayList<Activity> getActivity() {
+        return activities;
     }
 
 }

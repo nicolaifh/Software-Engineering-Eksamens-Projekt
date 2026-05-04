@@ -8,8 +8,8 @@ public class User {
     int accessLevel = 0;
     int timeManagement;
     ArrayList<Project> assignedProjects = new ArrayList<>();
-    HashMap<Project, ArrayList<Assignment>> assignedAssignments;
-    ArrayList<Assignment> personalActivities = new ArrayList<>();
+    HashMap<Project, ArrayList<Activity>> assignedActivities;
+    ArrayList<Activity> personalActivities = new ArrayList<>();
 
     public User(String initials) {
         this.initials = initials;
@@ -76,8 +76,8 @@ public class User {
         return newProject;
     }
 
-    public Assignment createPersonalActivity(String name) {
-        Assignment activity = new Assignment(name);
+    public Activity createPersonalActivity(String name) {
+        Activity activity = new Activity(name);
         activity.assignUser(this);
         this.personalActivities.add(activity);
         return activity;

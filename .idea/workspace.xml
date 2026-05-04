@@ -4,8 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="96f29bc4-d34c-4ce2-90f6-4f9901fa2bbc" name="Changes" comment="Implementerer fileReader">
+    <list default="true" id="80dc6781-edc2-40d7-96a5-143c402daaaf" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main/src/main/java/org/example/Assignment.java" beforeDir="false" afterPath="$PROJECT_DIR$/Main/src/main/java/org/example/Activity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main/src/main/java/org/example/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/Main/src/main/java/org/example/Project.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main/src/main/java/org/example/UIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Main/src/main/java/org/example/UIController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main/src/main/java/org/example/UIView.java" beforeDir="false" afterPath="$PROJECT_DIR$/Main/src/main/java/org/example/UIView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main/src/main/java/org/example/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/Main/src/main/java/org/example/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main/src/test/java/steps/StepDefinitions.java" beforeDir="false" afterPath="$PROJECT_DIR$/Main/src/test/java/steps/StepDefinitions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main/target/classes/org/example/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/Main/target/classes/org/example/Main.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -13,100 +20,53 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="main" />
-      </map>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;BENkovitch&quot;
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "BENkovitch"
   }
-}</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/nicolaifh/Software-Engineering-Eksamens-Projekt.git&quot;,
-    &quot;accountId&quot;: &quot;079a5273-1b34-42e2-8b39-562317f6a45c&quot;
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/nicolaifh/Software-Engineering-Eksamens-Projekt.git",
+    "accountId": "079a5273-1b34-42e2-8b39-562317f6a45c"
   }
-}</component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Main/src/main/java/org/example/Assignment.java" root0="FORCE_HIGHLIGHTING" />
-  </component>
-  <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
-  </component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 1
-}</component>
-  <component name="ProjectId" id="3CImXYnUTs9iq4ZmQzZke3NXTko" />
+}]]></component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 3,
+  "fromUser": false
+}]]></component>
+  <component name="ProjectId" id="3DG57Iqe7Fr4C0rlg3B5JQpu1QM" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;FileReader&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
-  <component name="RunManager">
-    <configuration default="true" type="JetRunConfigurationType">
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <option name="filePath" />
-      <method v="2" />
-    </configuration>
-  </component>
+}]]></component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="96f29bc4-d34c-4ce2-90f6-4f9901fa2bbc" name="Changes" comment="" />
-      <created>1776081498826</created>
+      <changelist id="80dc6781-edc2-40d7-96a5-143c402daaaf" name="Changes" comment="" />
+      <created>1777895397019</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1776081498826</updated>
-      <workItem from="1776081499886" duration="538000" />
-      <workItem from="1776082047062" duration="4334000" />
-      <workItem from="1776087561041" duration="160000" />
-      <workItem from="1776088765944" duration="1792000" />
-      <workItem from="1776683021054" duration="5219000" />
-      <workItem from="1777295793792" duration="1226000" />
-      <workItem from="1777317566612" duration="543000" />
-      <workItem from="1777890015957" duration="202000" />
+      <updated>1777895397019</updated>
+      <workItem from="1777895399007" duration="6788000" />
     </task>
-    <task id="LOCAL-00001" summary="Implementerer fileReader">
-      <option name="closed" value="true" />
-      <created>1777890204275</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1777890204275</updated>
-    </task>
-    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="lort" />
-    <MESSAGE value="Implementerer fileReader" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implementerer fileReader" />
   </component>
 </project>
