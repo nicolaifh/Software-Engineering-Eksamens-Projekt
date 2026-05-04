@@ -6,6 +6,16 @@
   <component name="ChangeListManager">
     <list default="true" id="96f29bc4-d34c-4ce2-90f6-4f9901fa2bbc" name="Changes" comment="Implementerer fileReader">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main/src/main/java/org/example/UIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Main/src/main/java/org/example/UIController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main/src/main/java/org/example/UIView.java" beforeDir="false" afterPath="$PROJECT_DIR$/Main/src/main/java/org/example/UIView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main/target/classes/org/example/Assignment.class" beforeDir="false" afterPath="$PROJECT_DIR$/Main/target/classes/org/example/Assignment.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main/target/classes/org/example/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/Main/target/classes/org/example/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main/target/classes/org/example/Project.class" beforeDir="false" afterPath="$PROJECT_DIR$/Main/target/classes/org/example/Project.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main/target/classes/org/example/ProjectController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Main/target/classes/org/example/ProjectController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main/target/classes/org/example/UIController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Main/target/classes/org/example/UIController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main/target/classes/org/example/UIView.class" beforeDir="false" afterPath="$PROJECT_DIR$/Main/target/classes/org/example/UIView.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main/target/classes/org/example/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/Main/target/classes/org/example/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main/target/classes/org/example/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Main/target/classes/org/example/UserController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,23 +56,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;FileReader&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration default="true" type="JetRunConfigurationType">
       <method v="2">
@@ -108,5 +120,12 @@
     <MESSAGE value="lort" />
     <MESSAGE value="Implementerer fileReader" />
     <option name="LAST_COMMIT_MESSAGE" value="Implementerer fileReader" />
+  </component>
+  <component name="XDebuggerManager">
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="org.example.Project" memberName="assignedUsers" />
+      </pinned-members>
+    </pin-to-top-manager>
   </component>
 </project>

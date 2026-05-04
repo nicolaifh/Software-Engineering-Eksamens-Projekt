@@ -20,12 +20,18 @@ public class UIController {
     private void setupCommands() {
         commands.put("help",           () -> view.showMainMenu());
         commands.put("create-project", () -> createProject(loggedInUser));
+        commands.put("show-projects",   () -> view.showProjects(projectController.getProjects()));
         commands.put("add-assignment", () -> addAssignment());
         commands.put("register-time",  () -> timeRegistration(loggedInUser));
         commands.put("add-user",       () -> addUser());
         commands.put("assign-user",    () -> assignUserToProject());
         commands.put("show-users",     () -> showProjectUsers());
         commands.put("exit",           () -> System.exit(0));
+        commands.put("show-assignments", () -> {Project selectedProject = selectProject();
+            if (selectedProject == null) return;
+            view.showAssignments(selectedProject);
+        });
+
     }
 
     public void startScreen() {
@@ -118,6 +124,7 @@ public class UIController {
     }
 
     private void addAssignment() {
+        System.out.println("\nChoose a project:");
         Project selectedProject = selectProject();
         if (selectedProject == null) return;
         view.showEnterAssignmentName();
