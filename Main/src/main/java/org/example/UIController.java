@@ -29,7 +29,7 @@ public class UIController {
         commands.put("exit",           () -> System.exit(0));
         commands.put("show-activities", () -> {Project selectedProject = selectProject();
             if (selectedProject == null) return;
-            view.showAssignments(selectedProject);
+            view.showActivity(selectedProject);
         });
 
     }
@@ -163,13 +163,15 @@ public class UIController {
         Activity selectedActivity = selectActivity(selectedProject);
         if (selectedActivity == null) return;
 
-        int hours = promptInt("Enter hours");
-        boolean success = selectedActivity.assignTimeUsed(loggedInUser, hours);
-        if (success) {
+        int hours = promptInt("Enter half hours");
+        try {
+            selectedActivity.assignTimeUsed(loggedInUser, hours);
             view.showTimeRegistered();
-        } else {
-            view.showError("Could not register hours!");
+        } catch (Exception e) {
+            view.showError(e.getMessage());
+
         }
+
     }
 
     private void assignUserToProject() {

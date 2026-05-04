@@ -42,7 +42,7 @@ public class UIView {
         System.out.println("\nActivities for project " + project.getProjectID() + ":");
         for (int i = 0; i < project.activities.size(); i++) {
             System.out.println(i + 1 + ": " + project.activities.get(i).name + " ("
-                    + project.activities.get(i).getTotalTimeUsed() + " Hours)");
+                    + project.activities.get(i).getTotalTimeUsed() + " Half hours)");
         }
     }
 
@@ -77,7 +77,7 @@ public class UIView {
     }
 
     public void showEnterHours() {
-        System.out.println("Enter hours:");
+        System.out.println("Enter half hours:");
     }
 
     public void showTimeRegistered() {
