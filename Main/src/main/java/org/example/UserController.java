@@ -23,6 +23,11 @@ public class UserController {
     public List<User> getUsersFromHR(File file){
         return List.of();
     }
+    public User createUser(String initals){
+        User newUser = new User(initals);
+        users.add(newUser);
+        return newUser;
+    }
 
     public void editUser(User user){
 
@@ -61,3 +66,10 @@ public class UserController {
         return users;
         }
     }
+    public User login(String initials) {
+    return users.stream()
+        .filter(u -> u.getInitials().equals(initials))
+        .findFirst()
+        .orElse(null);
+}
+}
