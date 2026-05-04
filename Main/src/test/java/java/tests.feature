@@ -64,3 +64,11 @@ Feature: tests
     Given a user wants to fetch their projects
     And User was added to 5 projects
     Then return 5 projects
+
+
+# White-Box tests
+  Scenario: ProjectsPerYear contains Year
+    Given a new project "String" 
+    Then return test
+
+  Scenario: ProjectsPerYear does not contain Year
