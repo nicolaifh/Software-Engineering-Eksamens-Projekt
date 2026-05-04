@@ -28,7 +28,7 @@ public class UIView {
     }
 
     public void showProject(Project project) {
-        System.out.println("Projekt oprettet med ID: " + project.getProjectID());
+        System.out.println("Project created with ID: " + project.getProjectID());
     }
 
     public void showProjects(ArrayList<Project> projects) {
@@ -41,7 +41,7 @@ public class UIView {
     public void showAssignments(Project project) {
         System.out.println("\nAssignments for project " + project.getProjectID() + ":");
         for (int i = 0; i < project.assignments.size(); i++) {
-            System.out.println(i + ": " + project.assignments.get(i).name + " ("
+            System.out.println(i + 1 + ": " + project.assignments.get(i).name + " ("
                     + project.assignments.get(i).getTotalTimeUsed() + " Hours)");
         }
     }
@@ -84,5 +84,23 @@ public class UIView {
         System.out.println("Time registered!");
     }
 
-    
+    public void showWelcomeMessage() {
+        System.out.println("Write 'help' to se commands");
+    }
+
+    public void showPrompt() {
+        System.out.print("\n> ");
+    }
+
+    public void showInputPrompt(String message) {
+        System.out.print(message + ": ");
+    }
+
+    public void showNumberError() {
+        System.out.println("Error: Please enter a number!");
+    }
+    public void showEnterAssignmentName() {
+    System.out.print("Enter name on assignment: ");
+}
+
 }

@@ -31,7 +31,7 @@ public class UIController {
     public void startScreen() {
         loggedInUser = login();
         setupCommands();
-        System.out.println("Skriv 'help' for at se kommandoer");
+        view.showWelcomeMessage();
         mainMenu();
     }
 
@@ -49,30 +49,30 @@ public class UIController {
 
     public void mainMenu() {
         while (true) {
-            System.out.print("\n> ");
+            view.showPrompt();
             String input = scanner.nextLine().trim().toLowerCase();
             Runnable command = commands.get(input);
             if (command != null) {
                 command.run();
             } else {
-                view.showError("Ukendt kommando, skriv 'help' for hjælp");
+                view.showError("Unknown error, write 'help' for help");
             }
         }
     }
 
     private String prompt(String message) {
-        System.out.print(message + ": ");
+        view.showInputPrompt(message);
         return scanner.nextLine().trim();
     }
 
     private int promptInt(String message) {
         while (true) {
-            System.out.print(message + ": ");
+            view.showInputPrompt(message);
             String input = scanner.nextLine().trim();
             try {
                 return Integer.parseInt(input);
             } catch (NumberFormatException e) {
-                view.showError("Indtast venligst et tal!");
+                view.showError("Please enter a number!");
             }
         }
     }
@@ -80,33 +80,33 @@ public class UIController {
     private Project selectProject() {
         ArrayList<Project> projects = projectController.getProjects();
         view.showProjects(projects);
-        int choice = promptInt("Vælg projekt ID");
+        int choice = promptInt("Choose project ID");
         for (Project p : projects) {
             if (p.getProjectID() == choice) {
                 return p;
             }
         }
-        view.showError("Projekt ikke fundet!");
+        view.showError("Project not found!");
         return null;
     }
 
     private Assignment selectAssignment(Project project) {
         ArrayList<Assignment> assignments = project.getAssignments();
         view.showAssignments(project);
-        int choice = promptInt("Vælg assignment");
-        if (choice < 0 || choice >= assignments.size()) {
-            view.showError("Assignment ikke fundet!");
+        int choice = promptInt("Choose assignment");
+        if (choice < 1 || choice > assignments.size()) {
+            view.showError("Assignment not found!");
             return null;
         }
-        return assignments.get(choice);
+        return assignments.get(choice-1);
     }
 
     private User selectUser() {
         ArrayList<User> users = userController.getUsers();
         view.showUsers(users);
-        int choice = promptInt("Vælg bruger");
+        int choice = promptInt("Choose user");
         if (choice < 0 || choice >= users.size()) {
-            view.showError("Bruger ikke fundet!");
+            view.showError("User not found!");
             return null;
         }
         return users.get(choice);
@@ -120,13 +120,16 @@ public class UIController {
     private void addAssignment() {
         Project selectedProject = selectProject();
         if (selectedProject == null) return;
+        view.showEnterAssignmentName();
+        
+        String inp = scanner.nextLine();
 
-        selectedProject.createAssignment();
+        selectedProject.createAssignment(inp);
         view.showAssignmentAdded();
     }
 
     private void addUser() {
-        String initials = prompt("Indtast initialer");
+        String initials = prompt("Enter initials");
         User newUser = userController.createUser(initials);
         view.showUserCreated(newUser);
     }
@@ -138,12 +141,12 @@ public class UIController {
         Assignment selectedAssignment = selectAssignment(selectedProject);
         if (selectedAssignment == null) return;
 
-        int hours = promptInt("Indtast timer");
+        int hours = promptInt("Enter hours");
         boolean success = selectedAssignment.assignTimeUsed(loggedInUser, hours);
         if (success) {
             view.showTimeRegistered();
         } else {
-            view.showError("Kunne ikke registrere timer!");
+            view.showError("Could not register hours!");
         }
     }
 

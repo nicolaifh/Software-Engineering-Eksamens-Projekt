@@ -104,10 +104,8 @@ public class Assignment {
     public void setTimeBudget(int timeBudget) {
         this.timeBudget = timeBudget;
     }
-    public HashMap<User, Integer> getTimeUsed() {
-        return timeUsed;
-    }
-    public void setTimeUsed(HashMap<User, Integer> timeUsed) {
+   
+    public void setTimeUsed(HashMap<User, HashMap<String, Integer>> timeUsed) {
         this.timeUsed = timeUsed;
     }
 
