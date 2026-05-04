@@ -56,10 +56,11 @@ public class UserController {
                 if (!line.matches("[a-zA-Z]{4}")) {
                     continue;
                 }
+                users.add(new User(line));
+                }
             }
 
-            users.add(new User(line));
-        } catch (IOException e) {
+        catch (IOException e) {
             throw new RuntimeException(e);
         }
 
