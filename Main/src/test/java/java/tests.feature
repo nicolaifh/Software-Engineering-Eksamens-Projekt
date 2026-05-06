@@ -1,6 +1,5 @@
 # Created by Nicolai at 23/03/2026
 Feature: tests
-  # Enter feature description here
 
   Scenario: View available users
     Given User1 checks available users

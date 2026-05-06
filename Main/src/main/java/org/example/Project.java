@@ -8,8 +8,8 @@ public class Project {
     int projectID;
     String projectName;
     ArrayList<Activity> activities = new ArrayList<>();
-    String startDate;
-    String endDate;
+    int startWeek;
+    int endWeek;
     ArrayList<User> assignedUsers = new ArrayList<>();
 
     public Project() {
@@ -19,15 +19,18 @@ public class Project {
         this.assignedUsers.add(user);
     }
 
-    public Activity createActivity(String name, Date startDate, Date endDate, int timeBudget) {
-        Activity activity = new Activity(name, startDate, endDate, timeBudget);
+    public Activity createActivity(String name, int startWeek, int endWeek, int timeBudget) {
+        for (Activity a : activities) {
+            if (a.getName().equals(name)) { return null; }
+        }
+        Activity activity = new Activity(name, startWeek, endWeek, timeBudget);
         activity.setProject(this);
         this.activities.add(activity);
         return activity;
     }
 
     public Activity createActivity(String name) {
-        return createActivity(name, null, null, 0);
+        return createActivity(name, 0, 0, 0);
     }
 
     public ArrayList<User> getAvailableUsers() {

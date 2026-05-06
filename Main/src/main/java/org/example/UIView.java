@@ -17,18 +17,24 @@ public class UIView {
     }
 
     public void showMainMenu() {
-        System.out.println("\ncreate-project            Creates a project");
-        System.out.println("add-activity              Adds a activity to project");
-        System.out.println("register-time             Register Time");
-        System.out.println("add-user                  Add a user");
-        System.out.println("assign-user               Assign user to a project");
-        System.out.println("show-users                Show user in a project");
-        System.out.println("exit                      Exits");
+        System.out.println("\ncreate-project                 Creates a new project");
+        System.out.println("focus-project                   focus a project, to skip any selection of project in any action taken");
+        System.out.println("add-activity                    Adds a activity to project");
+        System.out.println("register-time                   Register Time");
+        System.out.println("add-user                        Add a user");
+        System.out.println("assign-user                     Assign user to a project");
+        System.out.println("show-users                      Show user in a project");
+        System.out.println("generate-project-report,gpr     generate project report");
+        System.out.println("exit                            Exits");
         System.out.println("Choose: ");
     }
 
     public void showProject(Project project) {
         System.out.println("Project created with ID: " + project.getProjectID());
+    }
+
+    public void showFocusProject(Project project) {
+        System.out.println("Project focused with ID: " + project.getProjectID());
     }
 
     public void showProjects(ArrayList<Project> projects) {

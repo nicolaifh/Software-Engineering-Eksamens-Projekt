@@ -6,8 +6,8 @@ import java.util.Date;
 import java.util.HashMap;
 
 public class Activity {
-    Date startDate;
-    Date endDate;
+    int startWeek;
+    int endWeek;
     String name;
     ArrayList<User> assignedUsers = new ArrayList<>();
     int timeBudget;
@@ -16,10 +16,10 @@ public class Activity {
     Boolean started;
     Project project;
 
-    public Activity(String name, Date startDate, Date endDate, int timeBudget) {
+    public Activity(String name, int startWeek, int endWeek, int timeBudget) {
         this.name = name;
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.startWeek = startWeek;
+        this.endWeek = endWeek;
         this.timeBudget = timeBudget;
     }
 
@@ -33,10 +33,8 @@ public class Activity {
 
     public Boolean hasStarted() {
         Calendar cal = Calendar.getInstance();
-        if (startDate != null) {
-            return !cal.before(startDate);
-        }
-        return false;
+        int currentWeek = cal.get(Calendar.WEEK_OF_YEAR);
+        return currentWeek >= startWeek;
     }
 
     public ArrayList<User> getAssignedUsers() {
@@ -73,21 +71,11 @@ public class Activity {
         return timeUsed;
     }
 
-    public Date getStartDate() {
-        return startDate;
-    }
+    public int getStartWeek() { return startWeek; }
+    public void setStartWeek(int startWeek) { this.startWeek = startWeek; }
 
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    public Date getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
+    public int getEndWeek() { return endWeek; }
+    public void setEndWeek(int endWeek) { this.endWeek = endWeek; }
 
     public String getName() {
         return name;

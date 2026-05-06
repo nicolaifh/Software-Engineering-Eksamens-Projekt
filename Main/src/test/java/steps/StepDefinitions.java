@@ -23,7 +23,7 @@ public class StepDefinitions {
     Activity dummyActivity;
     Project newProject;
     Calendar calendar;
-    Date dummyDate = new Date();
+    int dummyDate = Calendar.getInstance().get(Calendar.WEEK_OF_YEAR);
     Object dummyData;
     Object dummyData2;
 
@@ -56,7 +56,7 @@ public class StepDefinitions {
 
     @When("{User} is assigned to a started assignments")
     public void userIsAssignedToAStartedAssignments(User arg0) {
-        dummyActivity.setStartDate(dummyDate); // sets time to current time
+        dummyActivity.setStartWeek(dummyDate); // sets time to current time
     }
 
     @Then("{User} should not be present on a list over available users.")
