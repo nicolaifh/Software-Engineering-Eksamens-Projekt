@@ -24,6 +24,8 @@ public class UIView {
         System.out.println("add-user                        Add a user");
         System.out.println("assign-user                     Assign user to a project");
         System.out.println("show-users                      Show user in a project");
+        System.out.println("edit-activity                   Edit activity");
+        System.out.println("show-avaliable-users            Show available users by project or global");
         System.out.println("generate-project-report,gpr     generate project report");
         System.out.println("exit                            Exits");
         System.out.println("Choose: ");

@@ -1,6 +1,7 @@
 package org.example;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -40,7 +41,121 @@ public class UIController {
         commands.put("focus-project", () -> focusProject());
         commands.put("generate-project-report", () -> printProjectReport());
         commands.put("gpr", () -> printProjectReport());
+        commands.put("edit-activity", () -> editActivity());
+        commands.put("show-avaliable-users", () -> showAvaliableUsers());
 
+    }
+
+    private void editActivity() {
+        Project selectedProject = focusedProject;
+        if (focusedProject == null) selectedProject = selectProject();
+        if (selectedProject == null) return;
+        Activity selectedActivity = selectActivity(selectedProject);
+        if (selectedActivity == null) return;
+        while(true){
+            System.out.println(selectedActivity.name + " | Start: W" + selectedActivity.getStartWeek() + " | End: W" + selectedActivity.getEndWeek() + " | TimeBudget/TimeUsed: " + selectedActivity.timeBudget +  "/" + selectedActivity.timeUsed);
+            System.out.println("Please enter your choice(leave blank to exit):");
+            System.out.println("1: Change name");
+            System.out.println("2: Change start week");
+            System.out.println("3: Change end week");
+            System.out.println("4: Change timebudget");
+            System.out.println("5: Assign User to activity");
+            Integer choice = promptInt(scanner.nextLine());
+            Integer newValue = null;
+            switch (choice) {
+                case 1:
+                    String newName = scanner.nextLine();
+                    if (newName.isEmpty()) break;
+                    selectedActivity.name = newName;
+                    break;
+                case 2:
+                    newValue = scanner.nextInt();
+                    if (newValue < 0 || newValue == null) break;
+                    selectedActivity.setStartWeek(newValue);
+                    break;
+                case 3:
+                    newValue = scanner.nextInt();
+                    if (newValue < 0 || newValue == null) break;
+                    selectedActivity.setEndWeek(newValue);
+                    break;
+                case 4:
+                    newValue = scanner.nextInt();
+                    if (newValue < 0 || newValue == null) break;
+                    selectedActivity.timeBudget = newValue;
+                    break;
+                case 5:
+                    selectedActivity.assignedUsers.add(selectUser());
+                    break;
+                case null, default:
+                    return;
+            }
+
+        }
+
+    }
+
+    public void showAvaliableUsers() {
+
+        System.out.println("Show users from:");
+        System.out.println("1: All users");
+        System.out.println("2: Project assigned users");
+        Integer scope = promptInt("Choice");
+        if (scope == null) return;
+
+        ArrayList<User> users;
+        if (scope == 1) {
+            users = new ArrayList<>(userController.getUsers());
+        } else if (scope == 2) {
+            Project selectedProject = focusedProject;
+            if (focusedProject == null) selectedProject = selectProject();
+            if (selectedProject == null) return;
+            users = new ArrayList<>(selectedProject.getAssignedUsers());
+        } else {
+            view.showError("Invalid choice!");
+            return;
+        }
+
+
+        int currentWeek = java.util.Calendar.getInstance().get(java.util.Calendar.WEEK_OF_YEAR);
+        Integer startWeek = promptInt("Start week (leave blank for current week W" + currentWeek + ")");
+        if (startWeek == null) startWeek = currentWeek;
+        Integer duration = promptInt("Number of weeks (leave blank for 4)");
+        if (duration == null) duration = 4;
+        int endWeek = startWeek + duration - 1;
+
+
+        ArrayList<Activity> allActivities = new ArrayList<>();
+        for (Project p : projectController.getProjects()) {
+            allActivities.addAll(p.getActivity());
+        }
+
+
+        HashMap<User, Integer> userBusyness = new HashMap<>();
+        for (User u : users) {
+            userBusyness.put(u, 0);
+        }
+
+        for (Activity a : allActivities) {
+            if (a.getEndWeek() < startWeek || a.getStartWeek() > endWeek) continue;
+            for (User u : users) {
+                if (a.getAssignedUsers().contains(u)) {
+                    userBusyness.put(u, userBusyness.get(u) + 1);
+                }
+            }
+        }
+
+
+        users.sort(Comparator.comparingInt(userBusyness::get));
+
+
+        System.out.println("=".repeat(40));
+        System.out.println("User availability W" + startWeek + " - W" + endWeek);
+        System.out.println("-".repeat(40));
+        for (User u : users) {
+            int activities = userBusyness.get(u);
+            System.out.println("  " + u.getInitials() + " | " + activities + " activities planned");
+        }
+        System.out.println("=".repeat(40));
     }
 
     public void startScreen() {
@@ -159,9 +274,7 @@ public class UIController {
         }
         Project selectedProject = focusedProject;
         if (focusedProject == null) selectedProject = selectProject();
-
-        if (selectedProject == null)
-            return;
+        if (selectedProject == null) return;
 
         if (!canManageProject(selectedProject)) {
             view.showError("Only the project leader can add activities!");
