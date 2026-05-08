@@ -1,18 +1,15 @@
 package org.example;
 
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.lang.reflect.Array;
 import java.util.List;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 
 public class UserController {
-    ArrayList<User> users = new ArrayList<User>();
+    ArrayList<User> users = new ArrayList<>();
 
     public UserController() {
     }
@@ -21,9 +18,6 @@ public class UserController {
         this.users = users;
     }
 
-    public List<User> getUsersFromHR(File file) {
-        return List.of();
-    }
 
     public User createUser(String initals) {
         User newUser = new User(initals);
@@ -56,6 +50,9 @@ public class UserController {
                 if (!line.matches("[a-zA-Z]{4}")) {
                     continue;
                 }
+                if (users.contains(new User(line))) {
+                    continue;
+                }
                 users.add(new User(line));
                 }
             }
@@ -72,4 +69,5 @@ public class UserController {
                 .findFirst()
                 .orElse(null);
     }
+
 }

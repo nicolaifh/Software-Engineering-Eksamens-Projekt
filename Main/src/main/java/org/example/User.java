@@ -77,10 +77,20 @@ public class User {
     }
 
     public Activity createPersonalActivity(String name) {
-        Activity activity = new Activity(name);
-        activity.assignUser(this);
+        for (Activity a : personalActivities) {
+            if (a.getName().equals(name)) { return null; }
+        }
+        Activity activity = new Activity(name, 0, 0, 0);
         this.personalActivities.add(activity);
         return activity;
+    }
+
+    public ArrayList<Activity> getPersonalActivities() {
+        return personalActivities;
+    }
+
+    public boolean removePersonalActivity(Activity activity) {
+        return personalActivities.remove(activity);
     }
 
     public boolean login(String inputInitials) {

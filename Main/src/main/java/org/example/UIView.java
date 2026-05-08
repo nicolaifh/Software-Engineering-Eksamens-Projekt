@@ -20,11 +20,15 @@ public class UIView {
         System.out.println("\ncreate-project                 Creates a new project");
         System.out.println("focus-project                   focus a project, to skip any selection of project in any action taken");
         System.out.println("add-activity                    Adds a activity to project");
+        System.out.println("add-pActivity                   Adds a personal activity");
         System.out.println("register-time                   Register Time");
         System.out.println("add-user                        Add a user");
+        System.out.println("import-users                    import users from file");
         System.out.println("assign-user                     Assign user to a project");
         System.out.println("show-users                      Show user in a project");
         System.out.println("edit-activity                   Edit activity");
+        System.out.println("delete-activity                 Delete a project or personal activity");
+        System.out.println("delete-project                  Delete a project");
         System.out.println("show-avaliable-users            Show available users by project or global");
         System.out.println("generate-project-report,gpr     generate project report");
         System.out.println("exit                            Exits");
@@ -110,5 +114,12 @@ public class UIView {
     public void showEnterActivityName() {
     System.out.print("Enter name on activity: ");
 }
-
+    public void showPersonalActivities(ArrayList<Activity> activities) {
+        System.out.println("\nYour personal activities:");
+        for (int i = 0; i < activities.size(); i++) {
+            System.out.println(i + 1 + ": " + activities.get(i).getName()
+                    + " | W" + activities.get(i).getStartWeek()
+                    + " - W" + activities.get(i).getEndWeek());
+        }
+    }
 }

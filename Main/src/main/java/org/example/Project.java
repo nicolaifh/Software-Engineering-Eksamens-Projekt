@@ -68,5 +68,8 @@ public class Project {
     public ArrayList<Activity> getActivity() {
         return activities;
     }
+    public boolean removeActivity(Activity activity) {
+        return activities.remove(activity);
+    }
 
 }

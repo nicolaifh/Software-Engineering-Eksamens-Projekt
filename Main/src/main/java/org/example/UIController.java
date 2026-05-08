@@ -1,9 +1,7 @@
 package org.example;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Scanner;
+import java.io.File;
+import java.util.*;
 
 public class UIController {
     UserController userController;
@@ -43,7 +41,10 @@ public class UIController {
         commands.put("gpr", () -> printProjectReport());
         commands.put("edit-activity", () -> editActivity());
         commands.put("show-avaliable-users", () -> showAvaliableUsers());
-
+        commands.put("add-pActivity", () -> addPersonalActivity(loggedInUser));
+        commands.put("import-users", () -> importUsers());
+        commands.put("delete-activity", () -> deleteActivity());
+        commands.put("delete-project",  () -> deleteProject());
     }
 
     private void editActivity() {
@@ -53,38 +54,38 @@ public class UIController {
         Activity selectedActivity = selectActivity(selectedProject);
         if (selectedActivity == null) return;
         while(true){
-            System.out.println(selectedActivity.name + " | Start: W" + selectedActivity.getStartWeek() + " | End: W" + selectedActivity.getEndWeek() + " | TimeBudget/TimeUsed: " + selectedActivity.timeBudget +  "/" + selectedActivity.timeUsed);
-            System.out.println("Please enter your choice(leave blank to exit):");
+            System.out.println(selectedActivity.name + " | Start: W" + selectedActivity.getStartWeek() + " | End: W" + selectedActivity.getEndWeek() + " | TimeBudget/TimeUsed: " + selectedActivity.timeBudget + "/" + selectedActivity.getTotalTimeUsed());
+            System.out.println("Please enter your choice (leave blank to exit):");
             System.out.println("1: Change name");
             System.out.println("2: Change start week");
             System.out.println("3: Change end week");
             System.out.println("4: Change timebudget");
             System.out.println("5: Assign User to activity");
-            Integer choice = promptInt(scanner.nextLine());
-            Integer newValue = null;
+            Integer choice = promptInt("Choice");
             switch (choice) {
                 case 1:
-                    String newName = scanner.nextLine();
+                    String newName = prompt("New name");
                     if (newName.isEmpty()) break;
                     selectedActivity.name = newName;
                     break;
                 case 2:
-                    newValue = scanner.nextInt();
-                    if (newValue < 0 || newValue == null) break;
-                    selectedActivity.setStartWeek(newValue);
+                    Integer newStart = promptInt("New start week");
+                    if (newStart == null || newStart < 0) break;
+                    selectedActivity.setStartWeek(newStart);
                     break;
                 case 3:
-                    newValue = scanner.nextInt();
-                    if (newValue < 0 || newValue == null) break;
-                    selectedActivity.setEndWeek(newValue);
+                    Integer newEnd = promptInt("New end week");
+                    if (newEnd == null || newEnd < 0) break;
+                    selectedActivity.setEndWeek(newEnd);
                     break;
                 case 4:
-                    newValue = scanner.nextInt();
-                    if (newValue < 0 || newValue == null) break;
-                    selectedActivity.timeBudget = newValue;
+                    Integer newBudget = promptInt("New time budget");
+                    if (newBudget == null || newBudget < 0) break;
+                    selectedActivity.timeBudget = newBudget;
                     break;
                 case 5:
-                    selectedActivity.assignedUsers.add(selectUser());
+                    User selected = selectUser();
+                    if (selected != null) selectedActivity.assignedUsers.add(selected);
                     break;
                 case null, default:
                     return;
@@ -119,9 +120,12 @@ public class UIController {
         int currentWeek = java.util.Calendar.getInstance().get(java.util.Calendar.WEEK_OF_YEAR);
         Integer startWeek = promptInt("Start week (leave blank for current week W" + currentWeek + ")");
         if (startWeek == null) startWeek = currentWeek;
-        Integer duration = promptInt("Number of weeks (leave blank for 4)");
-        if (duration == null) duration = 4;
-        int endWeek = startWeek + duration - 1;
+        Integer endWeek = promptInt("End week (leave blank for W" + (startWeek + 3) + ")");
+        if (endWeek == null) endWeek = startWeek + 3;
+        if (endWeek < startWeek) {
+            view.showError("End week must be >= start week!");
+            return;
+        }
 
 
         ArrayList<Activity> allActivities = new ArrayList<>();
@@ -267,6 +271,49 @@ public class UIController {
         }
     }
 
+    private void importUsers(){
+        System.out.println("1: Override current Userlist from file");
+        System.out.println("2: Add Users from file to list of Users");
+        Integer choice = promptInt("Choose option:");
+        if (choice == null) return;
+        switch (choice) {
+            case 1:
+                File newUserList = new File(prompt("Please enter File path"));
+                userController.setUsers(userController.importUsersFromFile(newUserList));
+                break;
+            case 2:
+                File newUserList2 = new File(prompt("Please enter File path"));
+                ArrayList<User> currentUsers = userController.getUsers();
+                ArrayList<User> newUsers = userController.importUsersFromFile(newUserList2);
+                for (User user : newUsers) {
+                    if (!currentUsers.contains(user)) {
+                        currentUsers.add(user);
+                    }
+                }
+                userController.setUsers(currentUsers);
+                break;
+            default:
+        }
+    }
+
+    private void addPersonalActivity(User loggedInUser) {
+        String inp = prompt("Activity name (or press enter to cancel)");
+        if (inp.isEmpty()) return;
+        Activity newActivity = loggedInUser.createPersonalActivity(inp);
+        if (newActivity == null) {
+            view.showError("An activity with that name already exists!");
+        }
+        if (newActivity != null) {
+            System.out.println("Current week: " + Calendar.getInstance().get(Calendar.WEEK_OF_YEAR));
+            Integer startWeek = promptInt("Start week of activity (leave empty for current week)");
+            if (startWeek == null) newActivity.setStartWeek(Calendar.getInstance().get(Calendar.WEEK_OF_YEAR));
+            else newActivity.setStartWeek(startWeek);
+            Integer endWeek = promptInt("End week");
+            if (endWeek == null) newActivity.setEndWeek(Calendar.getInstance().get(Calendar.WEEK_OF_YEAR));
+            else newActivity.setEndWeek(endWeek);
+        }
+    }
+
     private void addActivity() {
         if (projectController.getProjects().isEmpty()) {
             view.showError("No projects exist!");
@@ -282,7 +329,7 @@ public class UIController {
         }
 
         view.showEnterActivityName();
-        String inp = scanner.nextLine();
+        String inp = prompt("Add activity (or press enter to stop)");
         if (selectedProject.createActivity(inp) == null) {
             view.showError("An activity with that name already exists!");
         } else {
@@ -333,7 +380,10 @@ public class UIController {
         User selectedUser = selectUser();
         if (selectedUser == null) return;
 
-        if (selectedProject.getAssignedUsers().contains(selectedUser)) view.showError("User is already assigned!");
+        if (selectedProject.getAssignedUsers().contains(selectedUser)) {
+            view.showError("User is already assigned!");
+            return;
+        }
         selectedProject.assignUser(selectedUser);
         view.showUserAssigned();
     }
@@ -368,6 +418,82 @@ public class UIController {
             System.out.println("  - " + name + " | Start: W" + a.getStartWeek() + " | End: W" + a.getEndWeek());
         }
         System.out.println("=".repeat(40));
+    }
+
+    private void deleteActivity() {
+        System.out.println("Delete from:");
+        System.out.println("1: Project activity");
+        System.out.println("2: My personal activities");
+        Integer scope = promptInt("Choice");
+        if (scope == null) return;
+
+        if (scope == 1) {
+            Project selectedProject = focusedProject;
+            if (focusedProject == null) selectedProject = selectProject();
+            if (selectedProject == null) return;
+
+            if (!canManageProject(selectedProject)) {
+                view.showError("Only the project leader can delete activities!");
+                return;
+            }
+
+            Activity selectedActivity = selectActivity(selectedProject);
+            if (selectedActivity == null) return;
+
+            String confirm = prompt("Delete '" + selectedActivity.getName() + "'? (yes to confirm)");
+            if (!confirm.equalsIgnoreCase("yes")) {
+                System.out.println("Cancelled.");
+                return;
+            }
+            selectedProject.removeActivity(selectedActivity);
+            System.out.println("Activity deleted.");
+
+        } else if (scope == 2) {
+            ArrayList<Activity> personal = loggedInUser.getPersonalActivities();
+            if (personal.isEmpty()) {
+                view.showError("You have no personal activities!");
+                return;
+            }
+            view.showPersonalActivities(personal);
+            Integer choice = promptInt("Choose activity");
+            if (choice == null) return;
+            if (choice < 1 || choice > personal.size()) {
+                view.showError("Activity not found!");
+                return;
+            }
+            Activity toDelete = personal.get(choice - 1);
+            String confirm = prompt("Delete '" + toDelete.getName() + "'? (yes to confirm)");
+            if (!confirm.equalsIgnoreCase("yes")) {
+                System.out.println("Cancelled.");
+                return;
+            }
+            loggedInUser.removePersonalActivity(toDelete);
+            System.out.println("Personal activity deleted.");
+
+        } else {
+            view.showError("Invalid choice!");
+        }
+    }
+
+    private void deleteProject() {
+        Project selectedProject = focusedProject;
+        if (focusedProject == null) selectedProject = selectProject();
+        if (selectedProject == null) return;
+
+        if (!canManageProject(selectedProject)) {
+            view.showError("Only the project leader can delete a project!");
+            return;
+        }
+
+        String confirm = prompt("Delete project " + selectedProject.getProjectID() + " '" + selectedProject.getProjectName() + "'? (yes to confirm)");
+        if (!confirm.equalsIgnoreCase("yes")) {
+            System.out.println("Cancelled.");
+            return;
+        }
+
+        if (focusedProject == selectedProject) focusedProject = null;
+        projectController.removeProject(selectedProject);
+        System.out.println("Project deleted.");
     }
 
     public boolean canManageProject(Project project) {

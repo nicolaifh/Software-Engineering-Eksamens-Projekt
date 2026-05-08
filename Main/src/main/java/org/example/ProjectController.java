@@ -59,16 +59,18 @@ public class ProjectController {
             }
         }
         return myProjects.toArray(new Project[0]);
-
-        //public Project[] getMyProject(User user) {
-        //    return projectsPerYear.values().stream()
-        //        .flatMap(ArrayList::stream)
-        //        .filter(p -> p.getAssignedUsers().contains(user))
-        //        .toArray(Project[]::new);
-        //}
     }
 
-        public String generateProjectReport(Project project) {
-            return "";
+    public boolean removeProject(Project project) {
+        for (ArrayList<Project> list : projectsPerYear.values()) {
+            if (list.remove(project)) {
+                // Also clean up from any assigned users
+                for (User u : project.getAssignedUsers()) {
+                    u.getAssignedProjects().remove(project);
+                }
+                return true;
+            }
         }
+        return false;
+    }
 }
