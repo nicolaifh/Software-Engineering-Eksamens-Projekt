@@ -18,7 +18,6 @@ public class ProjectController {
         projectsPerYear.get(year).add(newProject);
         newProject.setProjectLead(caller);
         newProject.setProjectName(String.valueOf(newProject.projectID));
-        assignUserToProject(newProject, caller);
         return newProject;
     }
 
