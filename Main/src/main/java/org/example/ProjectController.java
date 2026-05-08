@@ -36,6 +36,13 @@ public class ProjectController {
         project.assignUser(user);
         user.getAssignedProjects().add(project);
     }
+    public ArrayList<Project> getProjects(){
+        ArrayList<Project> allProjects = new ArrayList<>();
+        for (ArrayList<Project> projects : projectsPerYear.values()){
+            allProjects.addAll(projects);
+        }
+        return allProjects;
+    }
 
     public User[] getAvailableUsers(Project project) {
         ArrayList<User> available = project.getAvailableUsers();
@@ -52,16 +59,18 @@ public class ProjectController {
             }
         }
         return myProjects.toArray(new Project[0]);
-
-        //public Project[] getMyProject(User user) {
-        //    return projectsPerYear.values().stream()
-        //        .flatMap(ArrayList::stream)
-        //        .filter(p -> p.getAssignedUsers().contains(user))
-        //        .toArray(Project[]::new);
-        //}
     }
 
-        public String generateProjectReport(Project project) {
-            return "";
+    public boolean removeProject(Project project) {
+        for (ArrayList<Project> list : projectsPerYear.values()) {
+            if (list.remove(project)) {
+                // Also clean up from any assigned users
+                for (User u : project.getAssignedUsers()) {
+                    u.getAssignedProjects().remove(project);
+                }
+                return true;
+            }
         }
+        return false;
+    }
 }

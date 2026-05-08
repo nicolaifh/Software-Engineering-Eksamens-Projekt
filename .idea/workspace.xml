@@ -4,13 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="96f29bc4-d34c-4ce2-90f6-4f9901fa2bbc" name="Changes" comment="fix: fixed createProject method">
+    <list default="true" id="80dc6781-edc2-40d7-96a5-143c402daaaf" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main/src/main/java/org/example/Assignment.java" beforeDir="false" afterPath="$PROJECT_DIR$/Main/src/main/java/org/example/Assignment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Main/src/main/java/org/example/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main/src/main/java/org/example/Assignment.java" beforeDir="false" afterPath="$PROJECT_DIR$/Main/src/main/java/org/example/Activity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Main/src/main/java/org/example/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/Main/src/main/java/org/example/Project.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main/src/main/java/org/example/UIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Main/src/main/java/org/example/UIController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main/src/main/java/org/example/UIView.java" beforeDir="false" afterPath="$PROJECT_DIR$/Main/src/main/java/org/example/UIView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Main/src/main/java/org/example/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/Main/src/main/java/org/example/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main/src/test/java/java/tests.feature" beforeDir="false" afterPath="$PROJECT_DIR$/Main/src/test/java/java/tests.feature" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Main/src/test/java/steps/StepDefinitions.java" beforeDir="false" afterPath="$PROJECT_DIR$/Main/src/test/java/steps/StepDefinitions.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Main/target/classes/org/example/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/Main/target/classes/org/example/Main.class" afterDir="false" />
     </list>
@@ -20,129 +20,53 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="Datastructure-refactoring" />
-      </map>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;BENkovitch&quot;
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "BENkovitch"
   }
-}</component>
-  <component name="GithubDefaultAccount">
-    <option name="defaultAccountId" value="0960a25d-1f5e-429b-99c2-741fcee5bb1b" />
-  </component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/nicolaifh/Software-Engineering-Eksamens-Projekt.git&quot;,
-    &quot;accountId&quot;: &quot;0960a25d-1f5e-429b-99c2-741fcee5bb1b&quot;
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/nicolaifh/Software-Engineering-Eksamens-Projekt.git",
+    "accountId": "079a5273-1b34-42e2-8b39-562317f6a45c"
   }
-}</component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Main/src/main/java/org/example/Assignment.java" root0="FORCE_HIGHLIGHTING" />
-  </component>
-  <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
-  </component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 1
-}</component>
-  <component name="ProjectId" id="3CImXYnUTs9iq4ZmQzZke3NXTko" />
+}]]></component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 3,
+  "fromUser": false
+}]]></component>
+  <component name="ProjectId" id="3DG57Iqe7Fr4C0rlg3B5JQpu1QM" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Cucumber Java.Scenario: Check Users Projects.executor": "Debug",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Application.Main.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "codeWithMe.voiceChat.enabledByDefault": "false",
     "git-widget-placeholder": "main",
-    "git.auto.fetch.suggestion.counter": "1",
     "kotlin-language-version-configured": "true",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "vcs.Git",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager">
-    <configuration name="Scenario: Check Users Projects" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
-      <option name="CUCUMBER_CORE_VERSION" value="7" />
-      <option name="FILE_PATH" value="$PROJECT_DIR$/Main/src/test/java/java/tests.feature" />
-      <option name="MAIN_CLASS_NAME" value="io.cucumber.core.cli.Main" />
-      <module name="Main" />
-      <option name="NAME_FILTER" value="^Check Users Projects$" />
-      <option name="PROGRAM_PARAMETERS" value=" --plugin teamcity --name &quot;^Check Users Projects$&quot;" />
-      <option name="SUGGESTED_NAME" value="Scenario: Check Users Projects" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="io.cucumber.core.cli.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Cucumber Java.Scenario: Check Users Projects" />
-        <item itemvalue="Cucumber Java.Scenario: Check Users Projects" />
-        <item itemvalue="Cucumber Java.Scenario: Check Users Projects" />
-      </list>
-    </recent_temporary>
-  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="96f29bc4-d34c-4ce2-90f6-4f9901fa2bbc" name="Changes" comment="" />
-      <created>1776081498826</created>
+      <changelist id="80dc6781-edc2-40d7-96a5-143c402daaaf" name="Changes" comment="" />
+      <created>1777895397019</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1776081498826</updated>
-      <workItem from="1776081499886" duration="538000" />
-      <workItem from="1776082047062" duration="4334000" />
+      <updated>1777895397019</updated>
+      <workItem from="1777895399007" duration="6788000" />
     </task>
-    <task id="LOCAL-00001" summary="fix: fixed createProject method">
-      <option name="closed" value="true" />
-      <created>1776687910410</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1776687910410</updated>
-    </task>
-    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="fix: fixed createProject method" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: fixed createProject method" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <breakpoint enabled="true" type="java-exception">
-          <properties class="org.opentest4j.AssertionFailedError" package="org.opentest4j" />
-          <option name="timeStamp" value="3" />
-        </breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
-    <pin-to-top-manager>
-      <pinned-members>
-        <PinnedItemInfo parentTag="org.example.Project" memberName="assignedUsers" />
-      </pinned-members>
-    </pin-to-top-manager>
   </component>
 </project>
