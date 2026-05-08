@@ -42,16 +42,17 @@ public class Activity {
     }
 
     public void assignTimeUsed(User user, int hours) {
-
-        if (hours <= 0) throw new IllegalArgumentException("Can't register below 1 half hours");
-
+        
         String today = new java.text.SimpleDateFormat("dd/MM/yyyy").format(new Date());
 
         timeUsed.putIfAbsent(user, new HashMap<>());
 
         int existingTime = timeUsed.get(user).getOrDefault(today, 0);
+        
+        if (existingTime + hours < 0) throw new IllegalArgumentException("Can't have less than 0 half hours registed.");
+
         if (existingTime + hours > 48) {
-            throw new IllegalArgumentException("Can't register more than 48 half hours");
+            throw new IllegalArgumentException("Can't register more than 48 half hours.");
         }
         timeUsed.get(user).put(today, existingTime + hours);
     }
