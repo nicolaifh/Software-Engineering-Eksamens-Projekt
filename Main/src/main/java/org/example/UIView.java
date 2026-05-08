@@ -27,6 +27,7 @@ public class UIView {
         System.out.println("assign-user                     Assign user to a project");
         System.out.println("show-users                      Show user in a project");
         System.out.println("edit-activity                   Edit activity");
+        System.out.println("edit-project                    Edit project");
         System.out.println("delete-activity                 Delete a project or personal activity");
         System.out.println("delete-project                  Delete a project");
         System.out.println("show-avaliable-users            Show available users by project or global");
@@ -36,7 +37,7 @@ public class UIView {
     }
 
     public void showProject(Project project) {
-        System.out.println("Project created with ID: " + project.getProjectID());
+        System.out.println("Project created with ID: " + project.getProjectID() + " Name: " + project.getProjectName());
     }
 
     public void showFocusProject(Project project) {
@@ -63,7 +64,7 @@ public class UIView {
     }
 
     public void showUsers(ArrayList<User> users) {
-        System.out.println("\nChoose a User (Enter Number):");
+        System.out.println("\nChoose a User (Enter Number) Enter for blank:");
         for (int i = 0; i < users.size(); i++) {
             System.out.println(i + ": " + users.get(i).getInitials());
         }

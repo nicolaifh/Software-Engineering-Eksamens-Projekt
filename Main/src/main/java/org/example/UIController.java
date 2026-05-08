@@ -43,6 +43,7 @@ public class UIController {
         commands.put("show-avaliable-users", () -> showAvaliableUsers());
         commands.put("add-pActivity", () -> addPersonalActivity(loggedInUser));
         commands.put("import-users", () -> importUsers());
+        commands.put("edit-project", () -> editProject());
         commands.put("delete-activity", () -> deleteActivity());
         commands.put("delete-project",  () -> deleteProject());
     }
@@ -257,8 +258,16 @@ public class UIController {
     }
 
     private void createProject(User loggedInUser) {
+        String name = prompt("Enter project name");
         Project project = loggedInUser.createProject(projectController);
+        project.setProjectName(name.isEmpty() ? String.valueOf(project.getProjectID()) : name);
         view.showProject(project);
+
+        User lead = selectUser();
+        if (lead != null) {
+            project.setProjectLead(lead);
+            System.out.println("Project leader set to: " + lead.getInitials());
+        }
 
         while(true) {
             String inp = prompt("Add activity (or press enter to stop)");
@@ -395,6 +404,46 @@ public class UIController {
 
         view.showProjectUsers(selectedProject);
     }
+
+    private void editProject() {
+        Project selectedProject = focusedProject;
+        if (focusedProject == null) selectedProject = selectProject();
+        if (selectedProject == null) return;
+
+        if (!canManageProject(selectedProject)) {
+            view.showError("Only the project leader can edit a project!");
+            return;
+        }
+
+        System.out.println("Project: " + selectedProject.getProjectID() + " Name: " + selectedProject.getProjectName());
+        System.out.println("1: Change name");
+        if (selectedProject.getProjectLead() == null) {
+            System.out.println("2: Set project leader");
+        }
+
+        Integer choice = promptInt("Choice");
+        if (choice == null) return;
+
+        switch (choice) {
+            case 1:
+                String newName = prompt("New name (Enter to cancel)");
+                if (!newName.isEmpty()) {
+                    selectedProject.setProjectName(newName);
+                    System.out.println("Name updated.");
+                }
+                break;
+            case 2:
+                User selected = selectUser();
+                if (selected != null) {
+                    selectedProject.setProjectLead(selected);
+                    System.out.println("Project leader set to: " + selected.getInitials());
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
 
     private void printProjectReport() {
         Project selectedProject = focusedProject;
