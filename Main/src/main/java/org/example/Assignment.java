@@ -33,8 +33,10 @@ public class Assignment {
 
     public Boolean hasStarted(){
         Calendar cal = Calendar.getInstance();
+        Calendar startDateCal = Calendar.getInstance();; 
         if (startDate != null) {
-            return !cal.before(startDate);
+            startDateCal.setTime(startDate); 
+            return !cal.before(startDateCal);
         }
         return false;
     }
