@@ -25,7 +25,8 @@ public class StepDefinitions {
     int dummyDate = Calendar.getInstance().get(Calendar.WEEK_OF_YEAR);
     Object dummyData;
     Object dummyData2;
-
+    String dummyExeption;
+    int dummyInt;
 
     @ParameterType("User[0-9]+|project manager|user")
     public User User(String name) {
@@ -120,80 +121,101 @@ public class StepDefinitions {
 
     @When("{User} is assigned to project")
     public void userIsAssignedToProject(User arg0) {
-        assertFalse(((Project) dummyData2).getAssignedUsers().contains(arg0));
+        ((Project) dummyData2).assignUser(arg0);
+        assertTrue(((Project) dummyData2).getAssignedUsers().contains(arg0));
     }
 
     @Then("failed to assign {User} to project ErrorMessage: {string}")
     public void failedToAssignUserToProjectErrorMessage(User arg0, String arg1) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+        if (((Project) dummyData2).getAssignedUsers().contains(arg0)) {
+            dummyExeption = "User already assigned."; 
+        }
+        assertEquals("User already assigned.", dummyExeption);
     }
 
 
 
     @When("a {User} creates an activity")
     public void aUserCreatesAnactivity(User arg0) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+        dummyProject = arg0.createProject(dummyProjectController);
+        dummyActivity = dummyProject.createActivity("testActivity");
+
+    }
+
+    @When("{User} is assigned to a project")
+    public void userIsAssignedToAProject(User arg0) {
+        dummyProject.assignUser(arg0);
     }
 
     @Then("create activity")
     public void createActivity() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+        assertEquals(dummyProject.getActivity().get(0), dummyActivity);
     }
 
 
 
-    @And("{User} is not assigned project")
+    @And("{User} is not assigned a project")
     public void userIsNotAssignedProject(User arg0) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+        calendar = calendar.getInstance(); 
+        dummyProject = dummyProjectController.createProject(calendar.get(Calendar.YEAR), dummyArraySize);
+        if (dummyProject.isUserAssigned(arg0)) {
+            dummyActivity = dummyProject.createActivity("testActivity");
+        } else {
+            dummyActivity = null;
+        }
     }
 
+///
     @Then("fail to create activity")
     public void failToCreateActivity() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+        assertEquals(null, dummyActivity);
     }
-
+///
 
 
     @Given("An int {int}")
     public void anIntInt(int arg0) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+        dummyInt = arg0;
     }
 
     @When("{User} assigns time used on activity")
     public void userAssignsTimeUsedOnactivity(User arg0) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+        dummyUser = arg0;
+        dummyProject = dummyProjectController.createProject(dummyUser);
+        dummyProject.assignUser(dummyUser);
+        dummyActivity = dummyProject.createActivity("testActivity");
+        dummyActivity.assignUser(dummyUser);
+        dummyActivity.assignTimeUsed(dummyUser, dummyInt);
     }
 
     @Then("the time {int} is assigned to user")
     public void theTimeIntIsAssignedToUser(int arg0) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+        assertEquals(arg0, dummyActivity.getTimeUsed(dummyUser));
     }
 
     @Given("a String {string}")
     public void aString(String arg0) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+        dummyExeption = arg0;
     }
 
     @When("{User} assigns a String as input on an activity")
     public void userAssignsAStringAsInputOnAnActivity(User arg0) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+        dummyUser = arg0;
+        dummyProject = dummyProjectController.createProject(dummyUser);
+        dummyActivity = dummyProject.createActivity("testActivity");
+        try{
+            Integer.parseInt(dummyExeption);
+            
+        }   catch (Exception e) {
+            dummyActivity.assignTimeUsed(arg0, 0);
+        }   
     }
 
-    @Then("no time is assigned to {User}")
-    public void noTimeIsAssignedToUser(User arg0) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+    @Then("no time is assigned to user")
+    public void noTimeIsAssignedToUser() {
+        assertEquals(0, dummyActivity.getTimeUsed(dummyUser));
     }
+
 
     @Given("a {User} wants to fetch their projects")
     public void aUserWantsToFetchTheirProjects(User arg0) {

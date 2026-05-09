@@ -40,12 +40,12 @@ Feature: tests
 
   Scenario: Create activity
     When a user creates an activity
-    And user is assigned to project
+    And user is assigned to a project
     Then create activity
 
   Scenario: fail to create activity
     When a user creates an activity
-    And user is not assigned project
+    And user is not assigned a project
     Then fail to create activity
 
 
@@ -58,6 +58,7 @@ Feature: tests
     Given a String "String"
     When user assigns a String as input on an activity
     Then no time is assigned to user
+
 
 # Other tests
   Scenario: Check Users Projects

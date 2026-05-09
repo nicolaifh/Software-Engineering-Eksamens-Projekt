@@ -57,6 +57,10 @@ public class Project {
         return availableUsers;
     }
 
+    public boolean isUserAssigned(User user) {
+        return this.getAssignedUsers().contains(user);
+    }
+
     public ArrayList<User> getAssignedUsers() {
         return assignedUsers;
     }
@@ -85,5 +89,6 @@ public class Project {
     public boolean removeActivity(Activity activity) {
         return activities.remove(activity);
     }
+
 
 }
