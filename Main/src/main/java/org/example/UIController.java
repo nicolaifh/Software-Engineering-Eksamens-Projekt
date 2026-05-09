@@ -70,13 +70,8 @@ public class UIController {
         Activity selectedActivity = selectActivity(selectedProject);
         if (selectedActivity == null) return;
         while(true){
-            System.out.println(selectedActivity.name + " | Start: W" + selectedActivity.getStartWeek() + " | End: W" + selectedActivity.getEndWeek() + " | TimeBudget/TimeUsed: " + selectedActivity.timeBudget + "/" + selectedActivity.getTotalTimeUsed());
-            System.out.println("Please enter your choice (leave blank to exit):");
-            System.out.println("1: Change name");
-            System.out.println("2: Change start week");
-            System.out.println("3: Change end week");
-            System.out.println("4: Change timebudget");
-            System.out.println("5: Assign User to activity");
+            view.showActivityDetails(selectedActivity);
+            view.showEditActivityMenu();
             Integer choice = promptInt("Choice");
             switch (choice) {
                 case 1:
@@ -112,9 +107,7 @@ public class UIController {
     }
 
     public void showAvaliableUsers() {
-        System.out.println("Show users from:");
-        System.out.println("1: All users");
-        System.out.println("2: Project assigned users");
+        view.showAvailableUsersScope();
         Integer scope = promptInt("Choice");
         if (scope == null) return;
 
@@ -152,13 +145,7 @@ public class UIController {
             return;
         }
 
-        System.out.println("=".repeat(40));
-        System.out.println("User availability W" + startWeek + " - W" + endWeek);
-        System.out.println("-".repeat(40));
-        for (User u : users) {
-            System.out.println("  " + u.getInitials());
-        }
-        System.out.println("=".repeat(40));
+       view.showUserAvailability(users, startWeek, endWeek);
     }
 
     public void startScreen() {
@@ -225,10 +212,10 @@ public class UIController {
         return null;
     }
     private void focusProject() {
-        System.out.println("Leave empty to unfocus.");
+        view.showUnfocusHint();
         focusedProject = selectProject();
         if (focusedProject != null)view.showFocusProject(focusedProject);
-        if(focusedProject == null) System.out.println("Project Unfocused");
+        else view.showProjectUnfocused();
     }
 
     private Activity selectActivity(Project project) {
@@ -264,7 +251,7 @@ public class UIController {
         User lead = selectUser();
         if (lead != null) {
             project.setProjectLead(lead);
-            System.out.println("Project leader set to: " + lead.getInitials());
+            view.showProjectLeaderSet(lead);
         }
 
         while(true) {
@@ -279,8 +266,7 @@ public class UIController {
     }
 
     private void importUsers(){
-        System.out.println("1: Override current Userlist from file");
-        System.out.println("2: Add Users from file to list of Users");
+        view.showImportUsersMenu();
         Integer choice = promptInt("Choose option:");
         if (choice == null) return;
         switch (choice) {
@@ -428,11 +414,7 @@ public class UIController {
             return;
         }
 
-        System.out.println("Project: " + selectedProject.getProjectID() + " Name: " + selectedProject.getProjectName());
-        System.out.println("1: Change name");
-        if (selectedProject.getProjectLead() == null) {
-            System.out.println("2: Set project leader");
-        }
+        view.showEditProjectMenu(selectedProject);
 
         Integer choice = promptInt("Choice");
         if (choice == null) return;
@@ -442,14 +424,14 @@ public class UIController {
                 String newName = prompt("New name (Enter to cancel)");
                 if (!newName.isEmpty()) {
                     selectedProject.setProjectName(newName);
-                    System.out.println("Name updated.");
+                    view.showNameUpdated();
                 }
                 break;
             case 2:
                 User selected = selectUser();
                 if (selected != null) {
                     selectedProject.setProjectLead(selected);
-                    System.out.println("Project leader set to: " + selected.getInitials());
+                    view.showProjectLeaderSet(selected);
                 }
                 break;
             default:
@@ -460,34 +442,16 @@ public class UIController {
 
     private void printProjectReport() {
         Project selectedProject = getProject();
-        int timebudget = 0;
+        int timeBudget = 0;
         int timeUsed = 0;
         if (selectedProject == null) return;
 
         for (Activity a : selectedProject.getActivity()){
-            timebudget = a.getTimeBudget();
-            timeUsed = a.getTotalTimeUsed();
+            timeBudget += a.getTimeBudget();
+            timeUsed += a.getTotalTimeUsed();
         }
 
-        System.out.println("=".repeat(40));
-        System.out.println("Project ID:   " + selectedProject.getProjectID());
-        System.out.println("Project Name: " + selectedProject.getProjectName());
-        System.out.println("Time Budget: " + timebudget);
-        System.out.println("Time Used/Time Left: " + timeUsed + "/" + (timebudget - timeUsed));
-        System.out.println("-".repeat(40));
-
-        System.out.println("Users:");
-        for (User u : selectedProject.getAssignedUsers()) {
-            System.out.println("  - " + u.getInitials());
-        }
-        System.out.println("-".repeat(40));
-
-        System.out.println("Activities:");
-        for (Activity a : selectedProject.getActivity()) {
-            String name = (a.getName() != null && !a.getName().isEmpty()) ? a.getName() : String.valueOf(selectedProject.getProjectID());
-            System.out.println("  - " + name + " | Start: W" + a.getStartWeek() + " | End: W" + a.getEndWeek());
-        }
-        System.out.println("=".repeat(40));
+        view.showProjectReport(selectedProject, timeBudget, timeUsed);
     }
 
     private Project getProject() {
@@ -498,9 +462,7 @@ public class UIController {
     }
 
     private void deleteActivity() {
-        System.out.println("Delete from:");
-        System.out.println("1: Project activity");
-        System.out.println("2: My personal activities");
+        view.showDeleteActivityMenu();
         Integer scope = promptInt("Choice");
         if (scope == null) return;
 
@@ -518,11 +480,11 @@ public class UIController {
 
             String confirm = prompt("Delete '" + selectedActivity.getName() + "'? (yes to confirm)");
             if (!confirm.equalsIgnoreCase("yes")) {
-                System.out.println("Cancelled.");
+                view.showCancelled();
                 return;
             }
             selectedProject.removeActivity(selectedActivity);
-            System.out.println("Activity deleted.");
+            view.showActivityDeleted();
 
         } else if (scope == 2) {
             ArrayList<Activity> personal = loggedInUser.getPersonalActivities();
@@ -540,11 +502,11 @@ public class UIController {
             Activity toDelete = personal.get(choice - 1);
             String confirm = prompt("Delete '" + toDelete.getName() + "'? (yes to confirm)");
             if (!confirm.equalsIgnoreCase("yes")) {
-                System.out.println("Cancelled.");
+                view.showCancelled();
                 return;
             }
             loggedInUser.removePersonalActivity(toDelete);
-            System.out.println("Personal activity deleted.");
+            view.showPersonalActivityDeleted();
 
         } else {
             view.showError("Invalid choice!");
@@ -562,13 +524,13 @@ public class UIController {
 
         String confirm = prompt("Delete project " + selectedProject.getProjectID() + " '" + selectedProject.getProjectName() + "'? (yes to confirm)");
         if (!confirm.equalsIgnoreCase("yes")) {
-            System.out.println("Cancelled.");
+            view.showCancelled();
             return;
         }
 
         if (focusedProject == selectedProject) focusedProject = null;
         projectController.removeProject(selectedProject);
-        System.out.println("Project deleted.");
+        view.showProjectDeleted();
     }
 
     public boolean canManageProject(Project project) {

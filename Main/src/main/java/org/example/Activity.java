@@ -47,6 +47,7 @@ public class Activity {
     public void assignTimeUsed(User user, int hours) {
         
         String today = new java.text.SimpleDateFormat("dd/MM/yyyy").format(new Date());
+        
 
         timeUsed.putIfAbsent(user, new HashMap<>());
 

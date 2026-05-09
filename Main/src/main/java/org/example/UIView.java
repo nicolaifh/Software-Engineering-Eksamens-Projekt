@@ -18,7 +18,7 @@ public class UIView {
     }
 
     public void showMainMenu() {
-        System.out.println("\ncreate-project                 Creates a new project");
+        System.out.println("\ncreate-project                  Creates a new project");
         System.out.println("focus-project                   focus a project, to skip any selection of project in any action taken");
         System.out.println("add-activity                    Adds a activity to project");
         System.out.println("add-pactivity                   Adds a personal activity");
@@ -46,6 +46,13 @@ public class UIView {
     public void showFocusProject(Project project) {
         System.out.println("Project focused with ID: " + project.getProjectID());
     }
+    public void showUnfocusHint() {
+        System.out.println("Leave empty to unfocus.");
+    }
+
+    public void showProjectUnfocused() {
+        System.out.println("Project unfocused.");
+    }
 
     public void showProjects(ArrayList<Project> projects) {
         System.out.println("Project ID | Project name");
@@ -54,12 +61,61 @@ public class UIView {
         }
     }
 
+    public void showEditProjectMenu(Project project) {
+        System.out.println("Project: " + project.getProjectID() + " Name: " + project.getProjectName());
+        System.out.println("1: Change name");
+        if (project.getProjectLead() == null) {
+            System.out.println("2: Set project leader");
+        }
+    }
+    public void showNameUpdated() {
+        System.out.println("Name updated.");
+    }
+    public void showProjectReport(Project project, int timeBudget, int timeUsed) {
+        System.out.println("=".repeat(40));
+        System.out.println("Project ID:   " + project.getProjectID());
+        System.out.println("Project Name: " + project.getProjectName());
+        System.out.println("Time Budget: " + timeBudget);
+        System.out.println("Time Used/Time Left: " + timeUsed + "/" + (timeBudget - timeUsed));
+        System.out.println("-".repeat(40));
+        System.out.println("Users:");
+        for (User u : project.getAssignedUsers()) {
+            System.out.println("  - " + u.getInitials());
+        }
+        System.out.println("-".repeat(40));
+        System.out.println("Activities:");
+        for (Activity a : project.getActivity()) {
+            String name = (a.getName() != null && !a.getName().isEmpty()) ? a.getName() : String.valueOf(project.getProjectID());
+            System.out.println("  - " + name + " | Start: W" + a.getStartWeek() + " | End: W" + a.getEndWeek() + " | Budget: " + a.getTimeBudget() + " | Used: " + a.getTotalTimeUsed());
+        }
+        System.out.println("=".repeat(40));
+    }
     public void showActivity(Project project) {
         System.out.println("\nActivities for project " + project.getProjectID() + ":");
         for (int i = 0; i < project.activities.size(); i++) {
             System.out.println(i + 1 + ": " + project.activities.get(i).name + " ("
                     + project.activities.get(i).getTotalTimeUsed() + " Half hours)");
         }
+    }
+    public void showDeleteActivityMenu() {
+        System.out.println("Delete from:");
+        System.out.println("1: Project activity");
+        System.out.println("2: My personal activities");
+    }
+
+    public void showCancelled() {
+        System.out.println("Cancelled.");
+    }
+
+    public void showActivityDeleted() {
+        System.out.println("Activity deleted.");
+    }
+
+    public void showPersonalActivityDeleted() {
+        System.out.println("Personal activity deleted.");
+    }
+    public void showProjectDeleted(){
+        System.out.println("Project deleted");
     }
 
     public void showCreateUser() {
@@ -79,6 +135,9 @@ public class UIView {
             System.out.println(u.getInitials());
         }
     }
+    public void showProjectLeaderSet(User user) {
+        System.out.println("Project leader set to: " + user.getInitials());
+    }
     public void showAllPersonalActivities(ArrayList<Activity> activities) {
         System.out.println("\nAll personal activities:");
         for (Activity a : activities) {
@@ -91,13 +150,43 @@ public class UIView {
     public void showActivityAdded() {
         System.out.println("Activity added!");
     }
+    public void showActivityDetails(Activity activity) {
+        System.out.println(activity.getName() + " | Start: W" + activity.getStartWeek() + " | End: W" + activity.getEndWeek() + " | Budget/Used: " + activity.getTimeBudget() + "/" + activity.getTotalTimeUsed());
+    }
+
+    public void showEditActivityMenu() {
+        System.out.println("1: Change name");
+        System.out.println("2: Change start week");
+        System.out.println("3: Change end week");
+        System.out.println("4: Change time budget");
+        System.out.println("5: Assign user to activity");
+        System.out.println("(leave blank to exit)");
+    }
 
     public void showUserCreated(User user) {
         System.out.println("User created: " + user.getInitials());
     }
+    public void showAvailableUsersScope() {
+        System.out.println("Show users from:");
+        System.out.println("1: All users");
+        System.out.println("2: Project assigned users");
+    }
+    public void showUserAvailability(ArrayList<User> users, int startWeek, int endWeek) {
+        System.out.println("=".repeat(40));
+        System.out.println("User availability W" + startWeek + " - W" + endWeek);
+        System.out.println("-".repeat(40));
+        for (User u : users) {
+            System.out.println("  " + u.getInitials());
+        }
+        System.out.println("=".repeat(40));
+    }
 
     public void showUserAssigned() {
         System.out.println("User assigned to project!");
+    }
+    public void showImportUsersMenu() {
+        System.out.println("1: Override current user list from file");
+        System.out.println("2: Add users from file to current list");
     }
 
     public void showEnterHours() {
