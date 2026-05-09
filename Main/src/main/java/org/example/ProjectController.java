@@ -69,4 +69,8 @@ public class ProjectController {
         }
         return false;
     }
+
+    public HashMap<Integer, ArrayList<Project>> getProjectsPerYear() {
+        return projectsPerYear;
+    }
 }
