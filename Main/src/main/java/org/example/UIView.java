@@ -47,7 +47,7 @@ public class UIView {
     public void showProjects(ArrayList<Project> projects) {
         System.out.println("Project ID | Project name");
         for (Project p : projects) {
-            System.out.println(p.getProjectID() + "      | " + p.getProjectName());
+            System.out.println(p.getProjectID() + " ".repeat(11 - Integer.toString(p.getProjectID()).length()) + "| " + p.getProjectName());
         }
     }
 

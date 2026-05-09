@@ -1,6 +1,7 @@
 package org.example;
 
 import java.io.File;
+import java.security.SecureRandom;
 import java.util.*;
 
 public class UIController {
@@ -315,6 +316,11 @@ public class UIController {
 
         if (!canManageProject(selectedProject)) {
             view.showError("Only the project leader can add activities!");
+            return;
+        }
+
+        if (selectedProject.getAssignedUsers().contains(loggedInUser)) {
+            view.showError("Only assigned users can add activities!");
             return;
         }
 

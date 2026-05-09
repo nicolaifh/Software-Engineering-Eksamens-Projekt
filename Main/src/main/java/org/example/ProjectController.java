@@ -13,8 +13,11 @@ public class ProjectController {
         if (!projectsPerYear.containsKey(year)) {
             projectsPerYear.put(year, new ArrayList<>());
         }
+        int sequence = projectsPerYear.get(year).size() + 1;
+        int digits = Math.max(3, (int) Math.floor(Math.log10(sequence)) + 1);
+        int multiplier = (int) Math.pow(10, digits);
 
-        newProject.projectID = ((year % 100) * 1000) + projectsPerYear.get(year).size() + 1;
+        newProject.projectID = (year % 100) * multiplier + sequence;
         projectsPerYear.get(year).add(newProject);
         //newProject.setProjectLead(caller); - var det ikke meningen at den skulle kunne være ingen i starten?  Jo.
         newProject.setProjectName(String.valueOf(newProject.projectID));
