@@ -36,26 +36,28 @@ public class StepDefinitions {
 
 
     @Given("{User} checks available users")
-    public void project_manager_checks_available_users(User arg0) {
-        dummyProject = arg0.createProject(dummyProjectController);
-        dummyActivity = dummyProject.createActivity("assignment1");
+    public void projectManagerChecksAvailableUsers(User arg0) {
+        dummyProject = dummyProjectController.createProject(arg0);
+        dummyActivity = dummyProject.createActivity("activity1");
     }
-    @When("{User} is not assigned to any started assignments")
-    public void user1_is_not_assigned_to_any_started_assignments(User arg0) {
-
+    @When("{User} is not assigned to any started activitys")
+    public void user1IsNotAssignedToAnyStartedActivitys(User arg0) {
         dummyProject.assignUser(arg0);
         dummyActivity.assignUser(arg0);
+        Calendar cal = Calendar.getInstance();
+        dummyActivity.setStartWeek(cal.get(Calendar.WEEK_OF_YEAR) + 2);
 
     }
     @Then("{User} should be present on a list over available users.")
-    public void user1_should_be_present_on_a_list_over_available_users(User arg0) {
+    public void user1ShouldBePresentOnAListOverAvailableUsers(User arg0) {
         assertTrue(dummyProject.getAvailableUsers().contains(arg0));
+        
     }
 
 
 
-    @When("{User} is assigned to a started assignments")
-    public void userIsAssignedToAStartedAssignments(User arg0) {
+    @When("{User} is assigned to a started activitys")
+    public void userIsAssignedToAStartedactivitys(User arg0) {
         dummyActivity.setStartWeek(dummyDate); // sets time to current time
     }
 
@@ -131,14 +133,14 @@ public class StepDefinitions {
 
 
 
-    @When("a {User} creates an assignment")
-    public void aUserCreatesAnAssignment(User arg0) {
+    @When("a {User} creates an activity")
+    public void aUserCreatesAnactivity(User arg0) {
         // Write code here that turns the phrase above into concrete actions
         throw new PendingException();
     }
 
-    @Then("create assignment")
-    public void createAssignment() {
+    @Then("create activity")
+    public void createActivity() {
         // Write code here that turns the phrase above into concrete actions
         throw new PendingException();
     }
@@ -151,8 +153,8 @@ public class StepDefinitions {
         throw new PendingException();
     }
 
-    @Then("fail to create assignment")
-    public void failToCreateAssignment() {
+    @Then("fail to create activity")
+    public void failToCreateActivity() {
         // Write code here that turns the phrase above into concrete actions
         throw new PendingException();
     }
@@ -165,8 +167,8 @@ public class StepDefinitions {
         throw new PendingException();
     }
 
-    @When("{User} assigns time used on assignment")
-    public void userAssignsTimeUsedOnAssignment(User arg0) {
+    @When("{User} assigns time used on activity")
+    public void userAssignsTimeUsedOnactivity(User arg0) {
         // Write code here that turns the phrase above into concrete actions
         throw new PendingException();
     }
@@ -183,8 +185,8 @@ public class StepDefinitions {
         throw new PendingException();
     }
 
-    @When("{User} assigns a String as input on an assignment")
-    public void userAssignsAStringAsInputOnAnAssignment(User arg0) {
+    @When("{User} assigns a String as input on an activity")
+    public void userAssignsAStringAsInputOnAnActivity(User arg0) {
         // Write code here that turns the phrase above into concrete actions
         throw new PendingException();
     }

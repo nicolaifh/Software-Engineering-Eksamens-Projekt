@@ -16,7 +16,7 @@ public class ProjectController {
 
         newProject.projectID = ((year % 100) * 1000) + projectsPerYear.get(year).size() + 1;
         projectsPerYear.get(year).add(newProject);
-        //newProject.setProjectLead(caller); - var det ikke meningen at den skulle kunne være ingen i starten?
+        //newProject.setProjectLead(caller); - var det ikke meningen at den skulle kunne være ingen i starten?  Jo.
         newProject.setProjectName(String.valueOf(newProject.projectID));
         assignUserToProject(newProject, caller);
         return newProject;
@@ -45,11 +45,6 @@ public class ProjectController {
         return allProjects;
     }
 
-    public User[] getAvailableUsers(Project project) {
-        ArrayList<User> available = project.getAvailableUsers();
-        return available.toArray(new User[0]);
-    }
-
     public Project[] getMyProject(User user) {
         ArrayList<Project> myProjects = new ArrayList<>();
         for (ArrayList<Project> projects : projectsPerYear.values()) {
@@ -73,5 +68,9 @@ public class ProjectController {
             }
         }
         return false;
+    }
+
+    public HashMap<Integer, ArrayList<Project>> getProjectsPerYear() {
+        return projectsPerYear;
     }
 }

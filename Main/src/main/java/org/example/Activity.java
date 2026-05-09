@@ -49,27 +49,28 @@ public class Activity {
 
         int existingTime = timeUsed.get(user).getOrDefault(today, 0);
         
-        if (existingTime + hours < 0) throw new IllegalArgumentException("Can't have less than 0 half hours registed.");
+        if (existingTime + hours < 0) 
+            throw new IllegalArgumentException("Can't have less than 0 half hours registed.");
 
-        if (existingTime + hours > 48) {
+        if (existingTime + hours > 48)
             throw new IllegalArgumentException("Can't register more than 48 half hours.");
-        }
-        timeUsed.get(user).put(today, existingTime + hours);
+    
+        timeUsed.get(user).put(today, existingTime + hours); 
     }
 
     public int getTotalTimeUsed() {
-    
-    int total = 0;
-    for (HashMap<String, Integer> dayMap : timeUsed.values()) {
-        for (int time : dayMap.values()) {
-            total += time;
+        int total = 0;
+        for (HashMap<String, Integer> dayMap : timeUsed.values()) {
+            for (int time : dayMap.values()) {
+                total += time;
+            }
         }
+        return total;
     }
-    return total;
-}
 
-    public HashMap<User, HashMap<String, Integer>> getTimeUsed() {
-        return timeUsed;
+    public Integer getTimeUsed(User user) {
+        String today = new java.text.SimpleDateFormat("dd/MM/yyyy").format(new Date());
+        return timeUsed.get(user).get(today); 
     }
 
     public int getStartWeek() { return startWeek; }
@@ -100,4 +101,5 @@ public class Activity {
     public void setProject(Project project) { this.project = project; }
 
     public boolean isPersonal() { return project == null; }
+
 }
