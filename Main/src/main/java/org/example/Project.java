@@ -2,6 +2,7 @@ package org.example;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 
 public class Project {
     User projectLead;
@@ -11,6 +12,7 @@ public class Project {
     int startWeek;
     int endWeek;
     ArrayList<User> assignedUsers = new ArrayList<>();
+    HashSet<String> activityNames = new HashSet<>();
 
     public Project() {
     }
@@ -20,9 +22,8 @@ public class Project {
     }
 
     public Activity createActivity(String name, int startWeek, int endWeek, int timeBudget) {
-        for (Activity a : activities) {
-            if (a.getName().equals(name)) { return null; }
-        }
+        if (!activityNames.add(name)) return null;
+
         Activity activity = new Activity(name, startWeek, endWeek, timeBudget);
         activity.setProject(this);
         this.activities.add(activity);
