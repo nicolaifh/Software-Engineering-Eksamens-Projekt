@@ -2,6 +2,9 @@ package org.example;
 
 import java.io.File;
 import java.security.SecureRandom;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.*;
 
 public class UIController {
@@ -22,6 +25,10 @@ public class UIController {
         commands.put("help",           () -> view.showMainMenu());
         commands.put("create-project", () -> createProject(loggedInUser));
         commands.put("add-activity",   () -> addActivity());
+        commands.put("show-pactivities", () -> {
+            System.out.println("\nYour personal activities:");
+            view.showPersonalActivities(loggedInUser.getPersonalActivities());
+        });
         commands.put("show-projects",   () -> view.showProjects(projectController.getProjects()));
         commands.put("register-time",  () -> timeRegistration(loggedInUser));
         commands.put("add-user",       () -> addUser());
@@ -36,6 +43,14 @@ public class UIController {
             Project selectedProject = selectProject();
             if (selectedProject == null) return;
             view.showActivity(selectedProject);
+        });
+        commands.put("show-allpactivities", () -> {
+            for (User u : userController.getUsers()) {
+                if (!u.getPersonalActivities().isEmpty()) {
+                    System.out.println("\n" + u.getInitials() + ":");
+                    view.showPersonalActivities(u.getPersonalActivities());
+                }
+            }
         });
         commands.put("focus-project", () -> focusProject());
         commands.put("generate-project-report", () -> printProjectReport());
@@ -288,21 +303,36 @@ public class UIController {
         }
     }
 
+    private LocalDate promptDate(String message) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        while (true) {
+            String input = prompt(message + " (dd/MM/yyyy)");
+            if (input.isEmpty()) return null;
+            try {
+                return LocalDate.parse(input, formatter);
+            } catch (DateTimeParseException e) {
+                view.showError("Invalid date format, please use dd/MM/yyyy");
+            }
+        }
+    }
+
     private void addPersonalActivity(User loggedInUser) {
         String inp = prompt("Activity name (or press enter to cancel)");
         if (inp.isEmpty()) return;
-        Activity newActivity = loggedInUser.createPersonalActivity(inp);
+
+        LocalDate startDate = promptDate("Start date");
+        if (startDate == null) return;
+        LocalDate endDate = promptDate("End date");
+        if (endDate == null) return;
+
+        if (endDate.isBefore(startDate)) {
+            view.showError("End date cannot be before start date!");
+            return;
+        }
+
+        Activity newActivity = loggedInUser.createPersonalActivity(inp, startDate, endDate);
         if (newActivity == null) {
             view.showError("An activity with that name already exists!");
-        }
-        if (newActivity != null) {
-            System.out.println("Current week: " + Calendar.getInstance().get(Calendar.WEEK_OF_YEAR));
-            Integer startWeek = promptInt("Start week of activity (leave empty for current week)");
-            if (startWeek == null) newActivity.setStartWeek(Calendar.getInstance().get(Calendar.WEEK_OF_YEAR));
-            else newActivity.setStartWeek(startWeek);
-            Integer endWeek = promptInt("End week");
-            if (endWeek == null) newActivity.setEndWeek(Calendar.getInstance().get(Calendar.WEEK_OF_YEAR));
-            else newActivity.setEndWeek(endWeek);
         }
     }
 

@@ -1,5 +1,6 @@
 package org.example;
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class UIView {
@@ -30,7 +31,9 @@ public class UIView {
         System.out.println("edit-project                    Edit project");
         System.out.println("delete-activity                 Delete a project or personal activity");
         System.out.println("delete-project                  Delete a project");
-        System.out.println("show-avaliable-users            Show available users by project or global");
+        System.out.println("show-avaliable-users            Shows available users by project or global");
+        System.out.println("show-pactivities                Shows personal activities for users");
+        System.out.println("show-allpactivities                Shows personal activities for users");
         System.out.println("generate-project-report,gpr     generate project report");
         System.out.println("exit                            Exits");
         System.out.println("Choose: ");
@@ -76,6 +79,14 @@ public class UIView {
             System.out.println(u.getInitials());
         }
     }
+    public void showAllPersonalActivities(ArrayList<Activity> activities) {
+        System.out.println("\nAll personal activities:");
+        for (Activity a : activities) {
+            System.out.println(a.getName()
+                    + " | " + a.getStartDate()
+                    + " - " + a.getEndDate());
+        }
+    }
 
     public void showActivityAdded() {
         System.out.println("Activity added!");
@@ -116,11 +127,11 @@ public class UIView {
     System.out.print("Enter name on activity: ");
 }
     public void showPersonalActivities(ArrayList<Activity> activities) {
-        System.out.println("\nYour personal activities:");
         for (int i = 0; i < activities.size(); i++) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             System.out.println(i + 1 + ": " + activities.get(i).getName()
-                    + " | W" + activities.get(i).getStartWeek()
-                    + " - W" + activities.get(i).getEndWeek());
+                    + " | " + activities.get(i).getStartDate().format(formatter)
+                    + " - " + activities.get(i).getEndDate().format(formatter));
         }
     }
 }

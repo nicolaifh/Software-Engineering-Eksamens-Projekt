@@ -1,5 +1,6 @@
 package org.example;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -76,12 +77,14 @@ public class User {
         return newProject;
     }
 
-    public Activity createPersonalActivity(String name) {
+    public Activity createPersonalActivity(String name, LocalDate startDate, LocalDate endDate) {
         for (Activity a : personalActivities) {
             if (a.getName().equals(name)) { return null; }
         }
-        Activity activity = new Activity(name, 0, 0, 0);
-        this.personalActivities.add(activity);
+        Activity activity = new Activity(name);
+        activity.setStartDate(startDate);
+        activity.setEndDate(endDate);
+        personalActivities.add(activity);
         return activity;
     }
 

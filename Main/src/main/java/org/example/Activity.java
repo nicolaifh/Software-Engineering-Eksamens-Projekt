@@ -1,5 +1,6 @@
 package org.example;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -8,6 +9,8 @@ import java.util.HashMap;
 public class Activity {
     int startWeek;
     int endWeek;
+    LocalDate startDate;
+    LocalDate endDate;
     String name;
     ArrayList<User> assignedUsers = new ArrayList<>();
     int timeBudget;
@@ -78,6 +81,12 @@ public class Activity {
 
     public int getEndWeek() { return endWeek; }
     public void setEndWeek(int endWeek) { this.endWeek = endWeek; }
+
+    public LocalDate getStartDate() { return startDate; }
+    public void setStartDate(LocalDate startDate) { this.startDate = startDate; }
+
+    public LocalDate getEndDate() { return endDate; }
+    public void setEndDate(LocalDate endDate) { this.endDate = endDate; }
 
     public String getName() {
         return name;

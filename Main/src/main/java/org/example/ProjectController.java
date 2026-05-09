@@ -19,7 +19,6 @@ public class ProjectController {
 
         newProject.projectID = (year % 100) * multiplier + sequence;
         projectsPerYear.get(year).add(newProject);
-        //newProject.setProjectLead(caller); - var det ikke meningen at den skulle kunne være ingen i starten?  Jo.
         newProject.setProjectName(String.valueOf(newProject.projectID));
         assignUserToProject(newProject, caller);
         return newProject;
