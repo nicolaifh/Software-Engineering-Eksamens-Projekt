@@ -64,7 +64,7 @@ public class UIView {
     }
 
     public void showUsers(ArrayList<User> users) {
-        System.out.println("\nChoose a User (Enter Number) Enter for blank:");
+        System.out.println("\nChoose a User as project leader (Enter Number) Enter for blank:");
         for (int i = 0; i < users.size(); i++) {
             System.out.println(i + ": " + users.get(i).getInitials());
         }
