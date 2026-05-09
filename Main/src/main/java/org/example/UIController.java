@@ -319,7 +319,7 @@ public class UIController {
             return;
         }
 
-        if (selectedProject.getAssignedUsers().contains(loggedInUser)) {
+        if (selectedProject.isUserAssigned(loggedInUser)) {
             view.showError("Only assigned users can add activities!");
             return;
         }
