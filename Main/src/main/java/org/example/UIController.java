@@ -436,7 +436,8 @@ public class UIController {
         System.out.println("=".repeat(40));
         System.out.println("Project ID:   " + selectedProject.getProjectID());
         System.out.println("Project Name: " + selectedProject.getProjectName());
-        System.out.println("Time Budget/Time Used: " + timebudget + "/" + timeUsed);
+        System.out.println("Time Budget: " + timebudget);
+        System.out.println("Time Used/Time Left: " + timeUsed + "/" + (timebudget - timeUsed));
         System.out.println("-".repeat(40));
 
         System.out.println("Users:");
