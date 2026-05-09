@@ -20,7 +20,7 @@ public class UIView {
         System.out.println("\ncreate-project                 Creates a new project");
         System.out.println("focus-project                   focus a project, to skip any selection of project in any action taken");
         System.out.println("add-activity                    Adds a activity to project");
-        System.out.println("add-pActivity                   Adds a personal activity");
+        System.out.println("add-pactivity                   Adds a personal activity");
         System.out.println("register-time                   Register Time");
         System.out.println("add-user                        Add a user");
         System.out.println("import-users                    import users from file");
