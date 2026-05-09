@@ -8,7 +8,6 @@ import io.cucumber.java.en.When;
 import org.example.*;
 
 import java.util.Calendar;
-import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -49,9 +48,8 @@ public class StepDefinitions {
 
     }
     @Then("{User} should be present on a list over available users.")
-    public void user1ShouldBePresentOnAListOverAvailableUsers(User arg0) {
-        assertTrue(dummyProject.getAvailableUsers().contains(arg0));
-        
+    public void user1_should_be_present_on_a_list_over_available_users(User arg0) {
+        assertTrue(dummyProject.getIdleUsers().contains(arg0));
     }
 
 
@@ -63,7 +61,7 @@ public class StepDefinitions {
 
     @Then("{User} should not be present on a list over available users.")
     public void userShouldNotBePresentOnAListOverAvailableUsers(User arg0) {
-        assertFalse(dummyProject.getAvailableUsers().contains(arg0));
+        assertFalse(dummyProject.getIdleUsers().contains(arg0));
     }
 
 

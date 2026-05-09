@@ -96,27 +96,13 @@ public class UIController {
     }
 
     public void showAvaliableUsers() {
-
         System.out.println("Show users from:");
         System.out.println("1: All users");
         System.out.println("2: Project assigned users");
         Integer scope = promptInt("Choice");
         if (scope == null) return;
 
-        ArrayList<User> users;
-        if (scope == 1) {
-            users = new ArrayList<>(userController.getUsers());
-        } else if (scope == 2) {
-            Project selectedProject = getProject();
-            if (selectedProject == null) return;
-            users = new ArrayList<>(selectedProject.getAssignedUsers());
-        } else {
-            view.showError("Invalid choice!");
-            return;
-        }
-
-
-        int currentWeek = java.util.Calendar.getInstance().get(java.util.Calendar.WEEK_OF_YEAR);
+        int currentWeek = Calendar.getInstance().get(Calendar.WEEK_OF_YEAR);
         Integer startWeek = promptInt("Start week (leave blank for current week W" + currentWeek + ")");
         if (startWeek == null) startWeek = currentWeek;
         Integer endWeek = promptInt("End week (leave blank for W" + (startWeek + 3) + ")");
@@ -126,37 +112,35 @@ public class UIController {
             return;
         }
 
-
-        ArrayList<Activity> allActivities = new ArrayList<>();
-        for (Project p : projectController.getProjects()) {
-            allActivities.addAll(p.getActivity());
-        }
-
-
-        HashMap<User, Integer> userBusyness = new HashMap<>();
-        for (User u : users) {
-            userBusyness.put(u, 0);
-        }
-
-        for (Activity a : allActivities) {
-            if (a.getEndWeek() < startWeek || a.getStartWeek() > endWeek) continue;
-            for (User u : users) {
-                if (a.getAssignedUsers().contains(u)) {
-                    userBusyness.put(u, userBusyness.get(u) + 1);
+        ArrayList<User> users;
+        if (scope == 1) {
+            HashMap<User, Integer> userBusyness = new HashMap<>();
+            for (User u : userController.getUsers()) userBusyness.put(u, 0);
+            for (Project p : projectController.getProjects()) {
+                for (Activity a : p.getActivity()) {
+                    if (a.getEndWeek() < startWeek || a.getStartWeek() > endWeek) continue;
+                    for (User u : userBusyness.keySet()) {
+                        if (a.getAssignedUsers().contains(u))
+                            userBusyness.put(u, userBusyness.get(u) + 1);
+                    }
                 }
             }
+            users = new ArrayList<>(userController.getUsers());
+            users.sort(Comparator.comparingInt(userBusyness::get));
+        } else if (scope == 2) {
+            Project selectedProject = focusedProject != null ? focusedProject : selectProject();
+            if (selectedProject == null) return;
+            users = selectedProject.getAvailableUsersRanked(startWeek, endWeek);
+        } else {
+            view.showError("Invalid choice!");
+            return;
         }
-
-
-        users.sort(Comparator.comparingInt(userBusyness::get));
-
 
         System.out.println("=".repeat(40));
         System.out.println("User availability W" + startWeek + " - W" + endWeek);
         System.out.println("-".repeat(40));
         for (User u : users) {
-            int activities = userBusyness.get(u);
-            System.out.println("  " + u.getInitials() + " | " + activities + " activities planned");
+            System.out.println("  " + u.getInitials());
         }
         System.out.println("=".repeat(40));
     }
@@ -440,11 +424,19 @@ public class UIController {
 
     private void printProjectReport() {
         Project selectedProject = getProject();
+        int timebudget = 0;
+        int timeUsed = 0;
         if (selectedProject == null) return;
+
+        for (Activity a : selectedProject.getActivity()){
+            timebudget = a.getTimeBudget();
+            timeUsed = a.getTotalTimeUsed();
+        }
 
         System.out.println("=".repeat(40));
         System.out.println("Project ID:   " + selectedProject.getProjectID());
         System.out.println("Project Name: " + selectedProject.getProjectName());
+        System.out.println("Time Budget/Time Used: " + timebudget + "/" + timeUsed);
         System.out.println("-".repeat(40));
 
         System.out.println("Users:");

@@ -1,7 +1,7 @@
 package org.example;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.HashMap;
 
 public class Project {
     User projectLead;
@@ -33,7 +33,7 @@ public class Project {
         return createActivity(name, 0, 0, 0);
     }
 
-    public ArrayList<User> getAvailableUsers() {
+    public ArrayList<User> getIdleUsers() {
         ArrayList<User> AvailableUsers = new ArrayList<>();
         for (Activity a : this.activities) {
             if(!a.hasStarted()){
@@ -41,6 +41,20 @@ public class Project {
             }
         }
         return AvailableUsers;
+    }
+
+    public ArrayList<User> getAvailableUsersRanked(int startWeek, int endWeek) {
+        ArrayList<User> availableUsers = new ArrayList<>();
+        HashMap<User, Integer> amountOfActivities = new HashMap<>();
+        for (User u :  this.assignedUsers) {
+            amountOfActivities.put(u, 0);
+            for (Activity a : this.activities) {
+                if (a.getAssignedUsers().contains(u) && !(a.getEndWeek() < startWeek || a.getStartWeek() > endWeek)) {
+                    amountOfActivities.put(u, amountOfActivities.get(u) + 1);
+                }
+            }
+        }
+        return availableUsers;
     }
 
     public ArrayList<User> getAssignedUsers() {
