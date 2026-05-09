@@ -41,7 +41,7 @@ public class UIController {
         commands.put("gpr", () -> printProjectReport());
         commands.put("edit-activity", () -> editActivity());
         commands.put("show-avaliable-users", () -> showAvaliableUsers());
-        commands.put("add-pActivity", () -> addPersonalActivity(loggedInUser));
+        commands.put("add-pactivity", () -> addPersonalActivity(loggedInUser));
         commands.put("import-users", () -> importUsers());
         commands.put("edit-project", () -> editProject());
         commands.put("delete-activity", () -> deleteActivity());
@@ -49,8 +49,7 @@ public class UIController {
     }
 
     private void editActivity() {
-        Project selectedProject = focusedProject;
-        if (focusedProject == null) selectedProject = selectProject();
+        Project selectedProject = getProject();
         if (selectedProject == null) return;
         Activity selectedActivity = selectActivity(selectedProject);
         if (selectedActivity == null) return;
@@ -108,8 +107,7 @@ public class UIController {
         if (scope == 1) {
             users = new ArrayList<>(userController.getUsers());
         } else if (scope == 2) {
-            Project selectedProject = focusedProject;
-            if (focusedProject == null) selectedProject = selectProject();
+            Project selectedProject = getProject();
             if (selectedProject == null) return;
             users = new ArrayList<>(selectedProject.getAssignedUsers());
         } else {
@@ -328,8 +326,7 @@ public class UIController {
             view.showError("No projects exist!");
             return;
         }
-        Project selectedProject = focusedProject;
-        if (focusedProject == null) selectedProject = selectProject();
+        Project selectedProject = getProject();
         if (selectedProject == null) return;
 
         if (!canManageProject(selectedProject)) {
@@ -362,8 +359,7 @@ public class UIController {
     }
 
     private void timeRegistration(User loggedInUser) {
-        Project selectedProject = focusedProject;
-        if (focusedProject == null) selectedProject = selectProject();
+        Project selectedProject = getProject();
         if (selectedProject == null) return;
 
         Activity selectedActivity = selectActivity(selectedProject);
@@ -382,8 +378,7 @@ public class UIController {
     }
 
     private void assignUserToProject() {
-        Project selectedProject = focusedProject;
-        if (focusedProject == null) selectedProject = selectProject();
+        Project selectedProject = getProject();
         if (selectedProject == null) return;
 
         User selectedUser = selectUser();
@@ -398,16 +393,14 @@ public class UIController {
     }
 
     private void showProjectUsers() {
-        Project selectedProject = focusedProject;
-        if (focusedProject == null) selectedProject = selectProject();
+        Project selectedProject = getProject();
         if (selectedProject == null) return;
 
         view.showProjectUsers(selectedProject);
     }
 
     private void editProject() {
-        Project selectedProject = focusedProject;
-        if (focusedProject == null) selectedProject = selectProject();
+        Project selectedProject = getProject();
         if (selectedProject == null) return;
 
         if (!canManageProject(selectedProject)) {
@@ -446,8 +439,7 @@ public class UIController {
 
 
     private void printProjectReport() {
-        Project selectedProject = focusedProject;
-        if (focusedProject == null) selectedProject = selectProject();
+        Project selectedProject = getProject();
         if (selectedProject == null) return;
 
         System.out.println("=".repeat(40));
@@ -469,6 +461,13 @@ public class UIController {
         System.out.println("=".repeat(40));
     }
 
+    private Project getProject() {
+        Project selectedProject = focusedProject;
+        if (focusedProject == null) selectedProject = selectProject();
+        if (selectedProject == null) return null;
+        return selectedProject;
+    }
+
     private void deleteActivity() {
         System.out.println("Delete from:");
         System.out.println("1: Project activity");
@@ -477,8 +476,7 @@ public class UIController {
         if (scope == null) return;
 
         if (scope == 1) {
-            Project selectedProject = focusedProject;
-            if (focusedProject == null) selectedProject = selectProject();
+            Project selectedProject = getProject();
             if (selectedProject == null) return;
 
             if (!canManageProject(selectedProject)) {
@@ -525,8 +523,7 @@ public class UIController {
     }
 
     private void deleteProject() {
-        Project selectedProject = focusedProject;
-        if (focusedProject == null) selectedProject = selectProject();
+        Project selectedProject = getProject();
         if (selectedProject == null) return;
 
         if (!canManageProject(selectedProject)) {
