@@ -92,8 +92,11 @@ public class Activity {
     public String getName() {
         return name;
     }
-    public void setName(String name) {
+    public boolean setName(String name) {
+        if (!project.activityNames.add(name)) return false;
+        project.activityNames.remove(this.name);
         this.name = name;
+        return true;
     }
     public int getTimeBudget() {
         return timeBudget;

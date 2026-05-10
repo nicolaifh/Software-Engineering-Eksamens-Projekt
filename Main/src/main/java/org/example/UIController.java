@@ -72,7 +72,7 @@ public class UIController {
                 case 1:
                     String newName = prompt("New name");
                     if (newName.isEmpty()) break;
-                    selectedActivity.name = newName;
+                    if (!selectedActivity.setName(newName)) view.showError("Name already exists");
                     break;
                 case 2:
                     Integer newStart = promptInt("New start week");
@@ -527,6 +527,5 @@ public class UIController {
         projectController.removeProject(selectedProject);
         view.showProjectDeleted();
     }
-
 
 }
