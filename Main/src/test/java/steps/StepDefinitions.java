@@ -35,34 +35,37 @@ public class StepDefinitions {
 
 
 
-    @Given("{User} checks available users")
-    public void projectManagerChecksAvailableUsers(User arg0) {
-        dummyProject = dummyProjectController.createProject(arg0);
+    @Given("User checks available users")
+    public void projectManagerChecksAvailableUsers() {
+        dummyUser = new User();
+        dummyProject = new Project();
+        dummyProject = dummyProjectController.createProject(dummyUser);
         dummyActivity = dummyProject.createActivity("activity1");
     }
-    @When("{User} is not assigned to any started activitys")
-    public void user1IsNotAssignedToAnyStartedActivitys(User arg0) {
-        dummyProject.assignUser(arg0);
-        dummyActivity.assignUser(arg0);
+    @When("User is not assigned to any started activitys")
+    public void user1IsNotAssignedToAnyStartedActivitys() {
+        dummyProject.assignUser(dummyUser);
+        dummyActivity.assignUser(dummyUser);
         Calendar cal = Calendar.getInstance();
         dummyActivity.setStartWeek(cal.get(Calendar.WEEK_OF_YEAR) + 2);
 
     }
-    @Then("{User} should be present on a list over available users.")
-    public void user1_should_be_present_on_a_list_over_available_users(User arg0) {
-        assertTrue(dummyProject.getIdleUsers().contains(arg0));
+    @Then("User should be present on a list over available users.")
+    public void user1_should_be_present_on_a_list_over_available_users() {
+        assertTrue(dummyProject.getIdleUsers().contains(dummyUser));
     }
 
 
 
-    @When("{User} is assigned to a started activitys")
-    public void userIsAssignedToAStartedactivitys(User arg0) {
+    @When("User is assigned to a started activitys")
+    public void userIsAssignedToAStartedactivitys() {
+        dummyActivity.assignUser(dummyUser);
         dummyActivity.setStartWeek(dummyDate); // sets time to current time
     }
 
-    @Then("{User} should not be present on a list over available users.")
-    public void userShouldNotBePresentOnAListOverAvailableUsers(User arg0) {
-        assertFalse(dummyProject.getIdleUsers().contains(arg0));
+    @Then("User should not be present on a list over available users.")
+    public void userShouldNotBePresentOnAListOverAvailableUsers() {
+        assertFalse(dummyProject.getIdleUsers().contains(dummyUser));
     }
 
 

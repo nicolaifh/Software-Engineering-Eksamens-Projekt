@@ -2,14 +2,14 @@
 Feature: tests
 
   Scenario: View available users
-    Given User1 checks available users
-    When User2 is not assigned to any started activitys
-    Then User2 should be present on a list over available users.
+    Given User checks available users
+    When User is not assigned to any started activitys
+    Then User should be present on a list over available users.
 
   Scenario: No available users
-    Given User1 checks available users
-    When User2 is assigned to a started activitys
-    Then User2 should not be present on a list over available users.
+    Given User checks available users
+    When User is assigned to a started activitys
+    Then User should not be present on a list over available users.
 
 
   Scenario: Create project with proper project ID
