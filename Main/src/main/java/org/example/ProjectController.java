@@ -76,7 +76,7 @@ public class ProjectController {
 
         assert  (projectsPerYear.values() == null && myProjects == null) ||
                 (myProjects.stream().allMatch(p -> p.getAssignedUsers().contains(user))) &&
-                (projectsAtPre.stream().filter(p ->  !p.isUserAssigned(user) ).noneMatch(p -> myProjects.contains(p))) : "post-condition";
+                (projectsAtPre.stream().filter(p ->  !p.isUserAssigned(user)).noneMatch(p -> myProjects.contains(p))) : "post-condition";
 
         return myProjects.toArray(new Project[0]);
     }

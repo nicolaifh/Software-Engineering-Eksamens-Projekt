@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import org.example.Activity;
 import org.example.Project;
 import org.example.ProjectController;
 import org.example.User;
@@ -60,7 +61,14 @@ public class RunJUnitTest {
 
     @Test
     public void test5() {
-        assertEquals(2, 1+1);
+        ProjectController projectControler = new ProjectController();
+        User user = new User();
+        Project newProject =  projectControler.createProject(user);
+        Activity newActivity = newProject.createActivity("newActivity");
+
+        newActivity.assignTimeUsed(user, 0);
+        System.out.println(newActivity.getTimeUsed(user));
+        
     }
 
 

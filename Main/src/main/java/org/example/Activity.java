@@ -43,12 +43,13 @@ public class Activity {
     }
 
     public void assignTimeUsed(User user, int hours) {
+        assert user != null && (hours >= -48 || hours <= 48) : "pre-conditon"; 
         
         String today = new java.text.SimpleDateFormat("dd/MM/yyyy").format(new Date());
-        
 
         timeUsed.putIfAbsent(user, new HashMap<>());
 
+        int exixtingTimeAtPre = timeUsed.get(user).getOrDefault(today, 0);
         int existingTime = timeUsed.get(user).getOrDefault(today, 0);
         
         if (existingTime + hours < 0) 
@@ -58,6 +59,10 @@ public class Activity {
             throw new IllegalArgumentException("Can't register more than 48 half hours.");
     
         timeUsed.get(user).put(today, existingTime + hours); 
+
+        assert  (timeUsed.get(user).get(today) == exixtingTimeAtPre + hours) && 
+                (timeUsed.get(user).get(today) <= 48) && 
+                (timeUsed.get(user).get(today) >= 0) : "post-condition";
     }
 
     public int getTotalTimeUsed() {
