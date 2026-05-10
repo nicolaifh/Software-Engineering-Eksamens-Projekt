@@ -26,7 +26,7 @@ public class UIController {
         commands.put("create-project", () -> createProject(loggedInUser));
         commands.put("add-activity",   () -> addActivity());
         commands.put("show-pactivities", () -> {
-            System.out.println("\nYour personal activities:");
+            view.showPersonalActivitiesHeader();
             view.showPersonalActivities(loggedInUser.getPersonalActivities());
         });
         commands.put("show-projects",   () -> view.showProjects(projectController.getProjects()));
@@ -45,12 +45,7 @@ public class UIController {
             view.showActivity(selectedProject);
         });
         commands.put("show-allpactivities", () -> {
-            for (User u : userController.getUsers()) {
-                if (!u.getPersonalActivities().isEmpty()) {
-                    System.out.println("\n" + u.getInitials() + ":");
-                    view.showPersonalActivities(u.getPersonalActivities());
-                }
-            }
+            view.showAllPersonalActivities(userController.getUsers());
         });
         commands.put("focus-project", () -> focusProject());
         commands.put("generate-project-report", () -> printProjectReport());
@@ -330,12 +325,12 @@ public class UIController {
         Project selectedProject = getProject();
         if (selectedProject == null) return;
 
-        if (!canManageProject(selectedProject)) {
+        if (!selectedProject.canBeEditedBy(loggedInUser)) {
             view.showError("Only the project leader can add activities!");
             return;
         }
 
-        if (selectedProject.isUserAssigned(loggedInUser)) {
+        if (!selectedProject.isUserAssigned(loggedInUser)) {
             view.showError("Only assigned users can add activities!");
             return;
         }
@@ -409,7 +404,7 @@ public class UIController {
         Project selectedProject = getProject();
         if (selectedProject == null) return;
 
-        if (!canManageProject(selectedProject)) {
+        if (!selectedProject.canBeEditedBy(loggedInUser)) {
             view.showError("Only the project leader can edit a project!");
             return;
         }
@@ -470,7 +465,7 @@ public class UIController {
             Project selectedProject = getProject();
             if (selectedProject == null) return;
 
-            if (!canManageProject(selectedProject)) {
+            if (!selectedProject.canBeEditedBy(loggedInUser)) {
                 view.showError("Only the project leader can delete activities!");
                 return;
             }
@@ -517,7 +512,7 @@ public class UIController {
         Project selectedProject = getProject();
         if (selectedProject == null) return;
 
-        if (!canManageProject(selectedProject)) {
+        if (!selectedProject.canBeEditedBy(loggedInUser)) {
             view.showError("Only the project leader can delete a project!");
             return;
         }
@@ -533,7 +528,5 @@ public class UIController {
         view.showProjectDeleted();
     }
 
-    public boolean canManageProject(Project project) {
-        return project.projectLead == null || project.projectLead == loggedInUser;
-    }
+
 }
