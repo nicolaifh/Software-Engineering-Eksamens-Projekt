@@ -35,13 +35,13 @@ public class Project {
     }
 
     public ArrayList<User> getIdleUsers() {
-        ArrayList<User> AvailableUsers = new ArrayList<>();
+        ArrayList<User> idleUsers = new ArrayList<>();
         for (Activity a : this.activities) {
             if(!a.hasStarted()){
-                AvailableUsers.addAll(a.getAssignedUsers());
+                idleUsers.addAll(a.getAssignedUsers());
             }
         }
-        return AvailableUsers;
+        return idleUsers;
     }
 
     public ArrayList<User> getAvailableUsersRanked(int startWeek, int endWeek) {

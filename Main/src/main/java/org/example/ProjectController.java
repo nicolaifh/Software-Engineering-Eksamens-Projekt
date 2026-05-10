@@ -8,7 +8,12 @@ public class ProjectController {
     HashMap<Integer, ArrayList<Project>> projectsPerYear = new HashMap<>();
 
     public Project createProject(User caller) {
+        assert caller != null :  "pre-condition";
+
         int year = Calendar.getInstance().get(Calendar.YEAR);
+
+        int sequenceAtPre = (projectsPerYear.get(year) == null ? 0 :  projectsPerYear.get(year).size()) ;
+
         Project newProject = new Project();
         if (!projectsPerYear.containsKey(year)) {
             projectsPerYear.put(year, new ArrayList<>());
@@ -21,6 +26,13 @@ public class ProjectController {
         projectsPerYear.get(year).add(newProject);
         newProject.setProjectName(String.valueOf(newProject.projectID));
         assignUserToProject(newProject, caller);
+
+        assert  projectsPerYear.containsKey(year) == true && 
+                sequence == sequenceAtPre + 1 &&  
+                newProject.getProjectID() == (year % 100) * multiplier + sequence &&
+                //newProject.getProjectName() == (String.valueOf(newProject.projectID)) && // this one retuns false no matteer what i do this tatment retuns false: (String.valueOf(newProject.projectID) == String.valueOf(newProject.projectID)) 
+                newProject.assignedUsers.get(0) == caller :  "post-condition";
+
         return newProject;
     }
 
@@ -48,6 +60,12 @@ public class ProjectController {
     }
 
     public Project[] getMyProject(User user) {
+        assert user != null :  "pre-condition"; // if projetsPerYear.values is empty getMyProject will retun empty
+        ArrayList<Project> projectsAtPre = new ArrayList<Project>();
+        for (ArrayList<Project> projects : projectsPerYear.values()) {
+            projectsAtPre = projects;
+        }
+
         ArrayList<Project> myProjects = new ArrayList<>();
         for (ArrayList<Project> projects : projectsPerYear.values()) {
             for (Project p : projects) {
@@ -56,6 +74,11 @@ public class ProjectController {
                 }
             }
         }
+
+        assert  (projectsPerYear.values() == null && myProjects == null) ||
+                (myProjects.stream().allMatch(p -> p.getAssignedUsers().contains(user))) &&
+                (projectsAtPre.stream().filter(p ->  !p.isUserAssigned(user) ).noneMatch(p -> myProjects.contains(p))) : "post-condition";
+
         return myProjects.toArray(new Project[0]);
     }
 
