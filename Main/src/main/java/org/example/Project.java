@@ -3,6 +3,7 @@ package org.example;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.stream.Collectors;
 
 public class Project {
     User projectLead;
@@ -35,13 +36,35 @@ public class Project {
     }
 
     public ArrayList<User> getIdleUsers() {
+        assert activities != null : "pre-condition"; 
+        ArrayList<Activity> activitysAtPre = activities;
+
         ArrayList<User> idleUsers = this.assignedUsers;
         for (Activity a : this.activities) {
             if(a.hasStarted()){
                 idleUsers.removeAll(a.getAssignedUsers());
             }
         }
+
+        // (idleUsers == null && activities.stream().filter(a -> a.hasStarted()).noneMatch(null)) 
+
+        assert  (idleUsers == null && activities.stream().filter(a -> !a.hasStarted()) == null) ||
+                (this.assignedUsers.stream() // no users in a started activity is in idleUsers.
+                .filter(u -> activitysAtPre.stream().anyMatch(a -> a.hasStarted()))
+                .noneMatch(u -> idleUsers.contains(u)) && 
+                this.assignedUsers.stream() // no users in a started activity is in idleUsers.
+                .filter(u -> activitysAtPre.stream().anyMatch(a -> !a.hasStarted()))
+                .anyMatch(u -> idleUsers.contains(u)) && 
+                //(idleUsers.stream().allMatch(u -> this.activities.contains(u))) &&
+                //(projectsAtPre.stream().filter(p ->  !p.isUserAssigned(user) ).noneMatch(p -> myProjects.contains(p))) 
+                (0 == 0)) : "post-condition";
+
+
         return idleUsers;
+
+        /* forEach(a -> {
+                    if (a.hasStarted()) { activitysAtPre.remove(a); return }}) 
+                ) */
     }
 
     public ArrayList<User> getAvailableUsersRanked(int startWeek, int endWeek) {

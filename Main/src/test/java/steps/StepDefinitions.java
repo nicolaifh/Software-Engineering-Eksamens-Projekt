@@ -168,12 +168,10 @@ public class StepDefinitions {
         }
     }
 
-///
     @Then("fail to create activity")
     public void failToCreateActivity() {
         assertEquals(null, dummyActivity);
     }
-///
 
 
     @Given("An int {int}")

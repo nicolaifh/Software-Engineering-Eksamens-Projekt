@@ -11,8 +11,3 @@ public class Main {
         ui.startScreen();
     }
 }
-
-
-
-    
-    
