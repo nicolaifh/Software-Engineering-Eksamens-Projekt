@@ -25,10 +25,6 @@ public class UserController {
         return newUser;
     }
 
-    public void editUser(User user) {
-
-    }
-
     public ArrayList<User> getUsers() {
         return users;
     }

@@ -192,10 +192,6 @@ public class UIView {
         System.out.println("2: Add users from file to current list");
     }
 
-    public void showEnterHours() {
-        System.out.println("Enter half hours:");
-    }
-
     public void showTimeRegistered() {
         System.out.println("Time registered!");
     }
@@ -212,9 +208,6 @@ public class UIView {
         System.out.print(message + ": ");
     }
 
-    public void showNumberError() {
-        System.out.println("Error: Please enter a number!");
-    }
     public void showEnterActivityName() {
     System.out.print("Enter name on activity: ");
 }

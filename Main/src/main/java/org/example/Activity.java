@@ -15,8 +15,6 @@ public class Activity {
     ArrayList<User> assignedUsers = new ArrayList<>();
     int timeBudget;
     HashMap<User, HashMap<String, Integer>> timeUsed = new HashMap<>();
-    Boolean finished;
-    Boolean started;
     Project project;
 
     public Activity(String name, int startWeek, int endWeek, int timeBudget) {
@@ -101,18 +99,6 @@ public class Activity {
     public int getTimeBudget() {
         return timeBudget;
     }
-    public void setTimeBudget(int timeBudget) {
-        this.timeBudget = timeBudget;
-    }
-   
-    public void setTimeUsed(HashMap<User, HashMap<String, Integer>> timeUsed) {
-        this.timeUsed = timeUsed;
-    }
-
     public Project getProject() { return project; }
-
     public void setProject(Project project) { this.project = project; }
-
-    public boolean isPersonal() { return project == null; }
-
 }

@@ -30,7 +30,6 @@ public class ProjectController {
         assert  projectsPerYear.containsKey(year) == true && 
                 sequence == sequenceAtPre + 1 &&  
                 newProject.getProjectID() == (year % 100) * multiplier + sequence &&
-                //newProject.getProjectName() == (String.valueOf(newProject.projectID)) && // this one retuns false no matteer what i do this tatment retuns false: (String.valueOf(newProject.projectID) == String.valueOf(newProject.projectID)) 
                 newProject.assignedUsers.get(0) == caller :  "post-condition";
 
         return newProject;
@@ -60,7 +59,7 @@ public class ProjectController {
     }
 
     public Project[] getMyProject(User user) {
-        assert user != null :  "pre-condition"; // if projetsPerYear.values is empty getMyProject will retun empty
+        assert user != null :  "pre-condition";
         ArrayList<Project> projectsAtPre = new ArrayList<Project>();
         for (ArrayList<Project> projects : projectsPerYear.values()) {
             projectsAtPre = projects;
@@ -85,7 +84,6 @@ public class ProjectController {
     public boolean removeProject(Project project) {
         for (ArrayList<Project> list : projectsPerYear.values()) {
             if (list.remove(project)) {
-                // Also clean up from any assigned users
                 for (User u : project.getAssignedUsers()) {
                     u.getAssignedProjects().remove(project);
                 }
