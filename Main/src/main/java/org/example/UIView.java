@@ -64,9 +64,7 @@ public class UIView {
     public void showEditProjectMenu(Project project) {
         System.out.println("Project: " + project.getProjectID() + " Name: " + project.getProjectName());
         System.out.println("1: Change name");
-        if (project.getProjectLead() == null) {
-            System.out.println("2: Set project leader");
-        }
+        System.out.println("2: Set project leader");
     }
     public void showNameUpdated() {
         System.out.println("Name updated.");
