@@ -35,10 +35,10 @@ public class Project {
     }
 
     public ArrayList<User> getIdleUsers() {
-        ArrayList<User> idleUsers = new ArrayList<>();
+        ArrayList<User> idleUsers = this.assignedUsers;
         for (Activity a : this.activities) {
-            if(!a.hasStarted()){
-                idleUsers.addAll(a.getAssignedUsers());
+            if(a.hasStarted()){
+                idleUsers.removeAll(a.getAssignedUsers());
             }
         }
         return idleUsers;
