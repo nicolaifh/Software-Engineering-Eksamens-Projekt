@@ -45,9 +45,7 @@ public class Project {
                 idleUsers.removeAll(a.getAssignedUsers());
             }
         }
-
-        // (idleUsers == null && activities.stream().filter(a -> a.hasStarted()).noneMatch(null)) 
-
+        
         assert  (idleUsers == null && activities.stream().filter(a -> !a.hasStarted()) == null) ||
                 (this.assignedUsers.stream() // no users in a started activity is in idleUsers.
                 .filter(u -> activitysAtPre.stream().anyMatch(a -> a.hasStarted()))
@@ -57,10 +55,6 @@ public class Project {
                 .allMatch(u -> idleUsers.contains(u))) : "post-condition";
 
         return idleUsers;
-
-        /* forEach(a -> {
-                    if (a.hasStarted()) { activitysAtPre.remove(a); return }}) 
-                ) */
     }
 
     public ArrayList<User> getAvailableUsersRanked(int startWeek, int endWeek) {

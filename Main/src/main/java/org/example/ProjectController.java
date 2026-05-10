@@ -29,7 +29,8 @@ public class ProjectController {
 
         assert  projectsPerYear.containsKey(year) == true && 
                 sequence == sequenceAtPre + 1 &&  
-                newProject.getProjectID() == (year % 100) * multiplier + sequence &&
+                newProject.getProjectID() == (year % 100) * multiplier + sequenceAtPre + 1 &&
+                newProject.getProjectName().equals(String.valueOf(newProject.projectID)) && 
                 newProject.assignedUsers.get(0) == caller :  "post-condition";
 
         return newProject;
