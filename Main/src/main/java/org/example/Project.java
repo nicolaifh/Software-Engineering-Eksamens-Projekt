@@ -10,8 +10,6 @@ public class Project {
     int projectID;
     String projectName;
     ArrayList<Activity> activities = new ArrayList<>();
-    int startWeek;
-    int endWeek;
     ArrayList<User> assignedUsers = new ArrayList<>();
     HashSet<String> activityNames = new HashSet<>();
 

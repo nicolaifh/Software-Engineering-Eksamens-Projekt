@@ -9,7 +9,6 @@ public class User {
     int accessLevel = 0;
     int timeManagement;
     ArrayList<Project> assignedProjects = new ArrayList<>();
-    HashMap<Project, ArrayList<Activity>> assignedActivities;
     ArrayList<Activity> personalActivities = new ArrayList<>();
 
     public User(String initials) {
@@ -47,24 +46,8 @@ public class User {
         return initials;
     }
 
-    public void setInitials(String initials) {
-        this.initials = initials;
-    }
-
-    public int getAccessLevel() {
-        return accessLevel;
-    }
-
     public void setAccessLevel(int accessLevel) {
         this.accessLevel = accessLevel;
-    }
-
-    public int getTimeMangement() {
-        return timeManagement;
-    }
-
-    public void setTimeMangement(int timeMangement) {
-        this.timeManagement = timeMangement;
     }
 
     public ArrayList<Project> getAssignedProjects() {
@@ -94,10 +77,6 @@ public class User {
 
     public boolean removePersonalActivity(Activity activity) {
         return personalActivities.remove(activity);
-    }
-
-    public boolean login(String inputInitials) {
-        return this.initials.equals(inputInitials);
     }
 
     public void assignProjectManager(Project project) {
