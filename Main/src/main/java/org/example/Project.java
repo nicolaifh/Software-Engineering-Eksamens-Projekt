@@ -90,6 +90,8 @@ public class Project {
     public boolean removeActivity(Activity activity) {
         return activities.remove(activity);
     }
-
+    public boolean canBeEditedBy(User user) {
+        return projectLead == null || projectLead.equals(user);
+    }
 
 }

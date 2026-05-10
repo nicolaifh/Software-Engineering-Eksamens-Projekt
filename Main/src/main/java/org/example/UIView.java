@@ -33,7 +33,7 @@ public class UIView {
         System.out.println("delete-project                  Delete a project");
         System.out.println("show-avaliable-users            Shows available users by project or global");
         System.out.println("show-pactivities                Shows personal activities for users");
-        System.out.println("show-allpactivities                Shows personal activities for users");
+        System.out.println("show-allpactivities             Shows personal activities for users");
         System.out.println("generate-project-report,gpr     generate project report");
         System.out.println("exit                            Exits");
         System.out.println("Choose: ");
@@ -95,6 +95,18 @@ public class UIView {
                     + project.activities.get(i).getTotalTimeUsed() + " Half hours)");
         }
     }
+    public void showPersonalActivitiesHeader() {
+        System.out.println("\nYour personal activities:");
+    }
+
+    public void showAllPersonalActivities(ArrayList<User> users) {
+        for (User u : users) {
+            if (!u.getPersonalActivities().isEmpty()) {
+                System.out.println("\n" + u.getInitials() + ":");
+                showPersonalActivities(u.getPersonalActivities());
+            }
+        }
+    }
     public void showDeleteActivityMenu() {
         System.out.println("Delete from:");
         System.out.println("1: Project activity");
@@ -136,14 +148,7 @@ public class UIView {
     public void showProjectLeaderSet(User user) {
         System.out.println("Project leader set to: " + user.getInitials());
     }
-    public void showAllPersonalActivities(ArrayList<Activity> activities) {
-        System.out.println("\nAll personal activities:");
-        for (Activity a : activities) {
-            System.out.println(a.getName()
-                    + " | " + a.getStartDate()
-                    + " - " + a.getEndDate());
-        }
-    }
+
 
     public void showActivityAdded() {
         System.out.println("Activity added!");
