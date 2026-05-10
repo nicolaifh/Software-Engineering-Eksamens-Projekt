@@ -80,8 +80,13 @@ public class User {
     }
 
     public void assignProjectManager(Project project) {
+        assert project != null : "pre-condition";
+
         if (this.accessLevel >= 1) {
             project.setProjectLead(this);
         }
+
+        assert  (this.accessLevel == 0 && project.projectLead != this) || 
+                (this.accessLevel == 1 && project.projectLead == this) : "post-condition";
     }
 }

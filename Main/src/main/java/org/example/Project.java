@@ -35,7 +35,9 @@ public class Project {
 
     public ArrayList<User> getIdleUsers() {
         assert activities != null : "pre-condition"; 
+        ArrayList<Activity> activitysAtPre1 = activities;
         ArrayList<Activity> activitysAtPre = activities;
+        ArrayList<User> assignedUsersAtPre = assignedUsers;
 
         ArrayList<User> idleUsers = this.assignedUsers;
         for (Activity a : this.activities) {
@@ -50,13 +52,9 @@ public class Project {
                 (this.assignedUsers.stream() // no users in a started activity is in idleUsers.
                 .filter(u -> activitysAtPre.stream().anyMatch(a -> a.hasStarted()))
                 .noneMatch(u -> idleUsers.contains(u)) && 
-                this.assignedUsers.stream() // no users in a started activity is in idleUsers.
-                .filter(u -> activitysAtPre.stream().anyMatch(a -> !a.hasStarted()))
-                .anyMatch(u -> idleUsers.contains(u)) && 
-                //(idleUsers.stream().allMatch(u -> this.activities.contains(u))) &&
-                //(projectsAtPre.stream().filter(p ->  !p.isUserAssigned(user) ).noneMatch(p -> myProjects.contains(p))) 
-                (0 == 0)) : "post-condition";
-
+                assignedUsersAtPre.stream() // all idleUsers is idle.
+                .filter(u -> activitysAtPre1.stream().anyMatch(a -> !a.hasStarted()))
+                .allMatch(u -> idleUsers.contains(u))) : "post-condition";
 
         return idleUsers;
 

@@ -9,8 +9,6 @@ import org.example.ProjectController;
 import org.example.User;
 import org.junit.Test;
 
-import io.cucumber.java.en_old.Ac;
-
 public class RunJUnitTest {
 
     @Test
@@ -52,7 +50,12 @@ public class RunJUnitTest {
 
     @Test
     public void test4() {
-        assertEquals(2, 1+1);
+        ProjectController projectControler = new ProjectController();
+        User user = new User();
+        Project newProject =  projectControler.createProject(user);
+
+        user.assignProjectManager(newProject);
+        System.out.println(newProject.getProjectLead());
     }
 
     @Test
