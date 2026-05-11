@@ -38,7 +38,7 @@ public class Project {
         ArrayList<Activity> activitysAtPre = activities;
         ArrayList<User> assignedUsersAtPre = assignedUsers;
 
-        ArrayList<User> idleUsers = this.assignedUsers;
+        ArrayList<User> idleUsers = new ArrayList<>(this.assignedUsers);
         for (Activity a : this.activities) {
             if(a.hasStarted()){
                 idleUsers.removeAll(a.getAssignedUsers());

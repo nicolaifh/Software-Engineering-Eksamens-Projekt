@@ -10,6 +10,7 @@ import org.example.ProjectController;
 import org.example.User;
 import org.junit.Test;
 
+//made by Ingrid
 public class RunJUnitTest {
 //made by Nicolai
     @Test
