@@ -32,7 +32,7 @@ public class Activity {
     public void assignUser(User user) {
         assignedUsers.add(user);
     }
-//made by Nicolai
+//made by Benjamin
     public Boolean hasStarted() {
         Calendar cal = Calendar.getInstance();
         int currentWeek = cal.get(Calendar.WEEK_OF_YEAR);
@@ -101,7 +101,7 @@ public class Activity {
     public String getName() {
         return name;
     }
-//made by Nicolai
+//made by Benjamin
     public boolean setName(String name) {
         if (!project.activityNames.add(name)) return false;
         project.activityNames.remove(this.name);

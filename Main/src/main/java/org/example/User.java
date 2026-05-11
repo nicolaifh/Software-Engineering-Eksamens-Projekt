@@ -58,7 +58,7 @@ public class User {
     public ArrayList<Project> getAssignedProjects() {
         return assignedProjects;
     }
-//made by Nicolai
+//made by Benjamin
     public Project createProject(ProjectController projectController) {
         Project newProject = projectController.createProject(this);
         this.assignedProjects.add(newProject);
@@ -94,7 +94,7 @@ public class User {
         assert  (this.accessLevel == 0 && project.projectLead != this) || 
                 (this.accessLevel == 1 && project.projectLead == this) : "post-condition";
     }
-//made by Nicolai
+//made by Mads
     public Integer getTimeUsed() {
         
         String today = new java.text.SimpleDateFormat("dd/MM/yyyy").format(new Date());

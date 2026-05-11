@@ -18,7 +18,7 @@ public class Project {
     public void assignUser(User user) {
         this.assignedUsers.add(user);
     }
-//made by Nicolai
+//made by Mads
     public Activity createActivity(String name, int startWeek, int endWeek, int timeBudget) {
         if (!activityNames.add(name)) return null;
 
@@ -27,7 +27,7 @@ public class Project {
         this.activities.add(activity);
         return activity;
     }
-//made by Nicolai
+//made by Mads
     public Activity createActivity(String name) {
         return createActivity(name, 0, 0, 0);
     }
