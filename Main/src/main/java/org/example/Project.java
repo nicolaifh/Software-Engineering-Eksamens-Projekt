@@ -34,7 +34,6 @@ public class Project {
 //made by Ingrid
     public ArrayList<User> getIdleUsers() {
         assert activities != null : "pre-condition"; 
-        ArrayList<Activity> activitysAtPre1 = activities;
         ArrayList<Activity> activitysAtPre = activities;
         ArrayList<User> assignedUsersAtPre = assignedUsers;
 
@@ -50,7 +49,7 @@ public class Project {
                 .filter(u -> activitysAtPre.stream().anyMatch(a -> a.hasStarted()))
                 .noneMatch(u -> idleUsers.contains(u)) && 
                 assignedUsersAtPre.stream() // all idleUsers is idle.
-                .filter(u -> activitysAtPre1.stream().anyMatch(a -> !a.hasStarted()))
+                .filter(u -> activitysAtPre.stream().anyMatch(a -> !a.hasStarted()))
                 .allMatch(u -> idleUsers.contains(u))) : "post-condition";
 
         return idleUsers;
