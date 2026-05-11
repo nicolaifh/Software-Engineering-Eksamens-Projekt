@@ -369,6 +369,7 @@ public class UIController {
         Integer hours = promptInt("Enter half hours");
         if (hours == null) return;
         try {
+            loggedInUser.assignTimeUsedForUser(hours);
             selectedActivity.assignTimeUsed(loggedInUser, hours);
             view.showTimeRegistered();
         } catch (Exception e) {
