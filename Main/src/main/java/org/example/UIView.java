@@ -34,6 +34,7 @@ public class UIView {
         System.out.println("show-available-users            Show available users on project or globally");
         System.out.println("show-p-activities               Show personal activities for users");
         System.out.println("show-all-p-activities           Show all personal activities for users");
+        System.out.println("show-my-timeused                Show my time used");
         System.out.println("generate-project-report,gpr     Generate project report");
         System.out.println("exit                            Exits");
         System.out.println("Choose: ");
