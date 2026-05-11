@@ -24,7 +24,7 @@ public class UIController {
         commands.put("help",           () -> view.showMainMenu());
         commands.put("create-project", () -> createProject(loggedInUser));
         commands.put("add-activity",   () -> addActivity());
-        commands.put("show-pactivities", () -> {
+        commands.put("show-p-activities", () -> {
             view.showPersonalActivitiesHeader();
             view.showPersonalActivities(loggedInUser.getPersonalActivities());
         });
@@ -43,15 +43,15 @@ public class UIController {
             if (selectedProject == null) return;
             view.showActivity(selectedProject);
         });
-        commands.put("show-allpactivities", () -> {
+        commands.put("show-all-p-activities", () -> {
             view.showAllPersonalActivities(userController.getUsers());
         });
         commands.put("focus-project", () -> focusProject());
         commands.put("generate-project-report", () -> printProjectReport());
         commands.put("gpr", () -> printProjectReport());
         commands.put("edit-activity", () -> editActivity());
-        commands.put("show-avaliable-users", () -> showAvaliableUsers());
-        commands.put("add-pactivity", () -> addPersonalActivity(loggedInUser));
+        commands.put("show-available-users", () -> showAvailableUsers());
+        commands.put("add-p-activity", () -> addPersonalActivity(loggedInUser));
         commands.put("import-users", () -> importUsers());
         commands.put("edit-project", () -> editProject());
         commands.put("delete-activity", () -> deleteActivity());
@@ -100,7 +100,7 @@ public class UIController {
 
     }
 
-    public void showAvaliableUsers() {
+    public void showAvailableUsers() {
         view.showAvailableUsersScope();
         Integer scope = promptInt("Choice");
         if (scope == null) return;
@@ -237,11 +237,12 @@ public class UIController {
     }
 
     private void createProject(User loggedInUser) {
-        String name = prompt("Enter project name");
+        String name = prompt("Enter project name (Press Enter for blank)");
         Project project = loggedInUser.createProject(projectController);
         project.setProjectName(name.isEmpty() ? String.valueOf(project.getProjectID()) : name);
         view.showProject(project);
 
+        view.selectProjectLead();
         User lead = selectUser();
         if (lead != null) {
             project.setProjectLead(lead);
@@ -249,7 +250,7 @@ public class UIController {
         }
 
         while(true) {
-            String inp = prompt("Add activity (or press enter to stop)");
+            String inp = prompt("Add activity (Press Enter to stop)");
             if (inp.isEmpty()) break;
             if (project.createActivity(inp) == null) {
                 view.showError("An activity with that name already exists!");
@@ -284,20 +285,20 @@ public class UIController {
     }
 
     private LocalDate promptDate(String message) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("DD/MM/YYYY");
         while (true) {
-            String input = prompt(message + " (dd/MM/yyyy)");
+            String input = prompt(message + " (DD/MM/YYYY)");
             if (input.isEmpty()) return null;
             try {
                 return LocalDate.parse(input, formatter);
             } catch (DateTimeParseException e) {
-                view.showError("Invalid date format, please use dd/MM/yyyy");
+                view.showError("Invalid date format, please use DD/MM/YYYY");
             }
         }
     }
 
     private void addPersonalActivity(User loggedInUser) {
-        String inp = prompt("Activity name (or press enter to cancel)");
+        String inp = prompt("Activity name (Press Enter to cancel)");
         if (inp.isEmpty()) return;
 
         LocalDate startDate = promptDate("Start date");
@@ -335,7 +336,7 @@ public class UIController {
         }
 
         view.showEnterActivityName();
-        String inp = prompt("Add activity (or press enter to stop)");
+        String inp = prompt("Add activity (Press Enter to stop)");
         if (selectedProject.createActivity(inp) == null) {
             view.showError("An activity with that name already exists!");
         } else {
@@ -381,6 +382,8 @@ public class UIController {
         Project selectedProject = getProject();
         if (selectedProject == null) return;
 
+        view.assignUserText();
+
         User selectedUser = selectUser();
         if (selectedUser == null) return;
 
@@ -415,7 +418,7 @@ public class UIController {
 
         switch (choice) {
             case 1:
-                String newName = prompt("New name (Enter to cancel)");
+                String newName = prompt("New name (Press Enter to cancel)");
                 if (!newName.isEmpty()) {
                     selectedProject.setProjectName(newName);
                     view.showNameUpdated();

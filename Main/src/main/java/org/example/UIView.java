@@ -19,22 +19,22 @@ public class UIView {
 
     public void showMainMenu() {
         System.out.println("\ncreate-project                  Creates a new project");
-        System.out.println("focus-project                   focus a project, to skip any selection of project in any action taken");
-        System.out.println("add-activity                    Adds a activity to project");
-        System.out.println("add-pactivity                   Adds a personal activity");
+        System.out.println("focus-project                   Focus a project, to skip any selection of project in any action taken");
+        System.out.println("add-activity                    Add an activity to project");
+        System.out.println("add-p-activity                  Add a personal activity");
         System.out.println("register-time                   Register Time");
         System.out.println("add-user                        Add a user");
-        System.out.println("import-users                    import users from file");
+        System.out.println("import-users                    Import users from file");
         System.out.println("assign-user                     Assign user to a project");
         System.out.println("show-users                      Show user in a project");
         System.out.println("edit-activity                   Edit activity");
         System.out.println("edit-project                    Edit project");
         System.out.println("delete-activity                 Delete a project or personal activity");
         System.out.println("delete-project                  Delete a project");
-        System.out.println("show-avaliable-users            Shows available users by project or global");
-        System.out.println("show-pactivities                Shows personal activities for users");
-        System.out.println("show-allpactivities             Shows personal activities for users");
-        System.out.println("generate-project-report,gpr     generate project report");
+        System.out.println("show-available-users            Show available users on project or globally");
+        System.out.println("show-p-activities               Show personal activities for users");
+        System.out.println("show-all-p-activities           Show all personal activities for users");
+        System.out.println("generate-project-report,gpr     Generate project report");
         System.out.println("exit                            Exits");
         System.out.println("Choose: ");
     }
@@ -133,7 +133,6 @@ public class UIView {
     }
 
     public void showUsers(ArrayList<User> users) {
-        System.out.println("\nChoose a User as project leader (Enter Number) Enter for blank:");
         for (int i = 0; i < users.size(); i++) {
             System.out.println(i + ": " + users.get(i).getInitials());
         }
@@ -197,7 +196,7 @@ public class UIView {
     }
 
     public void showWelcomeMessage() {
-        System.out.println("Write 'help' to se commands");
+        System.out.println("Write 'help' to see commands");
     }
 
     public void showPrompt() {
@@ -207,6 +206,10 @@ public class UIView {
     public void showInputPrompt(String message) {
         System.out.print(message + ": ");
     }
+
+    public void assignUserText() { System.out.println("\nChoose a User to assign (Press Enter to exit)");}
+
+    public void selectProjectLead() {System.out.println("\nChoose a User as project leader (Enter a Number or press Enter to leave blank):");}
 
     public void showEnterActivityName() {
     System.out.print("Enter name on activity: ");
