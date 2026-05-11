@@ -96,7 +96,9 @@ public class User {
     }
 //made by Nicolai
     public Integer getTimeUsed() {
+        
         String today = new java.text.SimpleDateFormat("dd/MM/yyyy").format(new Date());
+        if(timeUsed.get(today) == null) return 0;
         return timeUsed.get(today);
     }
 }
