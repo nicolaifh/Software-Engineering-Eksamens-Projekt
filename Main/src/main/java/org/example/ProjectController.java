@@ -3,10 +3,10 @@ package org.example;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
-
+//made by Nicolai
 public class ProjectController {
     HashMap<Integer, ArrayList<Project>> projectsPerYear = new HashMap<>();
-
+//made by Ingrid
     public Project createProject(User caller) {
         assert caller != null :  "pre-condition";
 
@@ -35,7 +35,7 @@ public class ProjectController {
 
         return newProject;
     }
-
+//made by Nicolai
     public Project createProject(int year, int dummySize) {
         Project newProject = new Project();
         if (!projectsPerYear.containsKey(year)) {
@@ -46,11 +46,12 @@ public class ProjectController {
         projectsPerYear.get(year).add(newProject);
         return newProject;
     }
-
+//made by Sigurd
     public void assignUserToProject(Project project, User user) {
         project.assignUser(user);
         user.getAssignedProjects().add(project);
     }
+//made by Sigurd
     public ArrayList<Project> getProjects(){
         ArrayList<Project> allProjects = new ArrayList<>();
         for (ArrayList<Project> projects : projectsPerYear.values()){
@@ -58,7 +59,7 @@ public class ProjectController {
         }
         return allProjects;
     }
-
+//made by Mads
     public Project[] getMyProject(User user) {
         assert user != null :  "pre-condition";
         ArrayList<Project> projectsAtPre = new ArrayList<Project>();
@@ -81,7 +82,7 @@ public class ProjectController {
 
         return myProjects.toArray(new Project[0]);
     }
-
+//made by Nicolai
     public boolean removeProject(Project project) {
         for (ArrayList<Project> list : projectsPerYear.values()) {
             if (list.remove(project)) {
@@ -93,7 +94,7 @@ public class ProjectController {
         }
         return false;
     }
-
+//made by Ingrid
     public HashMap<Integer, ArrayList<Project>> getProjectsPerYear() {
         return projectsPerYear;
     }

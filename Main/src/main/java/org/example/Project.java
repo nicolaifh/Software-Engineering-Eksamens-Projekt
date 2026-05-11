@@ -3,8 +3,7 @@ package org.example;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.stream.Collectors;
-
+//made by Nicolai
 public class Project {
     User projectLead;
     int projectID;
@@ -12,14 +11,14 @@ public class Project {
     ArrayList<Activity> activities = new ArrayList<>();
     ArrayList<User> assignedUsers = new ArrayList<>();
     HashSet<String> activityNames = new HashSet<>();
-
+//made by Nicolai
     public Project() {
     }
-
+//made by Nicolai
     public void assignUser(User user) {
         this.assignedUsers.add(user);
     }
-
+//made by Nicolai
     public Activity createActivity(String name, int startWeek, int endWeek, int timeBudget) {
         if (!activityNames.add(name)) return null;
 
@@ -28,11 +27,11 @@ public class Project {
         this.activities.add(activity);
         return activity;
     }
-
+//made by Nicolai
     public Activity createActivity(String name) {
         return createActivity(name, 0, 0, 0);
     }
-
+//made by Ingrid
     public ArrayList<User> getIdleUsers() {
         assert activities != null : "pre-condition"; 
         ArrayList<Activity> activitysAtPre1 = activities;
@@ -56,7 +55,7 @@ public class Project {
 
         return idleUsers;
     }
-
+//made by Nicolai
     public ArrayList<User> getAvailableUsersRanked(int startWeek, int endWeek) {
         ArrayList<User> availableUsers = new ArrayList<>();
         HashMap<User, Integer> amountOfActivities = new HashMap<>();
@@ -67,42 +66,47 @@ public class Project {
                     amountOfActivities.put(u, amountOfActivities.get(u) + 1);
                 }
             }
+            availableUsers.add(u);
         }
         return availableUsers;
     }
-
+//made by Ingrid
     public boolean isUserAssigned(User user) {
         return this.getAssignedUsers().contains(user);
     }
-
+//made by Nicolai
     public ArrayList<User> getAssignedUsers() {
         return assignedUsers;
     }
-
+//made by Nicolai
     public int getProjectID() {
         return projectID;
     }
-
+//made by Nicolai
     public User getProjectLead() {
         return projectLead;
     }
-
+//made by Nicolai
     public void setProjectLead(User projectLead) {
         this.projectLead = projectLead;
     }
-
+//made by Nicolai
     public String getProjectName() {
         return projectName;
     }
+//made by Nicolai
     public void setProjectName(String projectName) {
         this.projectName = projectName;
     }
+//made by Benjamin
     public ArrayList<Activity> getActivity() {
         return activities;
     }
+//made by Nicolai
     public boolean removeActivity(Activity activity) {
         return activities.remove(activity);
     }
+//made by Sigurd
     public boolean canBeEditedBy(User user) {
         return projectLead == null || projectLead.equals(user);
     }

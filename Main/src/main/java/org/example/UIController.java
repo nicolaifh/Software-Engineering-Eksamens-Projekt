@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.*;
-
+//made by Sigurd
 public class UIController {
     UserController userController;
     ProjectController projectController;
@@ -14,12 +14,12 @@ public class UIController {
     User loggedInUser = null;
     Project focusedProject = null;
     HashMap<String, Runnable> commands = new HashMap<>();
-
+//made by Sigurd
     public UIController(UserController userController, ProjectController projectController) {
         this.userController = userController;
         this.projectController = projectController;
     }
-
+//made by Sigurd
     private void setupCommands() {
         commands.put("help",           () -> view.showMainMenu());
         commands.put("create-project", () -> createProject(loggedInUser));
@@ -56,8 +56,13 @@ public class UIController {
         commands.put("edit-project", () -> editProject());
         commands.put("delete-activity", () -> deleteActivity());
         commands.put("delete-project",  () -> deleteProject());
+        commands.put("show-my-timeused", () -> showUsersUsedTime());
     }
-
+//made by Nicolai
+    private void showUsersUsedTime() {
+        view.showUsersUsedTime(loggedInUser);
+    }
+//made by Nicolai
     private void editActivity() {
         Project selectedProject = getProject();
         if (selectedProject == null) return;
@@ -99,7 +104,7 @@ public class UIController {
         }
 
     }
-
+//made by Nicolai
     public void showAvailableUsers() {
         view.showAvailableUsersScope();
         Integer scope = promptInt("Choice");
@@ -115,7 +120,7 @@ public class UIController {
             return;
         }
 
-        ArrayList<User> users;
+        ArrayList<User> users = null;
         if (scope == 1) {
             HashMap<User, Integer> userBusyness = new HashMap<>();
             for (User u : userController.getUsers()) userBusyness.put(u, 0);
@@ -141,14 +146,14 @@ public class UIController {
 
        view.showUserAvailability(users, startWeek, endWeek);
     }
-
+//made by Sigurd
     public void startScreen() {
         loggedInUser = login();
         setupCommands();
         view.showWelcomeMessage();
         mainMenu();
     }
-
+//made by Sigurd
     private User login() {
         view.showLogin();
         String initials = scanner.nextLine();
@@ -160,7 +165,7 @@ public class UIController {
         view.showLoginSuccess(user);
         return user;
     }
-
+//made by Sigurd
     public void mainMenu() {
         while (true) {
             view.showPrompt();
@@ -173,12 +178,12 @@ public class UIController {
             }
         }
     }
-
+//made by Sigurd
     private String prompt(String message) {
         view.showInputPrompt(message);
         return scanner.nextLine().trim();
     }
-
+//made by Sigurd
     private Integer promptInt(String message) {
         while (true) {
             view.showInputPrompt(message);
@@ -191,7 +196,7 @@ public class UIController {
             }
         }
     }
-
+//made by Sigurd
     private Project selectProject() {
         ArrayList<Project> projects = projectController.getProjects();
         view.showProjects(projects);
@@ -205,13 +210,14 @@ public class UIController {
         view.showError("Project not found!");
         return null;
     }
+//made by Nicolai
     private void focusProject() {
         view.showUnfocusHint();
         focusedProject = selectProject();
         if (focusedProject != null)view.showFocusProject(focusedProject);
         else view.showProjectUnfocused();
     }
-
+//made by Benjamin
     private Activity selectActivity(Project project) {
         ArrayList<Activity> activity = project.getActivity();
         view.showActivity(project);
@@ -223,7 +229,7 @@ public class UIController {
         }
         return activity.get(choice-1);
     }
-
+//made by Sigurd
     private User selectUser() {
         ArrayList<User> users = userController.getUsers();
         view.showUsers(users);
@@ -235,7 +241,7 @@ public class UIController {
         }
         return users.get(choice);
     }
-
+//made by Sigurd
     private void createProject(User loggedInUser) {
         String name = prompt("Enter project name (Press Enter for blank)");
         Project project = loggedInUser.createProject(projectController);
@@ -259,7 +265,7 @@ public class UIController {
             }
         }
     }
-
+//made by Nicolai
     private void importUsers(){
         view.showImportUsersMenu();
         Integer choice = promptInt("Choose option:");
@@ -283,7 +289,7 @@ public class UIController {
             default:
         }
     }
-
+//made by Mads
     private LocalDate promptDate(String message) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("DD/MM/YYYY");
         while (true) {
@@ -296,7 +302,7 @@ public class UIController {
             }
         }
     }
-
+//made by Mads
     private void addPersonalActivity(User loggedInUser) {
         String inp = prompt("Activity name (Press Enter to cancel)");
         if (inp.isEmpty()) return;
@@ -316,7 +322,7 @@ public class UIController {
             view.showError("An activity with that name already exists!");
         }
     }
-
+//made by Benjamin
     private void addActivity() {
         if (projectController.getProjects().isEmpty()) {
             view.showError("No projects exist!");
@@ -343,7 +349,7 @@ public class UIController {
             view.showActivityAdded();
         }
     }
-
+//made by Nicolai
     private void addUser() {
         String initials = prompt("Enter initials");
         if (initials.isEmpty()) return;
@@ -358,7 +364,7 @@ public class UIController {
         User newUser = userController.createUser(initials);
         view.showUserCreated(newUser);
     }
-
+//made by Benjamin
     private void timeRegistration(User loggedInUser) {
         Project selectedProject = getProject();
         if (selectedProject == null) return;
@@ -378,7 +384,7 @@ public class UIController {
         }
 
     }
-
+//made by Sigurd
     private void assignUserToProject() {
         Project selectedProject = getProject();
         if (selectedProject == null) return;
@@ -395,14 +401,14 @@ public class UIController {
         selectedProject.assignUser(selectedUser);
         view.showUserAssigned();
     }
-
+//made by Sigurd
     private void showProjectUsers() {
         Project selectedProject = getProject();
         if (selectedProject == null) return;
 
         view.showProjectUsers(selectedProject);
     }
-
+//made by Mads
     private void editProject() {
         Project selectedProject = getProject();
         if (selectedProject == null) return;
@@ -437,7 +443,7 @@ public class UIController {
         }
     }
 
-
+//made by Nicolai
     private void printProjectReport() {
         Project selectedProject = getProject();
         int timeBudget = 0;
@@ -451,14 +457,14 @@ public class UIController {
 
         view.showProjectReport(selectedProject, timeBudget, timeUsed);
     }
-
+//made by Mads
     private Project getProject() {
         Project selectedProject = focusedProject;
         if (focusedProject == null) selectedProject = selectProject();
         if (selectedProject == null) return null;
         return selectedProject;
     }
-
+//made by Nicolai
     private void deleteActivity() {
         view.showDeleteActivityMenu();
         Integer scope = promptInt("Choice");
@@ -510,7 +516,7 @@ public class UIController {
             view.showError("Invalid choice!");
         }
     }
-
+//made by Nicolai
     private void deleteProject() {
         Project selectedProject = getProject();
         if (selectedProject == null) return;

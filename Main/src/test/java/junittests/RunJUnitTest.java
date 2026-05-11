@@ -11,7 +11,7 @@ import org.example.User;
 import org.junit.Test;
 
 public class RunJUnitTest {
-
+//made by Nicolai
     @Test
     public void test1() {
         ProjectController projectControler = new ProjectController();
@@ -21,7 +21,7 @@ public class RunJUnitTest {
         System.out.println(newProject);
     }
 
-
+//made by Ingrid
     @Test
     public void test2() {
         ProjectController projectControler = new ProjectController();
@@ -30,7 +30,7 @@ public class RunJUnitTest {
         Project[] myProjects =  projectControler.getMyProject(user);
         System.out.println(myProjects);
     }
-
+//made by Mads
     @Test
     public void test3() {
         ProjectController projectControler = new ProjectController();
@@ -48,7 +48,7 @@ public class RunJUnitTest {
         ArrayList<User> idleUsers =  newProject.getIdleUsers();
         System.out.println(idleUsers);
     }
-
+//made by Sigurd
     @Test
     public void test4() {
         ProjectController projectControler = new ProjectController();
@@ -58,7 +58,7 @@ public class RunJUnitTest {
         user.assignProjectManager(newProject);
         System.out.println(newProject.getProjectLead());
     }
-
+//made by Benjamin
     @Test
     public void test5() {
         ProjectController projectControler = new ProjectController();
