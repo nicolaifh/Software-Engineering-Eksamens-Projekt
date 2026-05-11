@@ -34,8 +34,8 @@ Feature: tests
   Scenario: Failed to assign User
     Given User2 as an input
     And  User1 is project leader
-    When User2 is assigned to project
-    Then failed to assign User2 to project ErrorMessage: "User already assigned."
+    When User is assigned to project
+    Then failed to assign user to project ErrorMessage: "User already assigned."
 
 
   Scenario: Create activity
@@ -100,7 +100,7 @@ Feature: tests
   Scenario: The activity is not started
     Given the only User1 that is assighed to the only activity in the project
     And the activity is not startet 
-    Then return arrayList containing User1
+    Then return arrayList containing user
 
   # 4
   Scenario: Project is not assigned user as projectLead
@@ -118,15 +118,15 @@ Feature: tests
   # 5
   Scenario: Registered time is between 0 and 48 half hours.
     Given a User1 that has 4 hours registered for an activity
-    When User1 registers 4 hours for the activity
-    Then the time used for User1 in activity is 8 hours
+    When User registers 4 hours for the activity
+    Then the time used for user in activity is 8 hours
 
   Scenario: Registered time is over 48 half hours.
     Given a User1 that has 42 hours registered for an activity
-    When User1 registers 8 hours for the activity
+    When User registers 8 hours for the activity
     Then the exeption "IllegalArgumentException" is trown for User1 registering 8 houres
 
   Scenario: Registered time is under 0 half hours.
     Given a User1 that has 6 hours registered for an activity
-    When User1 registers -10 hours for the activity
+    When User registers -10 hours for the activity
     Then the exeption "IllegalArgumentException" is trown for User1 registering -10 houres

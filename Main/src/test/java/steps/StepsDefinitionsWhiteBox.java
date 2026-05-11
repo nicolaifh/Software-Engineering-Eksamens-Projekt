@@ -94,7 +94,8 @@ public class StepsDefinitionsWhiteBox {
     // Thrid whiteBox test
     @Given("the only {User} that is assighed to the only activity in the project")
     public void the_only_user_that_is_assighed_to_the_only_Activity_in_the_project(User user) {
-        dummyProject = dummyProjectController.createProject(user);
+        dummyUser = user;
+        dummyProject = dummyProjectController.createProject(dummyUser);
         dummyActivity = dummyProject.createActivity("testActivity");
         dummyActivity.assignUser(user);
     }
@@ -116,9 +117,9 @@ public class StepsDefinitionsWhiteBox {
         dummyActivity.setStartWeek(cal.get(Calendar.WEEK_OF_YEAR) + 2);
     }
 //made by Ingrid
-    @Then("return arrayList containing {User}")
-    public void return_array_list_containing_said_user(User user) {
-        assertTrue(dummyProject.getIdleUsers().contains(user)); 
+    @Then("return arrayList containing user")
+    public void return_array_list_containing_said_user() {
+        assertTrue(dummyProject.getIdleUsers().contains(dummyUser));
     }
     
 //made by Ingrid
@@ -153,24 +154,25 @@ public class StepsDefinitionsWhiteBox {
     // Fifth whiteBox test
     @Given("a {User} that has {int} hours registered for an activity")
     public void a_user1_that_has_hours_registered_for_an_activity(User user, Integer int1) {
-        dummyProject = dummyProjectController.createProject(user); 
+        dummyUser = user;
+        dummyProject = dummyProjectController.createProject(dummyUser);
         dummyActivity = dummyProject.createActivity("testActivity"); 
-        dummyActivity.assignUser(user); 
-        dummyActivity.assignTimeUsed(user, int1); 
+        dummyActivity.assignUser(dummyUser);
+        dummyActivity.assignTimeUsed(dummyUser, int1);
     }
 //made by Ingrid
-    @When("{User} registers {int} hours for the activity")
-    public void user1_registers_hours_for_the_activity(User user, Integer int1) {
+    @When("User registers {int} hours for the activity")
+    public void user1_registers_hours_for_the_activity(Integer int1) {
         try {
-            dummyActivity.assignTimeUsed(user, int1);  
+            dummyActivity.assignTimeUsed(dummyUser, int1);
         } catch (Exception e) { 
             exeptionString = "IllegalArgumentException";
         }     
     }
 //made by Ingrid
-    @Then("the time used for {User} in activity is {int} hours")
-    public void the_time_used_for_user1_in_activity_is_hours(User user, Integer int1) { 
-        assertEquals(int1, dummyActivity.getTimeUsed(user));  
+    @Then("the time used for user in activity is {int} hours")
+    public void the_time_used_for_user1_in_activity_is_hours(Integer int1) {
+        assertEquals(int1, dummyActivity.getTimeUsed(dummyUser));
     }
 //made by Ingrid
     @Then("the exeption {string} is trown for {User} registering {int} houres")

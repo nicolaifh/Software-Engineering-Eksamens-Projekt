@@ -118,31 +118,33 @@ public class StepDefinitions {
 //made by Mads
     @Then("assign {User} to project")
     public void assignUserToProject(User arg0) {
-        ((Project) dummyData2).assignUser(arg0);
+        dummyUser = arg0;
+        ((Project) dummyData2).assignUser(dummyUser);
         assertTrue(((Project) dummyData2).getAssignedUsers().contains(arg0));
     }
 
 
 //made by Sigurd
-    @When("{User} is assigned to project")
-    public void userIsAssignedToProject(User arg0) {
-        ((Project) dummyData2).assignUser(arg0);
-        assertTrue(((Project) dummyData2).getAssignedUsers().contains(arg0));
+    @When("User is assigned to project")
+    public void userIsAssignedToProject() {
+        ((Project) dummyData2).assignUser(dummyUser);
+        assertTrue(((Project) dummyData2).getAssignedUsers().contains(dummyUser));
     }
 //made by Sigurd
-    @Then("failed to assign {User} to project ErrorMessage: {string}")
-    public void failedToAssignUserToProjectErrorMessage(User arg0, String arg1) {
-        if (((Project) dummyData2).getAssignedUsers().contains(arg0)) {
-            dummyExeption = "User already assigned."; 
+    @Then("failed to assign user to project ErrorMessage: {string}")
+    public void failedToAssignUserToProjectErrorMessage(String arg1) {
+        if (((Project) dummyData2).getAssignedUsers().contains(dummyUser)) {
+            dummyExeption = "User already assigned.";
         }
-        assertEquals("User already assigned.", dummyExeption);
+        assertEquals(arg1, dummyExeption);
     }
 
 
 //made by Sigurd
     @When("a {User} creates an activity")
     public void aUserCreatesAnactivity(User arg0) {
-        dummyProject = arg0.createProject(dummyProjectController);
+        dummyUser = (User) arg0;
+        dummyProject = dummyUser.createProject(dummyProjectController);
         dummyActivity = dummyProject.createActivity("testActivity");
 
     }
@@ -161,7 +163,7 @@ public class StepDefinitions {
 //made by Nicolai
     @And("{User} is not assigned a project")
     public void userIsNotAssignedProject(User arg0) {
-        calendar = calendar.getInstance(); 
+        calendar = calendar.getInstance();
         dummyProject = dummyProjectController.createProject(calendar.get(Calendar.YEAR), dummyArraySize);
         if (dummyProject.isUserAssigned(arg0)) {
             dummyActivity = dummyProject.createActivity("testActivity");
@@ -208,10 +210,10 @@ public class StepDefinitions {
         dummyActivity = dummyProject.createActivity("testActivity");
         try{
             Integer.parseInt(dummyExeption);
-            
+
         }   catch (Exception e) {
             dummyActivity.assignTimeUsed(arg0, 0);
-        }   
+        }
     }
 //made by Nicolai
     @Then("no time is assigned to user")

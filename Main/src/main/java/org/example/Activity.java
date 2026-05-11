@@ -78,7 +78,8 @@ public class Activity {
 //made by Ingrid
     public Integer getTimeUsed(User user) { 
         String today = new java.text.SimpleDateFormat("dd/MM/yyyy").format(new Date());
-        return timeUsed.get(user).get(today); 
+        if(timeUsed.get(user).get(today) == null) return 0;
+        return timeUsed.get(user).get(today);
     }
 //made by Nicolai
     public int getStartWeek() { return startWeek; }
