@@ -2,6 +2,7 @@ package org.example;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 public class User {
@@ -10,6 +11,7 @@ public class User {
     int timeManagement;
     ArrayList<Project> assignedProjects = new ArrayList<>();
     ArrayList<Activity> personalActivities = new ArrayList<>();
+    HashMap<String, Integer> timeUsed = new HashMap<>();
 
     public User(String initials) {
         this.initials = initials;
@@ -27,6 +29,21 @@ public class User {
 
     public User() {
         this.initials = "TEST";
+    }
+
+    public void assignTimeUsedForUser(int hours) {
+        String today = new java.text.SimpleDateFormat("dd/MM/yyyy").format(new Date());
+
+        int exixtingTimeAtPre = timeUsed.getOrDefault(today, 0);
+        int existingTime = timeUsed.getOrDefault(today, 0);
+        
+        if (existingTime + hours < 0) 
+            throw new IllegalArgumentException("Can't have less than 0 half hours registed.");
+
+        if (existingTime + hours > 48)
+            throw new IllegalArgumentException("Can't register more than 48 half hours.");
+
+        timeUsed.put(today, existingTime + hours); 
     }
 
 
@@ -88,5 +105,9 @@ public class User {
 
         assert  (this.accessLevel == 0 && project.projectLead != this) || 
                 (this.accessLevel == 1 && project.projectLead == this) : "post-condition";
+    }
+
+    public HashMap<String, Integer> getTimeUsed() {
+        return timeUsed;
     }
 }

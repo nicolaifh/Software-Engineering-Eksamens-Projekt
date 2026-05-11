@@ -6,7 +6,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 
-public class Activity {
+public class Activity { 
     int startWeek;
     int endWeek;
     LocalDate startDate;
@@ -16,6 +16,7 @@ public class Activity {
     int timeBudget;
     HashMap<User, HashMap<String, Integer>> timeUsed = new HashMap<>();
     Project project;
+
 
     public Activity(String name, int startWeek, int endWeek, int timeBudget) {
         this.name = name;
@@ -75,7 +76,7 @@ public class Activity {
         return total;
     }
 
-    public Integer getTimeUsed(User user) {
+    public Integer getTimeUsed(User user) { 
         String today = new java.text.SimpleDateFormat("dd/MM/yyyy").format(new Date());
         return timeUsed.get(user).get(today); 
     }
